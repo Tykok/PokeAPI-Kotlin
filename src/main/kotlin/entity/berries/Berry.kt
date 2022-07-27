@@ -2,8 +2,24 @@ package entity.berries
 
 import entity.NamedApiResource
 
+/**
+ * Berries (Japanese: きのみ Tree Fruit) are small, juicy, fleshy fruit.
+ * As in the real world, a large variety exists in the Pokémon world, with a large range of flavors and effects.
+ * @link https://bulbapedia.bulbagarden.net/wiki/Berry
+ * @author Tykok
+ * @version 1.0.0
+ * @since 2022-07-27
+ */
 class Berry(
+
+    /**
+     * The identifier of the resource
+     */
     val id: Number,
+
+    /**
+     * The name of the resource
+     */
     val name: String,
 
     /**
