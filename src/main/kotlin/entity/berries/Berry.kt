@@ -56,21 +56,25 @@ class Berry(
 
     /**
      * The firmness of this berry, used in making Pokéblocks or Poffins.
+     * @see NamedApiResource
      */
     val firmness: NamedApiResource,
 
     /**
      * A list of references to each flavor a berry can have and the potency of each of those flavors in regard to this berry.
+     * @see BerryFlavorMap
      */
     val flavors: Array<BerryFlavorMap>,
 
     /**
      * Berries are actually items. This is a reference to the item specific data for this berry.
+     * @see NamedApiResource
      */
     val item: NamedApiResource,
 
     /**
      * The type inherited by "Natural Gift" when used with this Berry.
+     * @see NamedApiResource
      */
     val natural_gift_type: NamedApiResource,
 )
