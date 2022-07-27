@@ -10,7 +10,7 @@ class Name(
 
     /**
      * The localized name for an API resource in a specific language
-      */
+     */
     val name: String,
 
     /**
