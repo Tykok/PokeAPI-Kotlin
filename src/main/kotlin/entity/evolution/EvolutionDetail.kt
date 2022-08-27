@@ -1,7 +1,6 @@
 package entity.evolution
 
-import com.sun.org.apache.xpath.internal.operations.Bool
-import entity.NamedApiResource
+import entity.common.NamedApiResource
 import entity.items.Item
 import entity.moves.Move
 import entity.pokemon.Type

@@ -1,6 +1,6 @@
 package entity.contests
 
-import entity.NamedApiResource
+import entity.common.NamedApiResource
 
 /**
  * The types given to Pokémon in the contest are categories that judges use to evaluate the condition of a Pokémon in Pokémon contests.

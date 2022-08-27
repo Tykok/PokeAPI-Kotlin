@@ -1,7 +1,7 @@
 package entity.encounters
 
-import entity.Name
-import entity.NamedApiResource
+import entity.common.Name
+import entity.common.NamedApiResource
 
 /**
  * Encounter condition values are the various states that an encounter condition can have, i.e., time of day can be either day or night.

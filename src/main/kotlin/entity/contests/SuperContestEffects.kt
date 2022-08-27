@@ -1,7 +1,7 @@
 package entity.contests
 
-import entity.FlavorText
-import entity.NamedApiResource
+import entity.common.FlavorText
+import entity.common.NamedApiResource
 
 /**
  * `SuperContestEffects` class refers to the effects of move on the public when used in super contests.

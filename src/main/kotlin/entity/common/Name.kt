@@ -1,4 +1,4 @@
-package entity
+package entity.common
 
 /**
  * @link https://pokeapi.co/docs/v2#common-models
@@ -16,7 +16,7 @@ class Name(
     /**
      * The language this name is in.
      * @see NamedApiResource
-     * @see Languages
+     * @see Language
      */
     val language: NamedApiResource
 )

@@ -1,6 +1,6 @@
 package entity.contests
 
-import entity.NamedApiResource
+import entity.common.NamedApiResource
 
 /**
  * ContestName classe used to refer to a specific categories according to the color of the berry.

@@ -1,7 +1,7 @@
 package entity.evolution
 
-import entity.NamedApiResource
-import entity.Name
+import entity.common.NamedApiResource
+import entity.common.Name
 import entity.pokemon.PokemonSpecies
 
 /**

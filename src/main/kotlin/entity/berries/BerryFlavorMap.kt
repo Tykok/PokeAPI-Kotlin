@@ -1,6 +1,6 @@
 package entity.berries
 
-import entity.NamedApiResource
+import entity.common.NamedApiResource
 
 
 /**

@@ -1,4 +1,6 @@
-package entity
+package entity.utility
+
+import entity.common.Name
 
 /**
  * Languages for translations of API resource information.
@@ -7,7 +9,7 @@ package entity
  * @version 1.0.0
  * @since 2022-07-27
  */
-class Languages(
+class Language(
 
     /**
      * The identifier for this resource

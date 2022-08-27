@@ -1,7 +1,7 @@
 package entity.berries
 
-import entity.Name
-import entity.NamedApiResource
+import entity.common.Name
+import entity.common.NamedApiResource
 
 /**
  * @link https://pokeapi.co/docs/v2#berry-firmnesses

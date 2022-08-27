@@ -1,6 +1,6 @@
 package entity.encounters
 
-import entity.Name
+import entity.common.Name
 
 /**
  * EncounterMethod define how you can encounter a Pokemon.

@@ -1,7 +1,7 @@
 package entity.contests
 
-import entity.Effect
-import entity.FlavorText
+import entity.common.Effect
+import entity.common.FlavorText
 
 /**
  * `ContestEffects` class refers to the effects of move on the public when used in contests.

@@ -1,6 +1,6 @@
 package entity.evolution
 
-import entity.NamedApiResource
+import entity.common.NamedApiResource
 import entity.items.Item
 
 /**
