@@ -1,6 +1,6 @@
 package entity.games
 
-import entity.NamedApiResource
+import entity.common.NamedApiResource
 import entity.pokemon.PokemonSpecies
 /**
  * @see <a href="https://pokeapi.co/docs/v2#pokedexes">Documentation of PokeApi</a>

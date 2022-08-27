@@ -1,4 +1,4 @@
-package entity
+package entity.common
 
 /**
  * @link https://pokeapi.co/docs/v2#common-models

@@ -1,7 +1,7 @@
 package entity.games
 
-import entity.Name
-import entity.NamedApiResource
+import entity.common.Name
+import entity.common.NamedApiResource
 import entity.pokemon.Ability
 import entity.pokemon.PokemonSpecies
 import entity.pokemon.Type

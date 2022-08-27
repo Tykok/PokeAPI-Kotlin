@@ -1,4 +1,4 @@
-package entity
+package entity.common
 
 /**
  * NamedApiResource contains the name and the url to get the object from the API resource (pokeapi.co).

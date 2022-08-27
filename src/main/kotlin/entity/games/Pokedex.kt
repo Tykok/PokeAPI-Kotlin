@@ -1,8 +1,8 @@
 package entity.games
 
-import entity.Description
-import entity.Name
-import entity.NamedApiResource
+import entity.common.Description
+import entity.common.Name
+import entity.common.NamedApiResource
 import entity.locations.Region
 
 /**

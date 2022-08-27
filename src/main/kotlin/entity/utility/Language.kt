@@ -1,4 +1,6 @@
-package entity
+package entity.utility
+
+import entity.common.Name
 
 /**
  * Languages for translations of API resource information.

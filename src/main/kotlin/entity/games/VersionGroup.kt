@@ -1,6 +1,6 @@
 package entity.games
 
-import entity.NamedApiResource
+import entity.common.NamedApiResource
 import entity.moves.MoveLearnMethod
 import entity.locations.Region
 

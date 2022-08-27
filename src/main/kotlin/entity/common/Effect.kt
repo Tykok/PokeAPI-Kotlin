@@ -1,4 +1,4 @@
-package entity
+package entity.common
 
 /**
  * @see <a href="https://pokeapi.co/docs/v2#common-models">Documentation of PokeApi</a>

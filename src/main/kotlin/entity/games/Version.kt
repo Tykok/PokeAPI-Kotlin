@@ -1,7 +1,7 @@
 package entity.games
 
-import entity.Name
-import entity.NamedApiResource
+import entity.common.Name
+import entity.common.NamedApiResource
 
 /**
  * Versions of the games, e.g., Red, Blue or Yellow.

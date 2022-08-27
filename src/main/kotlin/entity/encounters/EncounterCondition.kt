@@ -1,7 +1,7 @@
 package entity.encounters
 
-import entity.Name
-import entity.NamedApiResource
+import entity.common.Name
+import entity.common.NamedApiResource
 
 
 /**
