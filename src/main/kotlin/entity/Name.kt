@@ -16,7 +16,7 @@ class Name(
     /**
      * The language this name is in.
      * @see NamedApiResource
-     * @see Languages
+     * @see Language
      */
     val language: NamedApiResource
 )

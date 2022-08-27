@@ -7,7 +7,7 @@ package entity
  * @version 1.0.0
  * @since 2022-07-27
  */
-class Languages(
+class Language(
 
     /**
      * The identifier for this resource
