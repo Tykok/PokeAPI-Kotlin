@@ -10,6 +10,10 @@ import entity.NamedApiResource
  * @see <a href="https://bulbapedia.bulbagarden.net/wiki/Contest_condition">Bulbapedia documentation for contest</a>
  * @see <a href="https://pokeapi.co/docs/v2#contest-effects">Documentation of PokeApi</a>
  * @see ContestEffect
+ *
+ * @author Tykok
+ * @version 1.0.0
+ * @since 2022-08-27
  */
 class SuperContestEffects(
 
