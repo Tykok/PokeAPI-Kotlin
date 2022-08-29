@@ -1,6 +1,7 @@
 package entity.moves
 
 import entity.common.*
+import entity.pokemon.AbilityEffectChange
 
 /**
  * Moves are the skills of Pokémon in battle. In battle, a Pokémon uses one move each turn.
