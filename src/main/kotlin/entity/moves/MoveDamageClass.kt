@@ -10,7 +10,7 @@ import entity.common.NamedApiResource
  * @since 2022-08-30
  *
  */
-class MoveLearnMethod(
+class MoveDamageClass(
 
     /**
      * The identifier for this resource.
@@ -29,16 +29,15 @@ class MoveLearnMethod(
     val descriptions: Array<Description>,
 
     /**
+     * A list of moves that fall into this damage class.
+     * @see NamedApiResource
+     * @see Move
+     */
+    val moves: Array<NamedApiResource>,
+
+    /**
      * The name of this resource listed in different languages.
      * @see Name
      */
-    val names: Array<Name>,
-
-    /**
-     * A list of version groups where moves can be learned through this method.
-     * @see NamedApiResource
-     * @see VersionGroup
-     */
-    val version_groups: Array<NamedApiResource>
-
+    val names: Array<Name>
 )
