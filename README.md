@@ -1,3 +1,5 @@
 # PokeAPI-Kotlin
 
-Description will come soon
+This project is a project to create a library to easily exploit the PokeAPI API.
+
+
