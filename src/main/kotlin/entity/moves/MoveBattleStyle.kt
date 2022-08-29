@@ -2,6 +2,12 @@ package entity.moves
 
 import entity.common.Name
 
+/**
+ * @author Tykok
+ * @version 1.0.0
+ * @since 2022-08-30
+ *
+ */
 class MoveBattleStyle(
     /**
      * The identifier for this resource.
