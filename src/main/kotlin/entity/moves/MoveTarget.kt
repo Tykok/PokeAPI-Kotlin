@@ -4,7 +4,7 @@ import entity.common.Description
 import entity.common.Name
 import entity.common.NamedApiResource
 
-class MoveLearnMethod(
+class MoveTarget(
 
     /**
      * The identifier for this resource.
@@ -23,16 +23,16 @@ class MoveLearnMethod(
     val descriptions: Array<Description>,
 
     /**
+     * A list of moves that that are directed at this target.
+     * @see NamedApiResource
+     * @see Move
+     */
+    val moves: Array<NamedApiResource>,
+
+    /**
      * The name of this resource listed in different languages.
      * @see Name
      */
-    val names: Array<Name>,
-
-    /**
-     * A list of version groups where moves can be learned through this method.
-     * @see NamedApiResource
-     * @see VersionGroup
-     */
-    val version_groups: Array<NamedApiResource>
+    val names: Array<Name>
 
 )
