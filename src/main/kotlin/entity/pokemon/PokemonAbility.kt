@@ -3,7 +3,7 @@ package entity.pokemon
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 
-class PokemonAbility (
+class PokemonAbility(
     /**
      *
      * Whether or not this is a hidden ability.

@@ -31,7 +31,7 @@ class BerryFirmness(
      */
     @JsonProperty("names")
     val names: Array<Name>
-){
+) {
     override fun toString(): String {
         return "BerryFirmness(id=$id, name='$name', berries=${berries.contentToString()}, names=${names.contentToString()})"
     }

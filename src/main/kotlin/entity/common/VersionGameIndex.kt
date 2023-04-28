@@ -7,5 +7,5 @@ class VersionGameIndex(
     val gameIndex: Int,
 
     @JsonProperty("version")
-    val version: NamedApiResource,
+    val version: NamedApiResource
 )

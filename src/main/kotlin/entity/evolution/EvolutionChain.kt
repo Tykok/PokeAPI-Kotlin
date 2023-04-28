@@ -31,7 +31,6 @@ class EvolutionChain(
     @JsonProperty("baby_trigger_item")
     val babyTriggerItem: NamedApiResource?,
 
-
     /**
      * The base chain link object. Each link contains evolution details for a Pokémon in the chain.
      * Each link references the next Pokémon in the natural evolution order.

@@ -11,4 +11,3 @@ class TypeRelations(
     @JsonProperty("half_damage_from") val halfDamageFrom: Array<NamedApiResource>,
     @JsonProperty("double_damage_from") val doubleDamageFrom: Array<NamedApiResource>
 )
-

@@ -3,7 +3,7 @@ package entity.pokemon
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 
-class TypePokemon (
+class TypePokemon(
 
     @JsonProperty("slot")
     val slot: Number,

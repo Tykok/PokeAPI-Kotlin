@@ -2,9 +2,9 @@ package entity.machines
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
+import entity.games.VersionGroup
 import entity.items.Item
 import entity.moves.Move
-import entity.games.VersionGroup
 
 /**
  * Machines are the representation of items that teach moves to Pokémon.

@@ -6,7 +6,7 @@ import entity.common.NamedApiResource
 
 /**
  * `SuperContestEffects` class refers to the effects of move on the public when used in super contests.
- * When you make a super contest with your Pokemon, the public has a reaction according to the nature and the movement of your Pokemon.
+ * When you make a super contest with your Pokémon, the public has a reaction according to the nature and the movement of your Pokémon.
  *
  * @see <a href="https://bulbapedia.bulbagarden.net/wiki/Contest_condition">Bulbapedia documentation for contest</a>
  * @see <a href="https://pokeapi.co/docs/v2#contest-effects">Documentation of PokeApi</a>
@@ -44,7 +44,7 @@ class SuperContestEffects(
     @JsonProperty("moves")
     val moves: List<NamedApiResource>
 ) {
-    override fun toString(): String {
-        return "SuperContestEffects(id=$id, appeal=$appeal, flavorTextEntries=${flavorTextEntries.contentToString()}, moves=$moves)"
-    }
+    override fun toString(): String = """
+        SuperContestEffects(id=$id, appeal=$appeal, flavorTextEntries=${flavorTextEntries.contentToString()}, moves=$moves)
+        """
 }

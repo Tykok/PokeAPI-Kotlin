@@ -33,8 +33,8 @@ class Gender(
 ) {
     override fun toString(): String {
         return "id= $id" +
-                "name = $name" +
-                "pokemonSpeciesDetails = $pokemonSpeciesDetails" +
-                "requiredForEvolution = $requiredForEvolution"
+            "name = $name" +
+            "pokemonSpeciesDetails = $pokemonSpeciesDetails" +
+            "requiredForEvolution = $requiredForEvolution"
     }
 }

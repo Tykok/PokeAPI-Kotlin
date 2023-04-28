@@ -24,7 +24,6 @@ class Language(
     @JsonProperty("name")
     val name: String,
 
-
     /**
      * Whether the games are published in this language.
      */

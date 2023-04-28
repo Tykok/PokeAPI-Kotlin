@@ -2,7 +2,6 @@ package entity.common
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-
 /**
  * @see <a href="https://pokeapi.co/docs/v2#description">Documentation of PokeApi</a>
  *

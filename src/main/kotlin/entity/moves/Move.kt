@@ -1,8 +1,12 @@
 package entity.moves
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import entity.common.*
-import entity.pokemon.AbilityEffectChange
+import entity.common.APIResource
+import entity.common.MachineVersionDetail
+import entity.common.Name
+import entity.common.NamedApiResource
+import entity.common.VerboseEffect
+import entity.pokemon.SuperContestEffects
 
 /**
  * Moves are the skills of Pokémon in battle. In battle, a Pokémon uses one move each turn.
@@ -99,10 +103,10 @@ class Move(
 
     /**
      * The list of previous effects this move has had across version groups of the games.
-     * @see AbilityEffectChange
+     * @see SuperContestEffects
      */
     @JsonProperty("effect_changes")
-    val effectChanges: List<AbilityEffectChange>,
+    val effectChanges: List<SuperContestEffects>,
 
     /**
      * List of Pokemon that can learn the move

@@ -21,7 +21,7 @@ class NamedApiResource(
      * The URL of the referenced resource.
      */
     @JsonProperty("url")
-    val url: String? = null,
+    val url: String? = null
 
 ) {
     override fun toString(): String {

@@ -1,7 +1,11 @@
 package entity.pokemon
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import entity.common.*
+import entity.common.APIResource
+import entity.common.Description
+import entity.common.FlavorText
+import entity.common.Name
+import entity.common.NamedApiResource
 
 /**
  * Represents a Pokémon species.

@@ -44,7 +44,7 @@ class BerryFlavor(
      */
     @JsonProperty("names")
     val names: Array<Name>
-){
+) {
     override fun toString(): String {
         return "BerryFlavor(id=$id, name='$name', berries=${berries.contentToString()}, contestType=$contestType, names=${names.contentToString()})"
     }

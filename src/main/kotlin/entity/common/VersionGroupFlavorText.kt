@@ -1,8 +1,8 @@
 package entity.common
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import entity.utility.Language
 import entity.games.VersionGroup
+import entity.utility.Language
 
 /**
  * @see <a href="https://pokeapi.co/docs/v2#versiongroupflavortext">Documentation of PokeApi</a>

@@ -2,7 +2,6 @@ package entity.locations
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
-import entity.pokemon.PokemonSpecies
 
 /**
  * @see <a href="https://pokeapi.co/docs/v2#palparkencounterspecies">Documentation of PokeApi</a>

@@ -14,7 +14,7 @@ import entity.common.NamedApiResource
  * @version 1.0.0
  * @since 2022-08-27
  */
-class Version (
+class Version(
     /**
      * The identifier for this resource.
      */

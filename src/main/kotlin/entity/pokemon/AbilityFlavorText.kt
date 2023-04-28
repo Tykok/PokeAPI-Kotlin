@@ -3,7 +3,6 @@ package entity.pokemon
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 import entity.games.VersionGroup
-import entity.utility.Language
 class AbilityFlavorText(
     /**
      * The localized name for an API resource in a specific language.

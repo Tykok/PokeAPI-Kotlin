@@ -23,7 +23,7 @@ class FlavorBerryMap(
      */
     @JsonProperty("berry")
     val berry: NamedApiResource
-){
+) {
     override fun toString(): String {
         return "FlavorBerryMap(potency=$potency, berry=$berry)"
     }

@@ -34,8 +34,8 @@ class ContestName(
      * @see NamedApiResource
      */
     @JsonProperty("language")
-    val language: NamedApiResource,
-){
+    val language: NamedApiResource
+) {
     override fun toString(): String {
         return "ContestName(name='$name', color='$color', language=$language)"
     }
