@@ -5,7 +5,7 @@ import entity.common.Effect
 import entity.common.NamedApiResource
 import entity.games.Generation
 
-class AbilityEffectChange(
+class SuperContestEffects(
     /**
      * The previous effect of this ability listed in different languages.
      * @see Effect

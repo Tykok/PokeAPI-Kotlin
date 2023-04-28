@@ -2,7 +2,7 @@ package entity.pokemon
 
 import entity.common.NamedApiResource
 
-class PokemonHeldItem (
+class PokemonHeldItem(
     /**
      * The item the referenced Pokémon holds.
      */

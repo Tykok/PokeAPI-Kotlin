@@ -1,7 +1,13 @@
 package entity.items
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import entity.common.*
+import entity.common.APIResource
+import entity.common.GenerationGameIndex
+import entity.common.MachineVersionDetail
+import entity.common.Name
+import entity.common.NamedApiResource
+import entity.common.VerboseEffect
+import entity.common.VersionGroupFlavorText
 import entity.evolution.EvolutionChain
 
 /**

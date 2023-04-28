@@ -3,10 +3,10 @@ package entity.evolution
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 import entity.items.Item
-import entity.moves.Move
-import entity.pokemon.Type
-import entity.pokemon.PokemonSpecies
 import entity.locations.Location
+import entity.moves.Move
+import entity.pokemon.PokemonSpecies
+import entity.pokemon.Type
 
 /**
  * EvolutionDetail define all possibility to make possible the evolution of the Pokemon.
@@ -146,6 +146,4 @@ class EvolutionDetail(
      */
     @JsonProperty("turn_upside_down")
     val turnUpsideDown: Boolean
-) {
-
-}
+)

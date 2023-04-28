@@ -1,9 +1,9 @@
 package entity.pokemon
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import entity.berries.BerryFlavor
 import entity.common.Name
 import entity.common.NamedApiResource
-import entity.berries.BerryFlavor
 
 class Nature(
 

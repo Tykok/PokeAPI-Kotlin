@@ -2,8 +2,8 @@ package entity.games
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
-import entity.moves.MoveLearnMethod
 import entity.locations.Region
+import entity.moves.MoveLearnMethod
 
 /**
  * Version groups categorize highly similar versions of the games.

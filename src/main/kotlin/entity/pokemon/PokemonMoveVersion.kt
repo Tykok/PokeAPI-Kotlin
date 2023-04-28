@@ -3,7 +3,7 @@ package entity.pokemon
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 
-class PokemonMoveVersion (
+class PokemonMoveVersion(
     /**
      * The method by which the move is learned.
      * @see MoveLearnMethod

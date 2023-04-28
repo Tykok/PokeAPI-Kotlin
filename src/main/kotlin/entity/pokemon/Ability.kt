@@ -23,7 +23,7 @@ class Ability(
     val name: String,
 
     /**
-     * Whether or not this ability originated in the main series of the video games.
+     * Whether this ability originated in the main series of the video games.
      */
     @JsonProperty("is_main_series")
     val isMainSeries: Boolean,
@@ -52,10 +52,10 @@ class Ability(
 
     /**
      * The list of previous effects this ability has had across version groups.
-     * @see AbilityEffectChange
+     * @see SuperContestEffects
      */
     @JsonProperty("effect_changes")
-    val effectChanges: Array<AbilityEffectChange>,
+    val effectChanges: Array<SuperContestEffects>,
 
     /**
      * The flavor text of this ability listed in different languages.
@@ -71,9 +71,9 @@ class Ability(
     @JsonProperty("pokemon")
     val pokemon: Array<AbilityPokemon>
 ) {
-    override fun toString(): String {
-        return "Ability(id=$id, name='$name', isMainSeries=$isMainSeries, generation=$generation, names=${names.contentToString()}, " +
-            "effectEntries=${effectEntries.contentToString()}, effectChanges=${effectChanges.contentToString()}, " +
-            "flavorTextEntries=${flavorTextEntries.contentToString()}, pokemon=${pokemon.contentToString()})"
-    }
+    override fun toString(): String = """
+        Ability(id=$id, name='$name', isMainSeries=$isMainSeries, generation=$generation, names=${names.contentToString()},
+        effectEntries=${effectEntries.contentToString()}, effectChanges=${effectChanges.contentToString()},
+        flavorTextEntries=${flavorTextEntries.contentToString()}, pokemon=${pokemon.contentToString()})
+        """
 }

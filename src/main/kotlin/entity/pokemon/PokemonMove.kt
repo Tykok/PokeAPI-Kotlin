@@ -12,5 +12,5 @@ class PokemonMove(
     val move: NamedApiResource,
 
     @JsonProperty("version_group_details")
-    val versionGroupDetails: Array<PokemonMoveVersion>,
+    val versionGroupDetails: Array<PokemonMoveVersion>
 )

@@ -16,12 +16,10 @@ class MoveCategory(
      */
     val id: Number,
 
-
     /**
      * The name for this resource.
      */
     val name: String,
-
 
     /**
      * A list of moves that fall into this category.
@@ -29,7 +27,6 @@ class MoveCategory(
      * @see Move
      */
     val moves: Array<NamedApiResource>,
-
 
     /**
      * The description of this resource listed in different languages.

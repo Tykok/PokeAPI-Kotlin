@@ -10,7 +10,6 @@ class GrowthRateExperienceLevel(
     @JsonProperty("level")
     val level: Number,
 
-
     /**
      * The amount of experience required to reach the referenced level.
      */
@@ -18,7 +17,7 @@ class GrowthRateExperienceLevel(
     val experience: Number
 ) {
 
-        override fun toString(): String {
-            return "GrowthRateExperienceLevel(level=$level, experience=$experience)"
-        }
+    override fun toString(): String {
+        return "GrowthRateExperienceLevel(level=$level, experience=$experience)"
+    }
 }

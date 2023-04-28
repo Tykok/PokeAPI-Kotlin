@@ -1,8 +1,8 @@
 package entity.evolution
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import entity.common.NamedApiResource
 import entity.common.Name
+import entity.common.NamedApiResource
 import entity.pokemon.PokemonSpecies
 
 /**

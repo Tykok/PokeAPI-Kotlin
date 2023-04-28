@@ -3,7 +3,6 @@ package entity.berries
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 
-
 /**
  * @link https://pokeapi.co/docs/v2#berries
  * @author Tykok
@@ -26,7 +25,7 @@ class BerryFlavorMap(
      */
     @JsonProperty("flavor")
     val flavor: NamedApiResource
-){
+) {
     override fun toString(): String {
         return "BerryFlavorMap(potency=$potency, flavor=$flavor)"
     }

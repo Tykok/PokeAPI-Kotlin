@@ -68,6 +68,6 @@ class PokemonForm(
 ) {
     override fun toString(): String {
         return "PokemonForm(id=$id, name='$name', order=$order, formOrder=$formOrder, isDefault=$isDefault, isBattleOnly=$isBattleOnly, isMega=$isMega, " +
-                "formName='$formName', pokemon=$pokemon, types=$types, sprites=$sprites, versionGroup=$versionGroup, names=$name, formNames=$formName"
+            "formName='$formName', pokemon=$pokemon, types=$types, sprites=$sprites, versionGroup=$versionGroup, names=$name, formNames=$formName"
     }
 }

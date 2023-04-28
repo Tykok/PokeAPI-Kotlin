@@ -89,8 +89,8 @@ class Berry(
      * @see NamedApiResource
      */
     @JsonProperty("natural_gift_type")
-    val naturalGiftType: NamedApiResource,
-){
+    val naturalGiftType: NamedApiResource
+) {
     override fun toString(): String {
         return "Berry(id=$id, name='$name', growthTime=$growthTime, maxHarvest=$maxHarvest, naturalGiftPower=$naturalGiftPower, size=$size, smoothness=$smoothness, soilDryness=$soilDryness, firmness=$firmness, flavors=${flavors.contentToString()}, item=$item, naturalGiftType=$naturalGiftType)"
     }

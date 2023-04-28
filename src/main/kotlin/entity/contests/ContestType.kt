@@ -51,9 +51,8 @@ class ContestType(
      */
     @JsonProperty("names")
     val names: Array<ContestName>
-){
+) {
     override fun toString(): String {
         return "ContestType(id=$id, name='$name', berryFlavor=$berryFlavor, names=${names.contentToString()})"
     }
 }
-

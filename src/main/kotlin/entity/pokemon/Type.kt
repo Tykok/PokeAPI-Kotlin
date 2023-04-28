@@ -38,6 +38,6 @@ data class Type(
 ) {
     override fun toString(): String {
         return "Type(id=$id, name='$name', damageRelations=$damageRelations, pastDamageRelations=$pastDamageRelations, gameIndices=$gameIndices, " +
-                "generation=$generation, moveDamageClass=$moveDamageClass, names=$names, pokemon=$pokemon, moves=$moves)"
+            "generation=$generation, moveDamageClass=$moveDamageClass, names=$names, pokemon=$pokemon, moves=$moves)"
     }
 }

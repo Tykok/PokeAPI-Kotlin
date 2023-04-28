@@ -3,11 +3,11 @@ package entity.games
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.Name
 import entity.common.NamedApiResource
+import entity.locations.Region
+import entity.moves.Move
 import entity.pokemon.Ability
 import entity.pokemon.PokemonSpecies
 import entity.pokemon.Type
-import entity.locations.Region
-import entity.moves.Move
 
 /**
  * A generation is a grouping of the Pokémon games that separates them based on the Pokémon they include.
@@ -46,7 +46,6 @@ class Generation(
     @JsonProperty("main_region")
     val mainRegion: NamedApiResource,
 
-
     /**
      * @see NamedApiResource
      * @see Move
@@ -77,6 +76,6 @@ class Generation(
 ) {
     override fun toString(): String {
         return "Generation(id=$id, name='$name', abilities=$abilities, names=$names, mainRegion=$mainRegion, moves=$moves, " +
-                "pokemonSpecies=$pokemonSpecies, types=$types, versionGroups=$versionGroups)"
+            "pokemonSpecies=$pokemonSpecies, types=$types, versionGroups=$versionGroups)"
     }
 }

@@ -16,7 +16,6 @@ import entity.common.NamedApiResource
  */
 class ItemPocket(
 
-
     /**
      * The identifier for this resource.
      */

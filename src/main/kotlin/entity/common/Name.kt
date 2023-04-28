@@ -23,7 +23,7 @@ class Name(
      */
     @JsonProperty("language")
     val language: NamedApiResource
-){
+) {
     override fun toString(): String {
         return "Name(name='$name', language=$language)"
     }

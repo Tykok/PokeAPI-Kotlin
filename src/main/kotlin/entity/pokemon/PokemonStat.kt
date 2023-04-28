@@ -21,5 +21,5 @@ class PokemonStat(
      * The base value of the stat.
      */
     @JsonProperty("base_stat")
-    val baseStat: Number,
+    val baseStat: Number
 )

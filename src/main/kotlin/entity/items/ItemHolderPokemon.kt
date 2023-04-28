@@ -11,7 +11,7 @@ import entity.pokemon.Pokemon
  * @version 1.0.0
  * @since 2022-08-27
  */
-class ItemHolderPokemon (
+class ItemHolderPokemon(
     /**
      * The Pokémon that holds this item.
      * @see NamedApiResource

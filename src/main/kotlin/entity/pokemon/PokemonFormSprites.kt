@@ -28,13 +28,13 @@ data class PokemonFormSprites(
     val frontShinyFemale: String?
 ) {
     override fun toString(): String {
-        return "frontDefault=$frontDefault,"+
-        "frontShiny=$frontShiny"+
-        "backDefault=$backDefault"+
-        "backShiny=$backShiny"+
-        "backFemale=$backFemale"+
-        "backShinyFemale=$backShinyFemale"+
-        "frontFemale=$frontFemale"+
-        "frontShinyFemale=$frontShinyFemale"
+        return "frontDefault=$frontDefault," +
+            "frontShiny=$frontShiny" +
+            "backDefault=$backDefault" +
+            "backShiny=$backShiny" +
+            "backFemale=$backFemale" +
+            "backShinyFemale=$backShinyFemale" +
+            "frontFemale=$frontFemale" +
+            "frontShinyFemale=$frontShinyFemale"
     }
 }
