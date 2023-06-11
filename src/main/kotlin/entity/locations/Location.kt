@@ -34,7 +34,7 @@ class Location(
      * @ee Region
      */
     @JsonProperty("region")
-    val region: NamedApiResource,
+    val region: NamedApiResource<Region>,
 
     /**
      * The name of this resource listed in different languages.
@@ -56,7 +56,7 @@ class Location(
      * @see LocationArea
      */
     @JsonProperty("areas")
-    val areas: List<NamedApiResource>
+    val areas: List<NamedApiResource<LocationArea>>
 ) {
     override fun toString(): String {
         return "Location(id=$id, name='$name', region=$region, names=$names, gameIndices=$gameIndices, areas=$areas)"

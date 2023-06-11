@@ -1,6 +1,8 @@
 package entity.common
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import entity.encounters.EncounterConditionValue
+import entity.encounters.EncounterMethod
 
 /**
  * @see <a href="https://pokeapi.co/docs/v2#encounter">Documentation of PokeApi</a>
@@ -29,7 +31,7 @@ class Encounter(
      * @see NamedApiResource
      */
     @JsonProperty("condition_values")
-    val conditionValues: List<NamedApiResource>,
+    val conditionValues: List<NamedApiResource<EncounterConditionValue>>,
 
     /**
      * Percent chance that this encounter will occur.
@@ -43,10 +45,10 @@ class Encounter(
      * @see NamedApiResource
      */
     @JsonProperty("method")
-    val method: NamedApiResource
+    val method: NamedApiResource<EncounterMethod>
 
 ) {
-    override fun toString(): String {
-        return "Encounter(minLevel=$minLevel, maxLevel=$maxLevel, conditionValues=$conditionValues, chance=$chance, method=$method)"
-    }
+    override fun toString(): String =
+        "Encounter(minLevel=$minLevel, maxLevel=$maxLevel, conditionValues=$conditionValues, " +
+            "chance=$chance, method=$method)"
 }

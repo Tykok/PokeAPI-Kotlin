@@ -18,7 +18,7 @@ class ContestComboDetail(
      * @see Move
      */
     @JsonProperty("use_before")
-    val useBefore: List<NamedApiResource>? = null,
+    val useBefore: List<NamedApiResource<Move>>? = null,
 
     /**
      * A list of moves to use after this move.
@@ -26,7 +26,7 @@ class ContestComboDetail(
      * @see Move
      */
     @JsonProperty("use_after")
-    val useAfter: List<NamedApiResource>? = null
+    val useAfter: List<NamedApiResource<Move>>? = null
 
 ) {
     override fun toString(): String {

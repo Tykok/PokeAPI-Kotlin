@@ -3,6 +3,7 @@ package entity.pokemon
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 import entity.common.VersionEncounterDetail
+import entity.locations.LocationArea
 
 /**
  * A class representing the encounter details of a Pokémon.
@@ -13,7 +14,7 @@ import entity.common.VersionEncounterDetail
 class PokemonEncounter(
 
     @JsonProperty("location_area")
-    val locationArea: NamedApiResource,
+    val locationArea: NamedApiResource<LocationArea>,
 
     @JsonProperty("version_details")
     val versionDetails: Array<VersionEncounterDetail>

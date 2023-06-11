@@ -25,7 +25,7 @@ class VersionGroupFlavorText(
      * @see Language
      */
     @JsonProperty("language")
-    val language: NamedApiResource,
+    val language: NamedApiResource<Language>,
 
     /**
      * The version group which uses this flavor text.
@@ -33,5 +33,5 @@ class VersionGroupFlavorText(
      * @see VersionGroup
      */
     @JsonProperty("version_group")
-    val versionGroup: NamedApiResource
+    val versionGroup: NamedApiResource<VersionGroup>
 )

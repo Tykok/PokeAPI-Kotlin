@@ -28,7 +28,7 @@ data class PokemonShape(
     val names: List<Name>,
 
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: List<NamedApiResource>
+    val pokemonSpecies: List<NamedApiResource<PokemonSpecies>>
 ) {
     override fun toString(): String {
         return "PokemonShape(id=$id, name='$name', awesomeNames=$awesomeNames, names=$names, pokemonSpecies=$pokemonSpecies)"

@@ -2,6 +2,8 @@ package entity.berries
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
+import entity.items.Item
+import entity.pokemon.Type
 
 /**
  * Berries (Japanese: きのみ Tree Fruit) are small, juicy, fleshy fruit.
@@ -66,9 +68,10 @@ class Berry(
     /**
      * The firmness of this berry, used in making Pokéblocks or Poffins.
      * @see NamedApiResource
+     * @see BerryFirmness
      */
     @JsonProperty("firmness")
-    val firmness: NamedApiResource,
+    val firmness: NamedApiResource<BerryFirmness>,
 
     /**
      * A list of references to each flavor a berry can have and the potency of each of those flavors in regard to this berry.
@@ -80,18 +83,22 @@ class Berry(
     /**
      * Berries are actually items. This is a reference to the item specific data for this berry.
      * @see NamedApiResource
+     * @see Item
      */
     @JsonProperty("item")
-    val item: NamedApiResource,
+    val item: NamedApiResource<Item>,
 
     /**
      * The type inherited by "Natural Gift" when used with this Berry.
      * @see NamedApiResource
+     * @see Type
      */
     @JsonProperty("natural_gift_type")
-    val naturalGiftType: NamedApiResource
+    val naturalGiftType: NamedApiResource<Type>
 ) {
-    override fun toString(): String {
-        return "Berry(id=$id, name='$name', growthTime=$growthTime, maxHarvest=$maxHarvest, naturalGiftPower=$naturalGiftPower, size=$size, smoothness=$smoothness, soilDryness=$soilDryness, firmness=$firmness, flavors=${flavors.contentToString()}, item=$item, naturalGiftType=$naturalGiftType)"
-    }
+    override fun toString() = """
+         Berry(id=$id, name='$name', growthTime=$growthTime, maxHarvest=$maxHarvest, naturalGiftPower=$naturalGiftPower,
+         size=$size, smoothness=$smoothness, soilDryness=$soilDryness, firmness=$firmness,
+         flavors=${flavors.contentToString()}, item=$item, naturalGiftType=$naturalGiftType)
+    """
 }

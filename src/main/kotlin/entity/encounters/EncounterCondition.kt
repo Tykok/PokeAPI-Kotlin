@@ -42,9 +42,9 @@ class EncounterCondition(
      * @see EncounterConditionValue
      */
     @JsonProperty("values")
-    val values: Array<NamedApiResource>
+    val values: Array<NamedApiResource<EncounterCondition>>
 ) {
-    override fun toString(): String {
-        return "EncounterCondition(id=$id, name='$name', names=${names.contentToString()}, values=${values.contentToString()})"
-    }
+    override fun toString() =
+        "EncounterCondition(id=$id, name='$name', names=${names.contentToString()}, " +
+            "values=${values.contentToString()})"
 }

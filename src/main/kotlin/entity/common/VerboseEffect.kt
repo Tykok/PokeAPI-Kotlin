@@ -30,5 +30,5 @@ class VerboseEffect(
      * @see Language
      */
     @JsonProperty("language")
-    val language: NamedApiResource
+    val language: NamedApiResource<Language>
 )

@@ -19,7 +19,7 @@ class PokemonEncounter(
      * @see Pokemon
      */
     @JsonProperty("pokemon")
-    val pokemon: NamedApiResource,
+    val pokemon: NamedApiResource<Pokemon>,
 
     /**
      * A list of versions and encounters with Pokémon that might happen in the referenced location area.

@@ -3,6 +3,8 @@ package entity.pokemon
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 import entity.games.VersionGroup
+import entity.utility.Language
+
 class AbilityFlavorText(
     /**
      * The localized name for an API resource in a specific language.
@@ -16,7 +18,7 @@ class AbilityFlavorText(
      * @see Langage
      */
     @JsonProperty("language")
-    val language: NamedApiResource,
+    val language: NamedApiResource<Language>,
 
     /**
      * The version group that uses this flavor text.
@@ -24,5 +26,5 @@ class AbilityFlavorText(
      * @see NamedApiResource
      */
     @JsonProperty("version_group")
-    val versionGroup: NamedApiResource
+    val versionGroup: NamedApiResource<VersionGroup>
 )

@@ -2,6 +2,7 @@ package entity.moves
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
+import entity.pokemon.Stat
 
 /**
  * @author Tykok
@@ -21,7 +22,7 @@ class MoveStatChange(
      * @see Stat
      */
     @JsonProperty("stat")
-    val stat: NamedApiResource
+    val stat: NamedApiResource<Stat>
 ) {
     override fun toString(): String {
         return "MoveStatChange(change=$change, stat=$stat)"

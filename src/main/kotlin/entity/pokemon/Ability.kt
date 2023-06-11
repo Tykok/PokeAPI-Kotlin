@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.Name
 import entity.common.NamedApiResource
 import entity.common.VerboseEffect
+import entity.contests.SuperContestEffects
 import entity.games.Generation
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -34,7 +35,7 @@ class Ability(
      * @see NamedApiResource
      */
     @JsonProperty("generation")
-    val generation: NamedApiResource,
+    val generation: NamedApiResource<Generation>,
 
     /**
      * The name of this resource listed in different languages.

@@ -3,6 +3,8 @@ package entity.moves
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 import entity.common.VerboseEffect
+import entity.games.VersionGroup
+import entity.pokemon.Type
 
 /**
  * @author Tykok
@@ -48,7 +50,7 @@ class PastMoveStatValues(
      * @see Type
      */
     @JsonProperty("type")
-    val type: NamedApiResource,
+    val type: NamedApiResource<Type>,
 
     /**
      * The version group in which these move stat values were in effect.
@@ -56,7 +58,7 @@ class PastMoveStatValues(
      * @see VersionGroup
      */
     @JsonProperty("version_group")
-    val versionGroup: NamedApiResource
+    val versionGroup: NamedApiResource<VersionGroup>
 ) {
     override fun toString(): String {
         return "PastMoveStatValues(accuracy=$accuracy, effectChance=$effectChance, power=$power, pp=$pp, effectEntries=$effectEntries, type=$type, versionGroup=$versionGroup)"

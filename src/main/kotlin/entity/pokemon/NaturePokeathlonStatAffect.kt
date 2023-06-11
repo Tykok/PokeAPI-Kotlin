@@ -15,7 +15,7 @@ class NaturePokeathlonStatAffect(
      * @see Nature
      */
     @JsonProperty("nature")
-    val nature: NamedApiResource
+    val nature: NamedApiResource<Nature>
 ) {
     override fun toString(): String {
         return "NaturePokeathlonStatAffect(maxChange=$maxChange, nature=$nature)"

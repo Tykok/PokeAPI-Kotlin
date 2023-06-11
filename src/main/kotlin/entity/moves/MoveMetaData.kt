@@ -16,7 +16,7 @@ class MoveMetaData(
      * @see NamedApiResource
      */
     @JsonProperty("ailment")
-    val ailment: NamedApiResource,
+    val ailment: NamedApiResource<MoveAilment>,
 
     /**
      * The category of move this move falls under, e.g. damage or ailment.
@@ -24,7 +24,7 @@ class MoveMetaData(
      * @see NamedApiResource
      */
     @JsonProperty("category")
-    val category: NamedApiResource,
+    val category: NamedApiResource<MoveCategory>,
 
     /**
      * The minimum number of times this move hits. Null if it always only hits once.

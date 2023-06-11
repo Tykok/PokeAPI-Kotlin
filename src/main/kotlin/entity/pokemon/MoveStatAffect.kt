@@ -1,6 +1,7 @@
 package entity.pokemon
 
 import entity.common.NamedApiResource
+import entity.moves.Move
 
 /**
  * @property change The maximum amount of change to the referenced stat.
@@ -8,5 +9,5 @@ import entity.common.NamedApiResource
  */
 class MoveStatAffect(
     val change: Number,
-    val move: NamedApiResource
+    val move: NamedApiResource<Move>
 )

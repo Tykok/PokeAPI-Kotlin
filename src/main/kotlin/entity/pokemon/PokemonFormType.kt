@@ -15,7 +15,7 @@ class PokemonFormType(
      * @see Type
      */
     @JsonProperty("type")
-    val type: NamedApiResource
+    val type: NamedApiResource<Type>
 ) {
     override fun toString(): String {
         return "slot=$slot, type=$type"

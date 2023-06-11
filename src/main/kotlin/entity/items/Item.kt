@@ -39,7 +39,7 @@ class Item(
      * The price of this item in stores.
      */
     @JsonProperty("cost")
-    val cost: Integer,
+    val cost: Int,
 
     /**
      * The power of the move Fling when used with this item.
@@ -53,7 +53,7 @@ class Item(
      * @see ItemFlingEffect
      */
     @JsonProperty("fling_effect")
-    val flingEffect: NamedApiResource?,
+    val flingEffect: NamedApiResource<ItemFlingEffect>?,
 
     /**
      * A list of attributes this item has.
@@ -61,7 +61,7 @@ class Item(
      * @see ItemAttribute
      */
     @JsonProperty("attributes")
-    val attributes: List<NamedApiResource>,
+    val attributes: List<NamedApiResource<ItemAttribute>>,
 
     /**
      * The category of items this item falls into.
@@ -69,7 +69,7 @@ class Item(
      * @see ItemCategory
      */
     @JsonProperty("category")
-    val category: NamedApiResource,
+    val category: NamedApiResource<ItemCategory>,
 
     /**
      * The effect of this ability listed in different languages.

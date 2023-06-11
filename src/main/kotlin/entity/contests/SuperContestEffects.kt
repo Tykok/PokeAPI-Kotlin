@@ -3,6 +3,7 @@ package entity.contests
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.FlavorText
 import entity.common.NamedApiResource
+import entity.moves.Move
 
 /**
  * `SuperContestEffects` class refers to the effects of move on the public when used in super contests.
@@ -40,9 +41,10 @@ class SuperContestEffects(
     /**
      * A list of moves that have the effect when used in super contests.
      * @see NamedApiResource
+     * @see Move
      */
     @JsonProperty("moves")
-    val moves: List<NamedApiResource>
+    val moves: List<NamedApiResource<Move>>
 ) {
     override fun toString(): String = """
         SuperContestEffects(id=$id, appeal=$appeal, flavorTextEntries=${flavorTextEntries.contentToString()}, moves=$moves)

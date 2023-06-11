@@ -6,6 +6,7 @@ import entity.common.Description
 import entity.common.FlavorText
 import entity.common.Name
 import entity.common.NamedApiResource
+import entity.games.Generation
 
 /**
  * Represents a Pokémon species.
@@ -49,31 +50,31 @@ class PokemonSpecies(
     val formsSwitchable: Boolean,
 
     @JsonProperty("growth_rate")
-    val growthRate: NamedApiResource,
+    val growthRate: NamedApiResource<GrowthRate>,
 
     @JsonProperty("pokedex_numbers")
     val pokedexNumbers: List<PokemonSpeciesDexEntry>,
 
     @JsonProperty("egg_groups")
-    val eggGroups: List<NamedApiResource>,
+    val eggGroups: List<NamedApiResource<EggGroup>>,
 
     @JsonProperty("color")
-    val color: NamedApiResource,
+    val color: NamedApiResource<PokemonColor>,
 
     @JsonProperty("shape")
-    val shape: NamedApiResource,
+    val shape: NamedApiResource<PokemonShape>,
 
     @JsonProperty("evolves_from_species")
-    val evolvesFromSpecies: NamedApiResource?,
+    val evolvesFromSpecies: NamedApiResource<PokemonSpecies>?,
 
     @JsonProperty("evolution_chain")
     val evolutionChain: APIResource,
 
     @JsonProperty("habitat")
-    val habitat: NamedApiResource?,
+    val habitat: NamedApiResource<PokemonHabitat>?,
 
     @JsonProperty("generation")
-    val generation: NamedApiResource,
+    val generation: NamedApiResource<Generation>,
 
     @JsonProperty("names")
     val names: List<Name>,
@@ -93,12 +94,12 @@ class PokemonSpecies(
     @JsonProperty("varieties")
     val varieties: List<PokemonSpeciesVariety>
 ) {
-    override fun toString(): String {
-        return "PokemonSpecies(id=$id, name='$name', order=$order, genderRate=$genderRate, captureRate=$captureRate, baseHappiness=$baseHappiness, " +
-            "isBaby=$isBaby, isLegendary=$isLegendary, isMythical=$isMythical, hatchCounter=$hatchCounter, hasGenderDifferences=$hasGenderDifferences, " +
-            "formsSwitchable=$formsSwitchable, growthRate=$growthRate, pokedexNumbers=$pokedexNumbers, eggGroups=$eggGroups, color=$color, " +
-            "shape=$shape, evolvesFromSpecies=$evolvesFromSpecies, evolutionChain=$evolutionChain, habitat=$habitat, generation=$generation, " +
-            "names=$names, palParkEncounters=$palParkEncounters, flavorTextEntries=$flavorTextEntries, formDescriptions=$formDescriptions, " +
-            "genera=$genera, varieties=$varieties)"
-    }
+    override fun toString() =
+        """PokemonSpecies(id=$id, name='$name', order=$order, genderRate=$genderRate, captureRate=$captureRate, baseHappiness=$baseHappiness,
+            isBaby=$isBaby, isLegendary=$isLegendary, isMythical=$isMythical, hatchCounter=$hatchCounter, hasGenderDifferences=$hasGenderDifferences,
+            formsSwitchable=$formsSwitchable, growthRate=$growthRate, pokedexNumbers=$pokedexNumbers, eggGroups=$eggGroups, color=$color,
+            shape=$shape, evolvesFromSpecies=$evolvesFromSpecies, evolutionChain=$evolutionChain, habitat=$habitat, generation=$generation,
+            names=$names, palParkEncounters=$palParkEncounters, flavorTextEntries=$flavorTextEntries, formDescriptions=$formDescriptions,
+            genera=$genera, varieties=$varieties)
+            """
 }

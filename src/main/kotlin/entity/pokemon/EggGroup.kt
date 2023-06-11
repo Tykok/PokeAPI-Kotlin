@@ -30,7 +30,7 @@ class EggGroup(
      * @see NamedApiResource
      */
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: List<NamedApiResource>
+    val pokemonSpecies: List<NamedApiResource<PokemonSpecies>>
 ) {
     override fun toString(): String {
         return "EggGroup(id=$id, name='$name', names=$names, pokemonSpecies=$pokemonSpecies)"

@@ -2,6 +2,7 @@ package entity.contests
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
+import entity.utility.Language
 
 /**
  * ContestName classe used to refer to a specific categories according to the color of the berry.
@@ -32,9 +33,10 @@ class ContestName(
     /**
      * The language that this name is in.
      * @see NamedApiResource
+     * @see Language
      */
     @JsonProperty("language")
-    val language: NamedApiResource
+    val language: NamedApiResource<Language>
 ) {
     override fun toString(): String {
         return "ContestName(name='$name', color='$color', language=$language)"

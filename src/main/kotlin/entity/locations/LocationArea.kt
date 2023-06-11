@@ -49,7 +49,7 @@ class LocationArea(
      * @see Location
      */
     @JsonProperty("location")
-    val location: NamedApiResource,
+    val location: NamedApiResource<Location>,
 
     /**
      * The name of this resource listed in different languages.

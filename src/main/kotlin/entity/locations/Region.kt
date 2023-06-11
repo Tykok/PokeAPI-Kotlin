@@ -3,6 +3,9 @@ package entity.locations
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.Name
 import entity.common.NamedApiResource
+import entity.games.Generation
+import entity.games.Pokedex
+import entity.games.VersionGroup
 
 /**
  * A region is an organized area of the Pokémon world. Most often, the main difference between regions is the
@@ -29,7 +32,7 @@ class Region(
      * @see Location
      */
     @JsonProperty("locations")
-    val locations: List<NamedApiResource>,
+    val locations: List<NamedApiResource<Location>>,
 
     /**
      * The name for this resource.
@@ -50,7 +53,7 @@ class Region(
      * @see Generation
      */
     @JsonProperty("main_generation")
-    val mainGeneration: NamedApiResource,
+    val mainGeneration: NamedApiResource<Generation>,
 
     /**
      * A list of pokédexes that catalogue Pokémon in this region.
@@ -58,15 +61,15 @@ class Region(
      * @see NamedApiResource
      */
     @JsonProperty("pokedexes")
-    val pokedexes: List<NamedApiResource>,
+    val pokedexes: List<NamedApiResource<Pokedex>>,
 
     /**
      * A list of version groups where this region can be visited.
-     * @see Pokedex
+     * @see NamedApiResource
      * @see VersionGroup
      */
     @JsonProperty("version_groups")
-    val versionGroups: List<NamedApiResource>
+    val versionGroups: List<NamedApiResource<VersionGroup>>
 ) {
     override fun toString(): String {
         return "Region(id=$id, locations=$locations, name='$name', names=$names, mainGeneration=$mainGeneration, pokedexes=$pokedexes, versionGroups=$versionGroups)"

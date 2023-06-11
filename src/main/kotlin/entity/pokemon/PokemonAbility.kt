@@ -22,5 +22,5 @@ class PokemonAbility(
      * @see Ability
      */
     @JsonProperty("ability")
-    val ability: NamedApiResource
+    val ability: NamedApiResource<Ability>
 )

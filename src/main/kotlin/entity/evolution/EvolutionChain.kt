@@ -29,7 +29,7 @@ class EvolutionChain(
      * @see Item
      */
     @JsonProperty("baby_trigger_item")
-    val babyTriggerItem: NamedApiResource?,
+    val babyTriggerItem: NamedApiResource<Item>?,
 
     /**
      * The base chain link object. Each link contains evolution details for a Pokémon in the chain.

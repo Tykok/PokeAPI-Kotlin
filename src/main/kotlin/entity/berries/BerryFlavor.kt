@@ -3,6 +3,7 @@ package entity.berries
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.Name
 import entity.common.NamedApiResource
+import entity.contests.ContestType
 
 /**
  * @link https://pokeapi.co/docs/v2#berry-flavors
@@ -34,9 +35,10 @@ class BerryFlavor(
     /**
      * The contest type that correlates with this berry flavor.
      * @see NamedApiResource
+     * @see ContestType
      */
     @JsonProperty("contest_type")
-    val contestType: NamedApiResource,
+    val contestType: NamedApiResource<ContestType>,
 
     /**
      * The name of this resource listed in different languages.
@@ -45,7 +47,8 @@ class BerryFlavor(
     @JsonProperty("names")
     val names: Array<Name>
 ) {
-    override fun toString(): String {
-        return "BerryFlavor(id=$id, name='$name', berries=${berries.contentToString()}, contestType=$contestType, names=${names.contentToString()})"
-    }
+    override fun toString() = """
+        BerryFlavor(id=$id, name='$name', berries=${berries.contentToString()},
+        contestType=$contestType, names=${names.contentToString()})
+        """
 }

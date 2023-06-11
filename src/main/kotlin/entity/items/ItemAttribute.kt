@@ -35,7 +35,7 @@ class ItemAttribute(
      * @see Item
      */
     @JsonProperty("items")
-    val items: Array<NamedApiResource>,
+    val items: Array<NamedApiResource<Item>>,
 
     /**
      * The name of this item attribute listed in different languages.

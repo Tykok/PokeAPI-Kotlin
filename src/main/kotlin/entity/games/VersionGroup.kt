@@ -41,7 +41,7 @@ class VersionGroup(
      * @see Generation
      */
     @JsonProperty("generation")
-    val generation: NamedApiResource,
+    val generation: NamedApiResource<Generation>,
 
     /**
      * A list of methods in which Pokémon can learn moves in this version group.
@@ -49,7 +49,7 @@ class VersionGroup(
      * @see MoveLearnMethod
      */
     @JsonProperty("move_learn_methods")
-    val moveLearnMethods: List<NamedApiResource>,
+    val moveLearnMethods: List<NamedApiResource<MoveLearnMethod>>,
 
     /**
      * A list of Pokédexes introduces in this version group.
@@ -57,7 +57,7 @@ class VersionGroup(
      * @see Pokedex
      */
     @JsonProperty("pokedexes")
-    val pokedexes: List<NamedApiResource>,
+    val pokedexes: List<NamedApiResource<Pokedex>>,
 
     /**
      * A list of regions that can be visited in this version group.
@@ -65,7 +65,7 @@ class VersionGroup(
      * @see Region
      */
     @JsonProperty("regions")
-    val regions: List<NamedApiResource>,
+    val regions: List<NamedApiResource<Region>>,
 
     /**
      * The versions this version group owns.
@@ -73,7 +73,7 @@ class VersionGroup(
      * @see Version
      */
     @JsonProperty("versions")
-    val versions: List<NamedApiResource>
+    val versions: List<NamedApiResource<Version>>
 ) {
     override fun toString(): String {
         return "VersionGroup(id=$id, name='$name', order=$order, generation=$generation, moveLearnMethods=$moveLearnMethods, pokedexes=$pokedexes, regions=$regions, versions=$versions)"

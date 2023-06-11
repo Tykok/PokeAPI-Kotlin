@@ -40,7 +40,7 @@ class Version(
      * @see VersionGroup
      */
     @JsonProperty("version_group")
-    val versionGroup: NamedApiResource? = null
+    val versionGroup: NamedApiResource<VersionGroup>? = null
 ) {
     override fun toString(): String {
         return "Version(id=$id, name='$name', names=${names.contentToString()}, versionGroups=$versionGroup)"

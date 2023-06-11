@@ -30,7 +30,7 @@ class Characteristic(
      * The stat which is affected by this characteristic.
      */
     @JsonProperty("highest_stat")
-    val highestStat: NamedApiResource
+    val highestStat: NamedApiResource<Stat>
 ) {
     override fun toString(): String {
         return "Characteristic(id=$id, geneModulo=$geneModulo, possibleValues=$possibleValues), descriptions=$descriptions), highestStat=$highestStat)"

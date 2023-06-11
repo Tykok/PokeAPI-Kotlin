@@ -25,7 +25,7 @@ class EncounterVersionDetails(
      * @see Version
      */
     @JsonProperty("version")
-    val version: NamedApiResource
+    val version: NamedApiResource<Version>
 ) {
     override fun toString(): String {
         return "EncounterVersionDetails(rate=$rate, version=$version)"

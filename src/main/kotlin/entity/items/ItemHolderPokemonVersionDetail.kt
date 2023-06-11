@@ -22,5 +22,5 @@ class ItemHolderPokemonVersionDetail(
      * @see NamedApiResource
      * @see Version
      */
-    val version: NamedApiResource
+    val version: NamedApiResource<Version>
 )

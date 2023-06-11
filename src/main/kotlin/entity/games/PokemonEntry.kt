@@ -3,6 +3,7 @@ package entity.games
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
 import entity.pokemon.PokemonSpecies
+
 /**
  * @see <a href="https://pokeapi.co/docs/v2#pokedexes">Documentation of PokeApi</a>
  *
@@ -24,7 +25,7 @@ class PokemonEntry(
      * @see PokemonSpecies
      */
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: NamedApiResource
+    val pokemonSpecies: NamedApiResource<PokemonSpecies>
 ) {
     override fun toString(): String {
         return "PokemonEntry(entryNumber=$entryNumber, pokemonSpecies=$pokemonSpecies)"
