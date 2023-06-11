@@ -9,7 +9,7 @@ class TypePokemon(
     val slot: Number,
 
     @JsonProperty("pokemon")
-    val pokemon: NamedApiResource
+    val pokemon: NamedApiResource<Pokemon>
 ) {
     override fun toString(): String {
         return "TypePokemon(slot=$slot, pokemon=$pokemon)"

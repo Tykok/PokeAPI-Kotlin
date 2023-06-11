@@ -16,7 +16,7 @@ class PokemonHabitat(
     val names: List<Name>,
 
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: List<NamedApiResource>
+    val pokemonSpecies: List<NamedApiResource<PokemonSpecies>>
 ) {
     override fun toString(): String {
         return "PokemonHabitat(id=$id, name='$name', names=$names, pokemonSpecies=$pokemonSpecies)"

@@ -18,7 +18,7 @@ class ItemHolderPokemon(
      * @see Pokemon
      */
     @JsonProperty("pokemon")
-    val pokemon: NamedApiResource,
+    val pokemon: NamedApiResource<Pokemon>,
 
     /**
      * The details for the version that this item is held in by the Pokémon.

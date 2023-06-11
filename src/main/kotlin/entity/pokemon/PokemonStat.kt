@@ -9,7 +9,7 @@ class PokemonStat(
      * @see Stat
      */
     @JsonProperty("stat")
-    val stat: NamedApiResource,
+    val stat: NamedApiResource<Stat>,
 
     /**
      * The effort points (EV) the Pokémon has in the stat.

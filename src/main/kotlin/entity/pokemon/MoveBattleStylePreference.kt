@@ -23,7 +23,7 @@ class MoveBattleStylePreference(
      * @see NamedApiResource
      */
     @JsonProperty("move_battle_style")
-    val moveBattleStyle: NamedApiResource
+    val moveBattleStyle: NamedApiResource<MoveBattleStyle>
 ) {
     override fun toString(): String {
         return "MoveBattleStylePreference(lowHpPreference=$lowHpPreference, highHpPreference=$highHpPreference, moveBattleStyle=$moveBattleStyle)"

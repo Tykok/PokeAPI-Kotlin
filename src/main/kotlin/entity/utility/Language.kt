@@ -50,7 +50,7 @@ class Language(
     val names: Array<Name>
 
 ) {
-    override fun toString(): String {
-        return "Language(id=$id, name=$name, official=$official, iso639=$iso639, iso3166=$iso3166, names=${names.contentToString()})"
-    }
+    override fun toString() =
+        "Language(id=$id, name=$name, official=$official, iso639=$iso639, iso3166=$iso3166, " +
+            "names=${names.contentToString()})"
 }

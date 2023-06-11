@@ -43,7 +43,7 @@ class EvolutionTrigger(
      * @see PokemonSpecies
      */
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: Array<NamedApiResource>
+    val pokemonSpecies: Array<NamedApiResource<PokemonSpecies>>
 ) {
     override fun toString(): String {
         return "EvolutionTrigger(id=$id, name='$name', names=${names.contentToString()}, pokemonSpecies=${pokemonSpecies.contentToString()})"

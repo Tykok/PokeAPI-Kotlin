@@ -30,7 +30,7 @@ class Machine(
      * @see Item
      */
     @JsonProperty("item")
-    val item: NamedApiResource,
+    val item: NamedApiResource<Item>,
 
     /**
      * The move that is taught by this machine.
@@ -38,7 +38,7 @@ class Machine(
      * @see Move
      */
     @JsonProperty("move")
-    val move: NamedApiResource,
+    val move: NamedApiResource<Move>,
 
     /**
      * The version group that this machine applies to.
@@ -46,7 +46,7 @@ class Machine(
      * @see VersionGroup
      */
     @JsonProperty("version_group")
-    val versionGroup: NamedApiResource
+    val versionGroup: NamedApiResource<VersionGroup>
 ) {
     override fun toString(): String {
         return "Machine(id=$id, item=$item, move=$move, versionGroup=$versionGroup)"

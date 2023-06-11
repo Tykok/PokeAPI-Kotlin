@@ -34,7 +34,7 @@ class Generation(
      * @see Ability
      */
     @JsonProperty("abilities")
-    val abilities: List<NamedApiResource>,
+    val abilities: List<NamedApiResource<Ability>>,
 
     @JsonProperty("names")
     val names: List<Name>,
@@ -44,35 +44,35 @@ class Generation(
      * @see Region
      */
     @JsonProperty("main_region")
-    val mainRegion: NamedApiResource,
+    val mainRegion: NamedApiResource<Region>,
 
     /**
      * @see NamedApiResource
      * @see Move
      */
     @JsonProperty("moves")
-    val moves: List<NamedApiResource>,
+    val moves: List<NamedApiResource<Move>>,
 
     /**
      * @see NamedApiResource
      * @see PokemonSpecies
      */
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: List<NamedApiResource>,
+    val pokemonSpecies: List<NamedApiResource<PokemonSpecies>>,
 
     /**
      * @see NamedApiResource
      * @see Type
      */
     @JsonProperty("types")
-    val types: List<NamedApiResource>,
+    val types: List<NamedApiResource<Type>>,
 
     /**
      * @see NamedApiResource
      * @see VersionGroup
      */
     @JsonProperty("version_groups")
-    val versionGroups: List<NamedApiResource>
+    val versionGroups: List<NamedApiResource<VersionGroup>>
 ) {
     override fun toString(): String {
         return "Generation(id=$id, name='$name', abilities=$abilities, names=$names, mainRegion=$mainRegion, moves=$moves, " +

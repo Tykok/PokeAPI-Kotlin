@@ -26,7 +26,7 @@ class MachineVersionDetail(
      * @see VersionGroup
      */
     @JsonProperty("version_group")
-    val versionGroup: NamedApiResource
+    val versionGroup: NamedApiResource<VersionGroup>
 ) {
     override fun toString(): String {
         return "MachineVersionDetail(machine=$machine, versionGroup=$versionGroup)"

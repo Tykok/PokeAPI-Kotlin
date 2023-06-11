@@ -26,7 +26,7 @@ class EvolutionDetail(
      * @see Item
      */
     @JsonProperty("item")
-    val item: NamedApiResource?,
+    val item: NamedApiResource<Item>?,
 
     /**
      * The type of event that triggers evolution into this Pokémon species.
@@ -34,7 +34,7 @@ class EvolutionDetail(
      * @see EvolutionTrigger
      */
     @JsonProperty("trigger")
-    val trigger: NamedApiResource?,
+    val trigger: NamedApiResource<EvolutionTrigger>?,
 
     /**
      * The id of the gender of the evolving Pokémon species must be in order to evolve into this Pokémon species.
@@ -48,7 +48,7 @@ class EvolutionDetail(
      * @see Item
      */
     @JsonProperty("held_item")
-    val heldItem: NamedApiResource?,
+    val heldItem: NamedApiResource<Item>?,
 
     /**
      * The move that must be known by the evolving Pokémon species during the evolution trigger event in order to evolve into this Pokémon species.
@@ -56,7 +56,7 @@ class EvolutionDetail(
      * @see Move
      */
     @JsonProperty("known_move")
-    val knownMove: NamedApiResource?,
+    val knownMove: NamedApiResource<Move>?,
 
     /**
      * The evolving Pokémon species must know a move with this type during the evolution trigger event in order to evolve into this Pokémon species.
@@ -64,7 +64,7 @@ class EvolutionDetail(
      * @see Type
      */
     @JsonProperty("known_move_type")
-    val knownMoveType: NamedApiResource?,
+    val knownMoveType: NamedApiResource<Type>?,
 
     /**
      * The location the evolution must be triggered at.
@@ -72,7 +72,7 @@ class EvolutionDetail(
      * @see Location
      */
     @JsonProperty("location")
-    val location: NamedApiResource?,
+    val location: NamedApiResource<Location>?,
 
     /**
      * The minimum required level of the evolving Pokémon species to evolve into this Pokémon species.
@@ -119,7 +119,7 @@ class EvolutionDetail(
      * @see Type
      */
     @JsonProperty("party_type")
-    val partyType: NamedApiResource?,
+    val partyType: NamedApiResource<Type>?,
 
     /**
      * The required relation between the Pokémon's Attack and Defense stats. 1 means Attack > Defense. 0 means Attack = Defense. -1 means Attack < Defense.
@@ -139,7 +139,7 @@ class EvolutionDetail(
      * @see PokemonSpecies
      */
     @JsonProperty("trade_species")
-    val tradeSpecies: NamedApiResource?,
+    val tradeSpecies: NamedApiResource<PokemonSpecies>?,
 
     /**
      * Whether or not the 3DS needs to be turned upside-down as this Pokémon levels up.

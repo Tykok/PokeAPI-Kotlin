@@ -33,7 +33,7 @@ class EncounterConditionValue(
      * @see EncounterCondition
      */
     @JsonProperty("condition")
-    val condition: NamedApiResource,
+    val condition: NamedApiResource<EncounterCondition>,
 
     /**
      * The name of this resource listed in different languages.
@@ -42,7 +42,6 @@ class EncounterConditionValue(
     @JsonProperty("names")
     val names: Array<Name>
 ) {
-    override fun toString(): String {
-        return "EncounterConditionValue(id=$id, name='$name', condition=$condition, names=${names.contentToString()})"
-    }
+    override fun toString() =
+        "EncounterConditionValue(id=$id, name='$name', condition=$condition, names=${names.contentToString()})"
 }

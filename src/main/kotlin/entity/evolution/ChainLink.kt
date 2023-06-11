@@ -31,7 +31,7 @@ class ChainLink(
      * @see PokemonSpecies
      */
     @JsonProperty("species")
-    val species: NamedApiResource,
+    val species: NamedApiResource<PokemonSpecies>,
 
     /**
      * All details regarding the specific details of the referenced Pokémon species evolution.

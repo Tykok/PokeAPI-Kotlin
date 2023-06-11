@@ -24,5 +24,5 @@ class GenerationGameIndex(
      * @see Generation
      */
     @JsonProperty("generation")
-    val generation: NamedApiResource
+    val generation: NamedApiResource<Generation>
 )

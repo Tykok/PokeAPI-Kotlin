@@ -2,6 +2,7 @@ package entity.pokemon
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
+import entity.moves.Move
 
 class PokemonMove(
     /**
@@ -9,7 +10,7 @@ class PokemonMove(
      * @see Move
      */
     @JsonProperty("move")
-    val move: NamedApiResource,
+    val move: NamedApiResource<Move>,
 
     @JsonProperty("version_group_details")
     val versionGroupDetails: Array<PokemonMoveVersion>

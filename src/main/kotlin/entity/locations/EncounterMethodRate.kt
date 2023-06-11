@@ -19,7 +19,7 @@ class EncounterMethodRate(
      * @see EncounterMethod
      */
     @JsonProperty("encounter_method")
-    val encounterMethod: NamedApiResource,
+    val encounterMethod: NamedApiResource<EncounterMethod>,
 
     /**
      * The chance of the encounter to occur on a version of the game.

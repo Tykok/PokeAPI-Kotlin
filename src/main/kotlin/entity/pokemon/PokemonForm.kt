@@ -3,6 +3,7 @@ package entity.pokemon
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.Name
 import entity.common.NamedApiResource
+import entity.games.VersionGroup
 
 /**
  * A class representing the details of a Pokémon form.
@@ -48,7 +49,7 @@ class PokemonForm(
     val formName: String,
 
     @JsonProperty("pokemon")
-    val pokemon: NamedApiResource,
+    val pokemon: NamedApiResource<Pokemon>,
 
     @JsonProperty("types")
     val types: List<PokemonFormType>,
@@ -57,7 +58,7 @@ class PokemonForm(
     val sprites: PokemonFormSprites,
 
     @JsonProperty("version_group")
-    val versionGroup: NamedApiResource,
+    val versionGroup: NamedApiResource<VersionGroup>,
 
     @JsonProperty("names")
     val names: List<Name>,

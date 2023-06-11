@@ -6,7 +6,11 @@ import entity.common.MachineVersionDetail
 import entity.common.Name
 import entity.common.NamedApiResource
 import entity.common.VerboseEffect
-import entity.pokemon.SuperContestEffects
+import entity.contests.ContestType
+import entity.contests.SuperContestEffects
+import entity.games.Generation
+import entity.pokemon.Pokemon
+import entity.pokemon.Type
 
 /**
  * Moves are the skills of Pokémon in battle. In battle, a Pokémon uses one move each turn.
@@ -76,7 +80,7 @@ class Move(
      * @see NamedApiResource
      */
     @JsonProperty("contest_type")
-    val contestType: NamedApiResource,
+    val contestType: NamedApiResource<ContestType>,
 
     /**
      * The effect the move has when used in a contest.
@@ -92,7 +96,7 @@ class Move(
      * @see MoveDamageClass
      */
     @JsonProperty("damage_class")
-    val damageClass: NamedApiResource,
+    val damageClass: NamedApiResource<MoveDamageClass>,
 
     /**
      * The effect of this move listed in different languages.
@@ -114,7 +118,7 @@ class Move(
      * @see Pokemon
      */
     @JsonProperty("learned_by_pokemon")
-    val learnedByPokemon: List<NamedApiResource>,
+    val learnedByPokemon: List<NamedApiResource<Pokemon>>,
 
     /**
      * The flavor text of this move listed in different languages.
@@ -129,7 +133,7 @@ class Move(
      * @see Generation
      */
     @JsonProperty("generation")
-    val generation: NamedApiResource,
+    val generation: NamedApiResource<Generation>,
 
     /**
      * A list of the machines that teach this move.
@@ -180,7 +184,7 @@ class Move(
      * @see MoveTarget
      */
     @JsonProperty("target")
-    val target: NamedApiResource,
+    val target: NamedApiResource<MoveTarget>,
 
     /**
      * The elemental type of this move.
@@ -188,7 +192,7 @@ class Move(
      * @see Type
      */
     @JsonProperty("type")
-    val type: NamedApiResource
+    val type: NamedApiResource<Type>
 ) {
     override fun toString(): String {
         return "Move(id=$id, name='$name', accuracy=$accuracy, effectChance=$effectChance, pp=$pp, priority=$priority, power=$power, contestCombos=$contestCombos, contestType=$contestType, contestEffect=$contestEffect, damageClass=$damageClass, effectEntries=$effectEntries, effectChanges=$effectChanges, learnedByPokemon=$learnedByPokemon, flavorTextEntries=$flavorTextEntries, generation=$generation, machines=$machines, meta=$meta, names=$names, pastValues=$pastValues, statChanges=$statChanges, superContestEffect=$superContestEffect, target=$target, type=$type)"

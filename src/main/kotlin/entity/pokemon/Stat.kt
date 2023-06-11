@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.APIResource
 import entity.common.Name
 import entity.common.NamedApiResource
+import entity.moves.MoveDamageClass
 
 /**
  * A stat refers to an aspect of a Pokémon that is used to represent its strengths and weaknesses. Each Pokémon has
@@ -43,7 +44,7 @@ data class Stat(
     val characteristics: List<APIResource>,
 
     @JsonProperty("move_damage_class")
-    val moveDamageClass: NamedApiResource?,
+    val moveDamageClass: NamedApiResource<MoveDamageClass>?,
 
     @JsonProperty("names")
     val names: List<Name>

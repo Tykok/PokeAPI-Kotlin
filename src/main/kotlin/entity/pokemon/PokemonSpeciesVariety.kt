@@ -12,7 +12,7 @@ class PokemonSpeciesVariety(
     val isDefault: Boolean,
 
     @JsonProperty("pokemon")
-    val pokemon: NamedApiResource
+    val pokemon: NamedApiResource<Pokemon>
 ) {
     override fun toString(): String {
         return "PokemonSpeciesVariety(isDefault=$isDefault, pokemon=$pokemon)"

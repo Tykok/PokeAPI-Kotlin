@@ -24,7 +24,7 @@ class PokemonColor(
     val names: List<Name>,
 
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: List<NamedApiResource>
+    val pokemonSpecies: List<NamedApiResource<PokemonSpecies>>
 ) {
     override fun toString(): String {
         return "PokemonColor(id=$id, name='$name', names=$names, pokemonSpecies=$pokemonSpecies"

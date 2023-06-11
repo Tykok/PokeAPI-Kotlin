@@ -34,7 +34,7 @@ class ItemCategory(
      * @see Item
      */
     @JsonProperty("items")
-    val items: List<NamedApiResource>,
+    val items: List<NamedApiResource<Item>>,
 
     /**
      * The name of this item attribute listed in different languages.
@@ -49,7 +49,7 @@ class ItemCategory(
      * @see ItemPocket
      */
     @JsonProperty("pocket")
-    val pocket: NamedApiResource
+    val pocket: NamedApiResource<ItemPocket>
 ) {
     override fun toString(): String {
         return "ItemCategory(id=$id, name='$name', items=$items, names=$names, pocket=$pocket)"

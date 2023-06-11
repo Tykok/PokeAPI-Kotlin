@@ -34,7 +34,7 @@ class ItemPocket(
      * @see ItemCategory
      */
     @JsonProperty("categories")
-    val categories: List<NamedApiResource>,
+    val categories: List<NamedApiResource<ItemCategory>>,
 
     /**
      * The name of this resource listed in different languages.

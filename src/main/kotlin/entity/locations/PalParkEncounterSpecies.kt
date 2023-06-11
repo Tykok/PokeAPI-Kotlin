@@ -2,6 +2,7 @@ package entity.locations
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
+import entity.pokemon.PokemonSpecies
 
 /**
  * @see <a href="https://pokeapi.co/docs/v2#palparkencounterspecies">Documentation of PokeApi</a>
@@ -30,7 +31,7 @@ class PalParkEncounterSpecies(
      * @ee PokemonSpecies
      */
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: NamedApiResource
+    val pokemonSpecies: NamedApiResource<PokemonSpecies>
 ) {
     override fun toString(): String {
         return "PalParkEncounterSpecies(baseScore=$baseScore, rate=$rate, pokemonSpecies=$pokemonSpecies)"

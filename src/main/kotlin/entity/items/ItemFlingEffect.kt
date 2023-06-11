@@ -40,7 +40,7 @@ class ItemFlingEffect(
      * @see Item
      */
     @JsonProperty("items")
-    val items: List<NamedApiResource>
+    val items: List<NamedApiResource<Item>>
 ) {
     override fun toString(): String {
         return "ItemFlingEffect(id=$id, name='$name', effectEntries=$effectEntries, items=$items)"

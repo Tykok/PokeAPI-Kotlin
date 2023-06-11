@@ -10,10 +10,10 @@ import entity.common.NamedApiResource
 class NatureStatAffectSets(
 
     @JsonProperty("increase")
-    val increase: List<NamedApiResource>,
+    val increase: List<NamedApiResource<Nature>>,
 
     @JsonProperty("decrease")
-    val decrease: List<NamedApiResource>
+    val decrease: List<NamedApiResource<Nature>>
 ) {
     override fun toString(): String {
         return "NatureStatAffectSets(increase=$increase, decrease=$decrease)"

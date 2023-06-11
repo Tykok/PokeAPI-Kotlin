@@ -1,6 +1,7 @@
 package entity.common
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import entity.utility.Language
 
 /**
  * @link https://pokeapi.co/docs/v2#common-models
@@ -22,7 +23,7 @@ class Name(
      * @see Language
      */
     @JsonProperty("language")
-    val language: NamedApiResource
+    val language: NamedApiResource<Language>
 ) {
     override fun toString(): String {
         return "Name(name='$name', language=$language)"

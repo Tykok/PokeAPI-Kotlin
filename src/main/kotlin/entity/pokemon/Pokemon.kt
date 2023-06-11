@@ -58,7 +58,7 @@ class Pokemon(
      *  @see PokemonForm
      */
     @JsonProperty("forms")
-    val forms: List<NamedApiResource>,
+    val forms: List<NamedApiResource<PokemonForm>>,
 
     /**
      * A list of game indices relevent to Pokémon item by generation.
@@ -101,7 +101,7 @@ class Pokemon(
      * @see PokemonSpecies
      */
     @JsonProperty("species")
-    val species: NamedApiResource,
+    val species: NamedApiResource<PokemonSpecies>,
 
     /**
      * A list of base stat values for this Pokémon.
@@ -116,10 +116,10 @@ class Pokemon(
     @JsonProperty("types")
     val types: List<PokemonType>
 ) {
-    override fun toString(): String {
-        return "Pokemon(id=$id, name='$name', baseExperience=$baseExperience, height=$height, isDefault=$isDefault, order=$order, " +
-            "weight=$weight, abilities=$abilities, forms=$forms, gameIndices=$gameIndices, heldItems=$heldItems, " +
-            "locationAreaEncounters='$locationAreaEncounters', moves=$moves, pastTypes=$pastTypes, sprites=$sprites, " +
-            "species=$species, stats=$stats, types=$types)"
-    }
+    override fun toString(): String = """
+        Pokemon(id=$id, name='$name', baseExperience=$baseExperience, height=$height, isDefault=$isDefault, order=$order,
+            weight=$weight, abilities=$abilities, forms=$forms, gameIndices=$gameIndices, heldItems=$heldItems,
+            locationAreaEncounters='$locationAreaEncounters', moves=$moves, pastTypes=$pastTypes, sprites=$sprites,
+            species=$species, stats=$stats, types=$types)
+            """
 }

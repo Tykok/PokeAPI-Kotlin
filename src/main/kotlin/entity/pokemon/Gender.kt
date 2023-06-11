@@ -29,7 +29,7 @@ class Gender(
      * @see NamedApiResource
      */
     @JsonProperty("required_for_evolution")
-    val requiredForEvolution: List<NamedApiResource>
+    val requiredForEvolution: List<NamedApiResource<PokemonSpecies>>
 ) {
     override fun toString(): String {
         return "id= $id" +

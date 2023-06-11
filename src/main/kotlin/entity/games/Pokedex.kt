@@ -65,7 +65,7 @@ class Pokedex(
      * @see Region
      */
     @JsonProperty("region")
-    val region: NamedApiResource?,
+    val region: NamedApiResource<Region>?,
 
     /**
      * A list of version groups this Pokédex is relevant to.
@@ -73,7 +73,7 @@ class Pokedex(
      * @see VersionGroup
      */
     @JsonProperty("version_groups")
-    val versionGroups: List<NamedApiResource>?
+    val versionGroups: List<NamedApiResource<VersionGroup>>?
 ) {
     override fun toString(): String {
         return "Pokedex(id=$id, name='$name', isMainSeries=$isMainSeries, descriptions=$descriptions, names=$names, pokemonEntries=$pokemonEntries, region=$region, versionGroups=$versionGroups)"

@@ -38,7 +38,7 @@ class MoveDamageClass(
      * @see Move
      */
     @JsonProperty("moves")
-    val moves: List<NamedApiResource>,
+    val moves: List<NamedApiResource<Move>>,
 
     /**
      * The name of this resource listed in different languages.

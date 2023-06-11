@@ -2,6 +2,8 @@ package entity.moves
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.NamedApiResource
+import entity.games.VersionGroup
+import entity.utility.Language
 
 /**
  * @author Tykok
@@ -22,7 +24,7 @@ class MoveFlavorText(
      * @see Language
      */
     @JsonProperty("language")
-    val language: NamedApiResource,
+    val language: NamedApiResource<Language>,
 
     /**
      * The version group that uses this flavor text.
@@ -30,7 +32,7 @@ class MoveFlavorText(
      * @see VersionGroup
      */
     @JsonProperty("version_group")
-    val versionGroup: NamedApiResource
+    val versionGroup: NamedApiResource<VersionGroup>
 
 ) {
     override fun toString(): String {

@@ -41,7 +41,7 @@ class GrowthRate(
      *  @see PokemonSpecies
      */
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: List<NamedApiResource>
+    val pokemonSpecies: List<NamedApiResource<PokemonSpecies>>
 ) {
     override fun toString(): String {
         return "GrowthRate(id=$id, name='$name', formula='$formula', descriptions=$descriptions, levels=$levels, pokemonSpecies=$pokemonSpecies)"

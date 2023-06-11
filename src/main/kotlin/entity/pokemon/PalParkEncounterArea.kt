@@ -16,7 +16,7 @@ class PalParkEncounterArea(
     val rate: Number,
 
     @JsonProperty("area")
-    val area: NamedApiResource
+    val area: NamedApiResource<PalParkEncounterArea>
 ) {
     override fun toString(): String {
         return "PalParkEncounterArea(baseScore=$baseScore, rate=$rate, area=$area)"

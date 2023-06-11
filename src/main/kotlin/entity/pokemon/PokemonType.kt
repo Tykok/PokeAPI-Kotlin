@@ -15,5 +15,5 @@ class PokemonType(
      * @see Type
      */
     @JsonProperty("type")
-    val type: NamedApiResource
+    val type: NamedApiResource<Type>
 )

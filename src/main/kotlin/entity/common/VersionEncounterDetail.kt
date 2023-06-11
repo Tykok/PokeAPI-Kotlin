@@ -18,7 +18,7 @@ class VersionEncounterDetail(
      * @see Version
      */
     @JsonProperty("version")
-    val version: NamedApiResource,
+    val version: NamedApiResource<Version>,
 
     /**
      * The total percentage of all encounter potential.
@@ -33,7 +33,6 @@ class VersionEncounterDetail(
     val encounterDetails: List<Encounter>
 
 ) {
-    override fun toString(): String {
-        return "VersionEncounterDetail(version=$version, maxChance=$maxChance, encounterDetails=$encounterDetails)"
-    }
+    override fun toString() =
+        "VersionEncounterDetail(version=$version, maxChance=$maxChance, encounterDetails=$encounterDetails)"
 }

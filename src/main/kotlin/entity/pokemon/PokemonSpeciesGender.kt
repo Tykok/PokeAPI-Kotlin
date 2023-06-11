@@ -16,7 +16,7 @@ class PokemonSpeciesGender(
      * @see NamedApiResource
      */
     @JsonProperty("pokemon_species")
-    val pokemonSpecies: NamedApiResource
+    val pokemonSpecies: NamedApiResource<PokemonSpecies>
 ) {
     override fun toString(): String {
         return "rate = $rate pokemonSpecies = $pokemonSpecies"

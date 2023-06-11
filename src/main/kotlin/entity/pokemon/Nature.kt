@@ -25,7 +25,7 @@ class Nature(
      * @see NamedApiResource
      */
     @JsonProperty("decreased_stat")
-    val decreasedStat: NamedApiResource?,
+    val decreasedStat: NamedApiResource<Stat>?,
 
     /**
      * The stat increased by 10% in Pokémon with this nature.
@@ -33,7 +33,7 @@ class Nature(
      * @see NamedApiResource
      */
     @JsonProperty("increased_stat")
-    val increasedStat: NamedApiResource?,
+    val increasedStat: NamedApiResource<Stat>?,
 
     /**
      * The flavor hated by Pokémon with this nature.
@@ -41,7 +41,7 @@ class Nature(
      * @see NamedApiResource
      */
     @JsonProperty("hates_flavor")
-    val hatesFlavor: NamedApiResource?,
+    val hatesFlavor: NamedApiResource<BerryFlavor>?,
 
     /**
      * The flavor liked by Pokémon with this nature.
@@ -49,7 +49,7 @@ class Nature(
      * @see NamedApiResource
      */
     @JsonProperty("likes_flavor")
-    val likesFlavor: NamedApiResource?,
+    val likesFlavor: NamedApiResource<BerryFlavor>?,
 
     /**
      * A list of Pokéathlon stats this nature effects and how much it effects them.

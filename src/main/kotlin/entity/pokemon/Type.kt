@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.GenerationGameIndex
 import entity.common.Name
 import entity.common.NamedApiResource
+import entity.games.Generation
+import entity.moves.Move
+import entity.moves.MoveDamageClass
 
 data class Type(
     @JsonProperty("id")
@@ -22,10 +25,10 @@ data class Type(
     val gameIndices: List<GenerationGameIndex>,
 
     @JsonProperty("generation")
-    val generation: NamedApiResource,
+    val generation: NamedApiResource<Generation>,
 
     @JsonProperty("move_damage_class")
-    val moveDamageClass: NamedApiResource,
+    val moveDamageClass: NamedApiResource<MoveDamageClass>,
 
     @JsonProperty("names")
     val names: List<Name>,
@@ -34,7 +37,7 @@ data class Type(
     val pokemon: List<TypePokemon>,
 
     @JsonProperty("moves")
-    val moves: List<NamedApiResource>
+    val moves: List<NamedApiResource<Move>>
 ) {
     override fun toString(): String {
         return "Type(id=$id, name='$name', damageRelations=$damageRelations, pastDamageRelations=$pastDamageRelations, gameIndices=$gameIndices, " +

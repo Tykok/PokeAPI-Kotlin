@@ -26,7 +26,7 @@ class MoveCategory(
      * @see NamedApiResource
      * @see Move
      */
-    val moves: Array<NamedApiResource>,
+    val moves: Array<NamedApiResource<Move>>,
 
     /**
      * The description of this resource listed in different languages.

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import entity.common.Description
 import entity.common.Name
 import entity.common.NamedApiResource
+import entity.games.VersionGroup
 
 /**
  * @author Tykok
@@ -45,7 +46,7 @@ class MoveLearnMethod(
      * @see VersionGroup
      */
     @JsonProperty("version_groups")
-    val versionGroups: List<NamedApiResource>
+    val versionGroups: List<NamedApiResource<VersionGroup>>
 
 ) {
     override fun toString(): String {
