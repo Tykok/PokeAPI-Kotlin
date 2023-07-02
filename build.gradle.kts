@@ -1,15 +1,32 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val artifact = "pokeapi"
+val projectName = "PokeApi"
+val ossrhUsername: String by project
+val ossrhPassword: String by project
+
+description = "PokeApi is a simple library you can use to make request to get data about Pokémon."
+group = "fr.tykok"
+version = "1.0-SNAPSHOT"
+
 plugins {
+    `java-library`
+    `maven-publish`
+    java
     kotlin("jvm") version "1.7.10"
     application
 }
 
-group = "fr.tykok"
-version = "1.0-SNAPSHOT"
-
 repositories {
     mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    withSourcesJar()
+    withJavadocJar()
 }
 
 dependencies {
@@ -31,4 +48,22 @@ tasks.withType<KotlinCompile> {
 
 application {
     mainClass.set("MainKt")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("library") {
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            url = uri("$buildDir/publishing/$version")
+            name = "PokeApi"
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+    }
 }
