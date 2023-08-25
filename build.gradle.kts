@@ -1,15 +1,38 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-plugins {
-    kotlin("jvm") version "1.7.10"
-    application
-}
+val artifact = "pokeapi"
+val projectName = "PokeApi"
+val ossrhUsername = System.getenv("OSSRH_USERNAME")
+val ossrhPassword = System.getenv("OSSRH_PASSWORD")
+val sonarSnapshotUri = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 
+description = "PokeApi is a simple library you can use to make request to get data about Pokémon."
 group = "fr.tykok"
 version = "1.0-SNAPSHOT"
 
+plugins {
+    `java-library`
+    `maven-publish`
+    java
+    kotlin("jvm") version "1.7.10"
+    application
+    signing
+}
+
 repositories {
     mavenCentral()
+    maven {
+        // TODO https://jitpack.io/
+        url = uri("https://jitpack.io")
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    withSourcesJar()
+    withJavadocJar()
 }
 
 dependencies {
@@ -31,4 +54,29 @@ tasks.withType<KotlinCompile> {
 
 application {
     mainClass.set("MainKt")
+}
+
+signing {
+    useGpgCmd()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("library") {
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            url = uri(sonarSnapshotUri)
+            name = projectName
+            group
+            version
+            description
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+    }
 }
