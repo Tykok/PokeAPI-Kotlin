@@ -2,8 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val artifact = "pokeapi"
 val projectName = "PokeApi"
-val ossrhUsername = System.getenv("OSSRH_USERNAME")
-val ossrhPassword = System.getenv("OSSRH_PASSWORD")
 val sonarSnapshotUri = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 
 description = "PokeApi is a simple library you can use to make request to get data about Pokémon."
@@ -17,6 +15,7 @@ plugins {
     kotlin("jvm") version "1.7.10"
     application
     signing
+    id("net.researchgate.release") version "3.0.2"
 }
 
 repositories {
@@ -43,7 +42,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.10.1")
 }
-
 tasks.test {
     useJUnitPlatform()
 }
@@ -52,8 +50,14 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+tasks.create("getProjectVersion") {
+    doLast {
+        logger.quiet("VERSION: $version")
+    }
+}
+
 application {
-    mainClass.set("MainKt")
+    mainClass.set("PokeApi")
 }
 
 signing {
@@ -74,8 +78,8 @@ publishing {
             version
             description
             credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                username = project.findProperty("ossrh.username") as String? ?: System.getenv("OSSRH_USERNAME")
+                password = project.findProperty("ossrh.password") as String? ?: System.getenv("OSSRH_PASSWORD")
             }
         }
     }

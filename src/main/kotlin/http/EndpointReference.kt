@@ -1,5 +1,6 @@
 package http
 
+import PokeApi
 import entity.berries.Berry
 import entity.berries.BerryFirmness
 import entity.berries.BerryFlavor
