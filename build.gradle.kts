@@ -17,6 +17,7 @@ plugins {
     kotlin("jvm") version "1.7.10"
     application
     signing
+    id("net.researchgate.release") version "3.0.2"
 }
 
 repositories {
@@ -52,8 +53,12 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+tasks.register("getProjectVersion") {
+    println(version)
+}
+
 application {
-    mainClass.set("MainKt")
+    mainClass.set("PokeApi")
 }
 
 signing {

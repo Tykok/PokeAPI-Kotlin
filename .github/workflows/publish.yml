@@ -21,3 +21,12 @@ jobs:
 
       - name: Publish PokeAPI
         run: ./gradlew publish
+
+      - name: Get project version
+        run: gradle getProjectVersion -q
+
+      - name: Publish to GitHub Packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: pokeapi
+          path: 'build/libs/pokeapi-${{ steps.get-project-version.outputs.version }}.jar'

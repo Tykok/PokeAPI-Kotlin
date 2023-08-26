@@ -1,7 +1,7 @@
 package entity.common
 
+import PokeApi
 import com.fasterxml.jackson.annotation.JsonProperty
-import http.PokeApi
 
 /**
  * NamedApiResource contains the name and the url to get the object from the API resource (pokeapi.co).
