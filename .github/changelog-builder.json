@@ -1,0 +1,52 @@
+{
+  "sort": {
+    "order": "ASC",
+    "on_property": "mergedAt"
+  },
+  "categories": [
+    {
+      "title": "## 🚀 Features",
+      "labels": [
+        "Feat",
+        "Feature",
+        "feat",
+        "feature"
+      ]
+    },
+    {
+      "title": "## 🐛 Fixes",
+      "labels": [
+        "Fix",
+        "fix"
+      ]
+    },
+    {
+      "key": "tests",
+      "title": "## 🧪 Tests",
+      "labels": [
+        "test",
+        "test"
+      ]
+    },
+    {
+      "key": "doc",
+      "title": "## Documentation",
+      "labels": [
+        "Doc",
+        "doc"
+      ]
+    },
+    {
+      "key": "clean",
+      "title": "## Clean",
+      "labels": [
+        "Clean",
+        "clean"
+      ]
+    },
+    {
+      "title": "## 📦 Uncategorized",
+      "labels": []
+    }
+  ]
+}

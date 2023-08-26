@@ -1,9 +1,8 @@
-package http
-
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import entity.common.NamedApiResources
 import exception.HttpBodyResponseException
+import http.getEndpoint
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
