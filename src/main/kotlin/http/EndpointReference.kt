@@ -1,6 +1,5 @@
 package http
 
-import PokeApi
 import entity.berries.Berry
 import entity.berries.BerryFirmness
 import entity.berries.BerryFlavor
@@ -141,9 +140,7 @@ inline fun <reified T : Any> getEndpoint(): String {
         Stat::class -> "stat"
         Type::class -> "type"
 
-        else -> throw UnknownEndpointException(
-            "Unknown endpoint: ${PokeApi.BASE_URL}/${T::class}"
-        )
+        else -> throw UnknownEndpointException(className = T::class.simpleName!!)
     }
 
     return elementType

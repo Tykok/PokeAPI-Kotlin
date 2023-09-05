@@ -9,8 +9,8 @@ import okhttp3.Response
 
 abstract class PokeApi {
     companion object PokeApi {
-        private val VERSION = "v2"
-        val BASE_URL = "https://pokeapi.co/api/$VERSION"
+        private const val VERSION = "v2"
+        const val BASE_URL = "https://pokeapi.co/api/$VERSION"
 
         inline fun <reified T : Any> get(id: Int): T = fetch(resource = id)
 
@@ -49,7 +49,7 @@ abstract class PokeApi {
             try {
                 return Gson().fromJson(response.body?.string(), T::class.java)
             } catch (e: Exception) {
-                throw HttpBodyResponseException("Error parsing response body", e)
+                throw HttpBodyResponseException(T::class)
             }
         }
 
@@ -60,7 +60,7 @@ abstract class PokeApi {
                     object : TypeToken<NamedApiResources<T>>() {}.type
                 )
             } catch (e: Exception) {
-                throw HttpBodyResponseException("Error parsing response body", e)
+                throw HttpBodyResponseException(T::class)
             }
         }
     }

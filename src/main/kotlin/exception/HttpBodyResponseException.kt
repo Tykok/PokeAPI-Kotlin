@@ -1,6 +1,5 @@
 package exception
 
-class HttpBodyResponseException : Exception {
-    constructor(message: String) : super(message)
-    constructor(message: String, cause: Throwable) : super(message, cause)
-}
+class HttpBodyResponseException(T: Any) : PokeApiException(
+    message = "Cannot parse response body for ${T::class.simpleName}"
+)

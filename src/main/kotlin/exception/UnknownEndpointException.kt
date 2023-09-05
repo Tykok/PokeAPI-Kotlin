@@ -1,3 +1,5 @@
 package exception
 
-class UnknownEndpointException(message: String) : Exception(message)
+class UnknownEndpointException(className: String) : PokeApiException(
+    "Unknown endpoint: ${PokeApi.BASE_URL}/$className"
+)

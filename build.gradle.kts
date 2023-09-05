@@ -20,10 +20,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven {
-        // TODO https://jitpack.io/
-        url = uri("https://jitpack.io")
-    }
 }
 
 java {
@@ -78,8 +74,10 @@ publishing {
             version
             description
             credentials {
-                username = project.findProperty("ossrh.username") as String? ?: System.getenv("OSSRH_USERNAME")
-                password = project.findProperty("ossrh.password") as String? ?: System.getenv("OSSRH_PASSWORD")
+                username = project.findProperty("ossrh.username") as String?
+                    ?: System.getenv("OSSRH_USERNAME")
+                password = project.findProperty("ossrh.password") as String?
+                    ?: System.getenv("OSSRH_PASSWORD")
             }
         }
     }
