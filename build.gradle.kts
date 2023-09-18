@@ -3,10 +3,18 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val artifact = "pokeapi"
 val projectName = "PokeApi"
 val sonarSnapshotUri = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+val sonarReleaseUri = "https://s01.oss.sonatype.org/content/repositories/releases/"
 
 description = "PokeApi is a simple library you can use to make request to get data about Pokémon."
 group = "fr.tykok"
-version = "1.0-SNAPSHOT"
+version = "0.0.1"
+
+fun getUriSonar(): String {
+    return if (version.toString().endsWith("SNAPSHOT"))
+        sonarSnapshotUri
+    else
+        sonarReleaseUri
+}
 
 plugins {
     `java-library`
@@ -68,7 +76,7 @@ publishing {
     }
     repositories {
         maven {
-            url = uri(sonarSnapshotUri)
+            url = uri(getUriSonar())
             name = projectName
             group
             version
