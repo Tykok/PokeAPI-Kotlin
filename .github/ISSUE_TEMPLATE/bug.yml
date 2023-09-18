@@ -1,0 +1,53 @@
+name: Bug Report from 🐞
+description: If u see any bug, please click here 🐞🐛
+title: "Fix: "
+labels: [ "bug" ]
+assignees:
+  - octocat
+body:
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity / Criticality of the bug(s) 👀
+      options:
+        - Low
+        - Medium
+        - High
+        - Critical
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened ❓
+      placeholder: Tell us what you see !
+      value: "A bug happened 💥"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output 📒
+      description: Please copy and paste any relevant log output.
+      render: Shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce the bug ➿
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

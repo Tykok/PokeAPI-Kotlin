@@ -1,0 +1,42 @@
+name: New feature 🌱
+description: Tell us if you have any idea of features 🔥💭
+title: "Feature: "
+labels: [ "feature" ]
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this report of an idea of a new feature !
+        Please describe the idea in as much detail as possible.
+        You can use markdown in many textarea to make it more readable.
+
+        Thanks! And have a nice day 🎇
+
+  - type: textarea
+    id: feature-details
+    attributes:
+      label: Expecting for this feature 🚀
+      description: Type here, what you want to update or add in this project.
+      placeholder: Use markdown if you want.
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Any example or any resources 🗂
+      description: |
+        Add here any resources, URL, files, or anything gonna help us.
+      placeholder: You can use markdown too here
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct 😇
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/Tykok/cedict-chinese-transformation/blob/develop/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
