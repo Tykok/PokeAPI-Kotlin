@@ -33,10 +33,10 @@ If you spot a problem with :
 Search if an issue already exists. If not, create a new one.
 Next, use the templates to create a new issue :
 
-- [Bug report](https://github.com/Tykok/cedict-chinese-transformation/issues/new?assignees=octocat&labels=bug&projects=&template=bug.yml&title=Fix%3A+)
-- [Feature request](https://github.com/Tykok/cedict-chinese-transformation/issues/new?assignees=octocat&labels=feature&projects=&template=feature.yml&title=Feature%3A+)
-- [Proposal](https://github.com/Tykok/cedict-chinese-transformation/issues/new?assignees=octocat&labels=proposal&projects=&template=proposal.yml&title=Proposal%3A+)
-- [Security vulnerability](https://github.com/Tykok/cedict-chinese-transformation/security/advisories/new)
+- [Bug report]()
+- [Feature request]()
+- [Proposal]()
+- [Security vulnerability]()
 
 # Commit
 
