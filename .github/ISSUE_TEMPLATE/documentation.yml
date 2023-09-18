@@ -1,0 +1,23 @@
+name: New feature 🌱
+description: Tell us if you have any idea of features 🔥💭
+title: "Doc: "
+labels: [ "documentation" ]
+body:
+
+  - type: textarea
+    id: doc-details
+    attributes:
+      label: What do you want to add or update 📝
+      description: Type here, what you want to add or update in the documentation.
+      placeholder: Use markdown if you want.
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct 😇
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/Tykok/cedict-chinese-transformation/blob/develop/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
