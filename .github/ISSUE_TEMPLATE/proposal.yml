@@ -14,9 +14,9 @@ body:
         Thanks! And have a nice day 🎇
 
   - type: textarea
-    id: feature-details
+    id: proposal-details
     attributes:
-      label: Expecting for this feature 🚀
+      label: What you want to add or update ✨
       description: Type here, what you want to update or add in this project.
       placeholder: Use markdown if you want.
     validations:
@@ -25,7 +25,7 @@ body:
   - type: textarea
     id: example
     attributes:
-      label: Any example or any resources 🗂
+      label: Any example or any resources would help us 🗂
       description: |
         Add here any resources, URL, files, or anything gonna help us.
       placeholder: You can use markdown too here
