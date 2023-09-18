@@ -46,6 +46,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build .jar
+        run: sh gradlew build
+        
       - name: Create Release
         if: ${{ success() }}
         id: create_release
