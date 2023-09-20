@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![project_img.png](.github/documentation/project_img.png)
+![project_img.png](docs/mkdocs-markdown/img/project_img.png)
 
 </div>
 

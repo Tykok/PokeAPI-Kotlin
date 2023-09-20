@@ -1,0 +1,31 @@
+site_name: PokeApi - Documentation
+repo_url: https://github.com/Tykok/PokeAPI-Kotlin
+repo_name: PokeAPI-Kotlin
+site_description: A Kotlin wrapper for the PokeApi
+site_author: Tykok
+site_url: https://tykok.github.io/PokeAPI-Kotlin/
+edit_uri: edit/master/docs/
+docs_dir: mkdocs-markdown
+theme:
+  name: readthedocs
+  locale: en
+  highlightjs: true
+  hljs_style: github
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Methods: methods.md
+  - About: about.md
+  - API Reference:
+      - Pokemon: entities/pokemon.md
+      - Berry: entities/berry.md
+      - Contest: entities/contest.md
+      - Encounter: entities/encounter.md
+      - Evolution: entities/evolution.md
+      - Game: entities/game.md
+      - Item: entities/item.md
+      - Location: entities/location.md
+      - Machine: entities/machine.md
+      - Move: entities/move.md
+      - Utility: entities/utility.md
+
