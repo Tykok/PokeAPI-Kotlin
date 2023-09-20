@@ -7,15 +7,31 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 
+/**
+ * PokeApi is a Kotlin wrapper for the PokeApi RESTful API.
+ * @author Tykok
+ * @version 1.0
+ * @see <a href="https://pokeapi.co/">PokeApi</a>
+ * @see <a href="https://pokeapi.co/docs/v2">PokeApi Docs</a>
+ */
 abstract class PokeApi {
     companion object PokeApi {
         private const val VERSION = "v2"
         const val BASE_URL = "https://pokeapi.co/api/$VERSION"
 
+        /**
+         * Get a resource by its id.
+         */
         inline fun <reified T : Any> get(id: Int): T = fetch(resource = id)
 
+        /**
+         * Get a resource by its name.
+         */
         inline fun <reified T : Any> get(name: String): T = fetch(resource = name)
 
+        /**
+         * Get a list of resources.
+         */
         inline fun <reified T : Any> get(limit: Int = 20, offset: Int = 20) = fetchAll<T>(
             limit,
             offset
