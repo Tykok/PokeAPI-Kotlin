@@ -9,12 +9,10 @@ description = "PokeApi is a simple library you can use to make request to get da
 group = "fr.tykok"
 version = "0.0.2"
 
-fun getUriSonar(): String {
-    return if (version.toString().endsWith("SNAPSHOT"))
-        sonarSnapshotUri
-    else
-        sonarReleaseUri
-}
+fun getUriSonar(): String = if (version.toString().endsWith("SNAPSHOT"))
+    sonarSnapshotUri
+else
+    sonarReleaseUri
 
 plugins {
     `java-library`
@@ -24,6 +22,7 @@ plugins {
     application
     signing
     id("net.researchgate.release") version "3.0.2"
+    id("org.jetbrains.dokka") version "1.9.0"
 }
 
 repositories {
@@ -46,6 +45,7 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.10.1")
 }
+
 tasks.test {
     useJUnitPlatform()
 }
@@ -58,6 +58,29 @@ tasks.create("getProjectVersion") {
     doLast {
         logger.quiet("VERSION: $version")
     }
+}
+tasks.register<Jar>("dokkaHtmlJar") {
+    dependsOn(tasks.dokkaHtml)
+    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
+    archiveClassifier.set("html-docs")
+}
+
+tasks.register<Jar>("dokkaJavadocJar") {
+    dependsOn(tasks.dokkaJavadoc)
+    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+    archiveClassifier.set("javadoc")
+}
+
+project.tasks.named<Jar>("javadocJar") {
+    from(tasks.named("dokkaJavadoc"))
+}
+
+task<Exec>("mkdocs-serve") {
+    commandLine("mkdocs", "serve", "--config-file", "docs/mkdocs.yml")
+}
+
+task<Exec>("mkdocs-build") {
+    commandLine("mkdocs", "build", "--config-file", "docs/mkdocs.yml")
 }
 
 application {

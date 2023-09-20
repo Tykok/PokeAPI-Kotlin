@@ -1,6 +1,14 @@
 <div align="center">
 
-![project_img.png](.github/documentation/project_img.png)
+![project_img.png](docs/mkdocs-markdown/img/project_img.png)
+
+</div>
+<br/><br/>
+<div align="center">
+
+[![javadoc](https://javadoc.io/badge2/fr.tykok/pokeapi/javadoc.svg)](https://javadoc.io/doc/fr.tykok/pokeapi)
+![Maven Central](https://img.shields.io/maven-central/v/fr.tykok/pokeapi)
+![GitHub](https://img.shields.io/github/license/Tykok/PokeAPI-Kotlin)
 
 </div>
 
