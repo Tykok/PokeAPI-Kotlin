@@ -25,3 +25,4 @@ ij_kotlin_allow_trailing_comma_on_call_site = false
 ktlint_standard_enum-entry-name-case = disabled
 ktlint_standard_filename = disabled
 ktlint_standard_multiline-if-else = disabled
+ij_kotlin_imports_layout = *, java.**, javax.**, kotlin.**, ^
