@@ -32,7 +32,8 @@ class NamedApiResource<T : Any>(
 }
 
 inline fun <reified T : Any> NamedApiResource<T>.get(): T? =
-    if (this.url != null)
+    if (this.url != null) {
         PokeApi.fetch<T>(fullUrl = this.url)
-    else
+    } else {
         null
+    }
