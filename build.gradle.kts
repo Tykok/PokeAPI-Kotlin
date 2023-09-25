@@ -7,7 +7,7 @@ val sonarReleaseUri = "https://s01.oss.sonatype.org/content/repositories/release
 
 description = "PokeApi is a simple library you can use to make request to get data about Pokémon."
 group = "fr.tykok"
-version = "0.0.2"
+version = "0.0.3"
 
 fun getUriSonar(): String = if (version.toString().endsWith("SNAPSHOT")) {
     sonarSnapshotUri
