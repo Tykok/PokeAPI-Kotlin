@@ -4,7 +4,7 @@ repo_name: PokeAPI-Kotlin
 site_description: A Kotlin wrapper for the PokeApi
 site_author: Tykok
 site_url: https://tykok.github.io/PokeAPI-Kotlin/
-edit_uri: edit/master/docs/
+edit_uri: edit/main/docs/mkdocs-markdown/
 docs_dir: mkdocs-markdown
 theme:
   name: readthedocs

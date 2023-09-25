@@ -7,7 +7,8 @@
 <div align="center">
 
 [![javadoc](https://javadoc.io/badge2/fr.tykok/pokeapi/javadoc.svg)](https://javadoc.io/doc/fr.tykok/pokeapi)
-![Maven Central](https://img.shields.io/maven-central/v/fr.tykok/pokeapi)
+[![Maven Central](https://img.shields.io/maven-central/v/fr.tykok/pokeapi)](https://central.sonatype.com/artifact/fr.tykok/pokeapi)
+[![PokeApi Doc](https://img.shields.io/badge/PokeApi_documentation-blue)](https://tykok.github.io/PokeAPI-Kotlin/)
 ![GitHub](https://img.shields.io/github/license/Tykok/PokeAPI-Kotlin)
 
 </div>
