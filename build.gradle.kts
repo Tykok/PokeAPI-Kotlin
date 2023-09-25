@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val artifact = "pokeapi"
 val projectName = "PokeApi"
+val projectDocUrl = "https://tykok.github.io/PokeAPI-Kotlin/"
 val sonarSnapshotUri = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 val sonarReleaseUri = "https://s01.oss.sonatype.org/content/repositories/releases/"
 
@@ -98,14 +99,32 @@ publishing {
         create<MavenPublication>("library") {
             from(components["java"])
         }
+        create<MavenPublication>("mavenJava") {
+            pom {
+                name.set(projectName)
+                description.set(description)
+                url.set(projectDocUrl)
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://github.com/Tykok/PokeAPI-Kotlin/blob/main/LICENSE")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("Tykok")
+                    }
+                }
+            }
+        }
     }
     repositories {
         maven {
             url = uri(getUriSonar())
             name = projectName
-            group
-            version
-            description
+            group = group
+            version = version.toString()
+            description = description
             credentials {
                 username = project.findProperty("ossrh.username") as String?
                     ?: System.getenv("OSSRH_USERNAME")
