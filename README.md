@@ -10,6 +10,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/fr.tykok/pokeapi)](https://central.sonatype.com/artifact/fr.tykok/pokeapi)
 [![PokeApi Doc](https://img.shields.io/badge/PokeApi_documentation-blue)](https://tykok.github.io/PokeAPI-Kotlin/)
 ![GitHub](https://img.shields.io/github/license/Tykok/PokeAPI-Kotlin)
+[![Discord](https://img.shields.io/discord/903774510648533012)](https://discord.gg/gryDvNE9)
 
 </div>
 

@@ -6,6 +6,7 @@
     <a href="https://javadoc.io/doc/fr.tykok/pokeapi"><img src="https://javadoc.io/badge2/fr.tykok/pokeapi/javadoc.svg" alt="Javadoc" /></a>
     <a href="https://central.sonatype.com/artifact/fr.tykok/pokeapi"><img src="https://img.shields.io/maven-central/v/fr.tykok/pokeapi" alt="Maven Central" /></a>
     <img src="https://img.shields.io/github/license/Tykok/PokeAPI-Kotlin" alt="License" />
+    <a href="https://discord.gg/gryDvNE9"><img src="https://img.shields.io/discord/903774510648533012"/></a>
 </div>
 <br/>
 
