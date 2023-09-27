@@ -50,6 +50,9 @@ import entity.pokemon.Stat
 import entity.pokemon.Type
 import exception.UnknownEndpointException
 
+/**
+ * Get the endpoint for a given class.
+ */
 inline fun <reified T : Any> getEndpoint(): String {
     val elementType = when (T::class) {
         /**
