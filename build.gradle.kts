@@ -10,11 +10,12 @@ description = "PokeApi is a simple library you can use to make request to get da
 group = "fr.tykok"
 version = "1.0.0"
 
-fun getUriSonar(): String = if (version.toString().endsWith("SNAPSHOT")) {
-    sonarSnapshotUri
-} else {
-    sonarReleaseUri
-}
+fun getUriSonar(): String =
+    if (version.toString().endsWith("SNAPSHOT")) {
+        sonarSnapshotUri
+    } else {
+        sonarReleaseUri
+    }
 
 plugins {
     `java-library`

@@ -1,6 +1,6 @@
 # Berry
 
-The `Berry` entity is used to map data from `https://pokeapi.co/api/v2/berry/...`.
+The `Berry` entities is used to map data from `https://pokeapi.co/api/v2/berry/...`.
 
 ![Berry](../img/berry.jpeg)
 
