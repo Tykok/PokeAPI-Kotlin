@@ -3,13 +3,13 @@
 To use the methods, you need to import `PokeApi` class. Next, you can use the `get` methods to fetch data from the
 [pokeapi.co][pokeapi].
 
-You need to give the entity type as a generic parameter to the `get()` methods. The available entity types are available
-in the `fr.tykok.pokeapi.entity` package, all the documentation are given in the `API Resource` section of this website.
+You need to give the entities type as a generic parameter to the `get()` methods. The available entities types are available
+in the `fr.tykok.pokeapi.entities` package, all the documentation are given in the `API Resource` section of this website.
 
 All entities used to call a specific endpoint and is used to map the response of the endpoint.
-Each entity are described in the entities section.
+Each entities are described in the entities section.
 
-Finally, you need to give an `id`, the `name`, or the `limit` of the list to get the entity or the list of entities
+Finally, you need to give an `id`, the `name`, or the `limit` of the list to get the entities or the list of entities
 given in the generic parameter.
 All parameters for the `get()` method are described below.
 
