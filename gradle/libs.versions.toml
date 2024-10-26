@@ -1,0 +1,24 @@
+[versions]
+mockk = "1.13.11"
+gson = "2.10"
+jackson = "2.17.0"
+okhttp = "4.10.0"
+junitBom = "5.11.0-M1"
+
+[plugins]
+netResearchgateRelease = { id = "net.researchgate.release", version = "3.0.2" }
+dokka = { id = "org.jetbrains.dokka", version = "1.9.0" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "11.6.0" }
+
+[libraries]
+junitBom = { module = "org.junit:junit-bom", version.ref = "junitBom" }
+junitJupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junitPlatform = { module = "org.junit.platform:junit-platform-launcher" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+# https://mvnrepository.com/artifact/com.google.code.gson/gson
+gson = { module = "com.google.code.gson:gson" , version.ref = "gson"}
+# https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+jackson = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson"}
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp"}
+
+[bundles]
