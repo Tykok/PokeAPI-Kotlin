@@ -1,32 +1,26 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 val artifact = "pokeapi"
 val projectName = "PokeApi"
 val projectDocUrl = "https://tykok.github.io/PokeAPI-Kotlin/"
-val sonarSnapshotUri = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-val sonarReleaseUri = "https://s01.oss.sonatype.org/content/repositories/releases/"
+val projectUrl = "https://github.com/Tykok/PokeAPI-Kotlin"
+val mavenCentralPublishURI = uri("https://central.sonatype.com/api/v1/publisher/deployments/download/")
 
 description = "PokeApi is a simple library you can use to make request to get data about Pokémon."
 group = "fr.tykok"
 version = "1.0.0"
 
-fun getUriSonar(): String =
-    if (version.toString().endsWith("SNAPSHOT")) {
-        sonarSnapshotUri
-    } else {
-        sonarReleaseUri
-    }
-
 plugins {
+    alias(libs.plugins.netResearchgateRelease)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.ktlint)
     `java-library`
     `maven-publish`
-    java
-    kotlin("jvm") version "1.7.10"
-    application
     signing
-    id("net.researchgate.release") version "3.0.2"
-    id("org.jetbrains.dokka") version "1.9.0"
-    id("org.jlleitschuh.gradle.ktlint") version "11.6.0"
+    java
+    kotlin("jvm") version "2.0.0"
+    application
+    jacoco
 }
 
 repositories {
@@ -43,19 +37,35 @@ java {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.0.1")
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation(libs.okhttp)
+    implementation(libs.jackson)
+    implementation(libs.gson)
+
+    testImplementation(platform(libs.junitBom))
+    testImplementation(libs.junitJupiter)
+    testRuntimeOnly(libs.junitPlatform)
+    testImplementation(libs.mockk)
 }
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+}
+
+kotlin {
+    compilerOptions {
+        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0)
+        jvmTarget.set(JvmTarget.JVM_17)
+    }
 }
 
 tasks.create("getProjectVersion") {
@@ -63,6 +73,7 @@ tasks.create("getProjectVersion") {
         logger.quiet("VERSION: $version")
     }
 }
+
 tasks.register<Jar>("dokkaHtmlJar") {
     dependsOn(tasks.dokkaHtml)
     from(tasks.dokkaHtml.flatMap { it.outputDirectory })
@@ -88,7 +99,15 @@ task<Exec>("mkdocs-build") {
 }
 
 application {
-    mainClass.set("PokeApi")
+    mainClass.set("fr.tykok.pokeapi.PokeApi")
+}
+
+sourceSets {
+    test {
+        kotlin {
+            srcDir("src/test/kotlin")
+        }
+    }
 }
 
 signing {
@@ -97,35 +116,40 @@ signing {
 
 publishing {
     publications {
-        create<MavenPublication>("library") {
-            from(components["java"])
-        }
         create<MavenPublication>("mavenJava") {
+            from(components["kotlin"])
+
+            groupId = groupId
+            artifactId = artifactId
+            version = version
+
             pom {
                 name.set(projectName)
-                description.set(description)
-                url.set(projectDocUrl)
+                url.set(projectUrl)
+
                 licenses {
                     license {
                         name.set("MIT License")
-                        url.set("https://github.com/Tykok/PokeAPI-Kotlin/blob/main/LICENSE")
+                    }
+                }
+
+                developers {
+                    developer {
+                        name.set("Tykok")
                     }
                 }
             }
         }
     }
+
     repositories {
         maven {
-            url = uri(getUriSonar())
-            name = projectName
-            group = group
-            version = version.toString()
-            description = description
+            name = "sonatype"
+            url = mavenCentralPublishURI
+
             credentials {
-                username = project.findProperty("ossrh.username") as String?
-                    ?: System.getenv("OSSRH_USERNAME")
-                password = project.findProperty("ossrh.password") as String?
-                    ?: System.getenv("OSSRH_PASSWORD")
+                username = project.findProperty("ossrhUsername") as String? ?: System.getenv("OSSRH_USERNAME")
+                password = project.findProperty("ossrhPassword") as String? ?: System.getenv("OSSRH_PASSWORD")
             }
         }
     }
