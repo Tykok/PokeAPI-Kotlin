@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.locations
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.common.VersionEncounterDetail
 import fr.tykok.pokeapi.entities.pokemon.Pokemon
@@ -18,12 +18,10 @@ data class PokemonEncounter(
      * @see NamedApiResource
      * @see Pokemon
      */
-    @JsonProperty("pokemon")
     val pokemon: NamedApiResource<Pokemon>,
     /**
      * A list of versions and encounters with Pokémon that might happen in the referenced location area.
      * @see VersionEncounterDetail
      */
-    @JsonProperty("version_details")
     val versionDetails: List<VersionEncounterDetail>
-)
+) : PokeApiObject

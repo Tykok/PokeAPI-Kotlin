@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.locations
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.encounters.EncounterMethod
 
@@ -17,12 +17,10 @@ data class EncounterMethodRate(
      * @see NamedApiResource
      * @see EncounterMethod
      */
-    @JsonProperty("encounter_method")
     val encounterMethod: NamedApiResource<EncounterMethod>,
     /**
      * The chance of the encounter to occur on a version of the game.
      * @see EncounterVersionDetails
      */
-    @JsonProperty("version_details")
     val versionDetails: List<EncounterVersionDetails>
-)
+) : PokeApiObject

@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.berries
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 /**
@@ -13,7 +13,7 @@ data class BerryFlavorMap(
     /**
      * How powerful the referenced flavor is for this berry.
      */
-    @JsonProperty("potency")
+
     val potency: String,
     /**
      * The referenced berry flavor.
@@ -21,6 +21,6 @@ data class BerryFlavorMap(
      * @see NamedApiResource
      * @see BerryFlavor
      */
-    @JsonProperty("flavor")
+
     val flavor: NamedApiResource<BerryFlavor>
-)
+) : PokeApiObject

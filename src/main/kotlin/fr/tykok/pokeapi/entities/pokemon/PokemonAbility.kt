@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 data class PokemonAbility(
@@ -8,17 +8,14 @@ data class PokemonAbility(
      *
      * Whether or not this is a hidden ability.
      */
-    @JsonProperty("is_hidden")
     val isHidden: Boolean,
     /**
      * The slot this ability occupies in this Pokémon species.
      */
-    @JsonProperty("slot")
     val slot: Int,
     /**
      * The ability the Pokémon may have.
      * @see Ability
      */
-    @JsonProperty("ability")
     val ability: NamedApiResource<Ability>
-)
+) : PokeApiObject

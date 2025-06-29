@@ -1,7 +1,6 @@
 package fr.tykok.pokeapi.entities.contests
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.berries.BerryFlavor
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
@@ -30,24 +29,20 @@ data class ContestType(
     /**
      * Identifier of the resource
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * Name of the resource
      */
-    @JsonProperty("name")
     val name: String,
     /**
      * The berry flavor that correlates with this contest type.
      * @see NamedApiResource
      * @see BerryFlavor
      */
-    @JsonProperty("berry_flavor")
     val berryFlavor: NamedApiResource<BerryFlavor>,
     /**
      * The name of this contest type listed in different languages.
      * @see ContestName
      */
-    @JsonProperty("names")
-    val names: Array<ContestName>
-) : PokeApiObject
+    val names: List<ContestName>
+) : PokeApiEndpointReference

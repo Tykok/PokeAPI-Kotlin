@@ -1,7 +1,5 @@
 package fr.tykok.pokeapi.entities.games
-
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Description
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -23,48 +21,40 @@ data class Pokedex(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The name for this resource.
      */
-    @JsonProperty("name")
     val name: String,
     /**
      * Whether or not this Pokédex originated in the main series of the video games.
      */
-    @JsonProperty("is_main_series")
     val isMainSeries: Boolean,
     /**
      * The description of this resource listed in different languages.
      * @see Description
      */
-    @JsonProperty("descriptions")
     val descriptions: List<Description>,
     /**
      * The name of this resource listed in different languages.
      * @see Name
      */
-    @JsonProperty("names")
     val names: List<Name>,
     /**
      * A list of Pokémon catalogued in this Pokédex and their indexes.
      * @see PokemonEntry
      */
-    @JsonProperty("pokemon_entries")
     val pokemonEntries: List<PokemonEntry>,
     /**
      * The region this Pokédex catalogues Pokémon for.
      * @see NamedApiResource
      * @see Region
      */
-    @JsonProperty("region")
     val region: NamedApiResource<Region>?,
     /**
      * A list of version groups this Pokédex is relevant to.
      * @see NamedApiResource
      * @see VersionGroup
      */
-    @JsonProperty("version_groups")
     val versionGroups: List<NamedApiResource<VersionGroup>>?
-) : PokeApiObject
+) : PokeApiEndpointReference

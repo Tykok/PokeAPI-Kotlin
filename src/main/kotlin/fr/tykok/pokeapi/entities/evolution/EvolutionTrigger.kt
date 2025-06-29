@@ -1,7 +1,5 @@
 package fr.tykok.pokeapi.entities.evolution
-
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.pokemon.PokemonSpecies
@@ -20,25 +18,21 @@ data class EvolutionTrigger(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The name for this resource.
      */
-    @JsonProperty("name")
     val name: String,
     /**
      * The name of this resource listed in different languages.
      * @see NamedApiResource
      * @see Name
      */
-    @JsonProperty("names")
-    val names: Array<Name>,
+    val names: List<Name>,
     /**
      * A list of pokemon species that result from this evolution trigger.
      * @see NamedApiResource
      * @see PokemonSpecies
      */
-    @JsonProperty("pokemon_species")
-    val pokemonSpecies: Array<NamedApiResource<PokemonSpecies>>
-) : PokeApiObject
+    val pokemonSpecies: List<NamedApiResource<PokemonSpecies>>
+) : PokeApiEndpointReference

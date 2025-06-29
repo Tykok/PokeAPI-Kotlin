@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.items
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 
 /**
  * An item is an object in the games which the player can pick up, keep in their bag, and use in some manner.
@@ -16,6 +16,5 @@ data class ItemSprites(
     /**
      * The default depiction of this item.
      */
-    @JsonProperty("default")
     val default: String
-)
+) : PokeApiObject

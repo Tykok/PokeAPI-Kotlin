@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 data class TypeRelationsPast(
@@ -9,8 +9,6 @@ data class TypeRelationsPast(
      * @see NamedApiResource
      * @see Type
      */
-    @JsonProperty("no_damage_to")
     val generation: NamedApiResource<Type>,
-    @JsonProperty("damage_relations")
     val damageRelations: TypeRelations
-)
+) : PokeApiObject

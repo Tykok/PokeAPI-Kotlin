@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.moves
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 /**
@@ -16,13 +16,11 @@ data class ContestComboDetail(
      * @see NamedApiResource
      * @see Move
      */
-    @JsonProperty("use_before")
     val useBefore: List<NamedApiResource<Move>>? = null,
     /**
      * A list of moves to use after this move.
      * @see NamedApiResource
      * @see Move
      */
-    @JsonProperty("use_after")
     val useAfter: List<NamedApiResource<Move>>? = null
-)
+) : PokeApiObject

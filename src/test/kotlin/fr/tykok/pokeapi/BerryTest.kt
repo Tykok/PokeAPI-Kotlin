@@ -1,4 +1,5 @@
-import fr.tykok.pokeapi.PokeApi
+package fr.tykok.pokeapi
+
 import fr.tykok.pokeapi.entities.berries.Berry
 import io.mockk.every
 import io.mockk.mockk
@@ -53,6 +54,7 @@ class BerryTest {
 
         // When
         val berry = PokeApi.get<Berry>(1)
+
         // Then
         assertInstanceOf(Berry::class.java, berry)
         assertEquals(id, berry.id)

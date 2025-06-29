@@ -1,7 +1,5 @@
 package fr.tykok.pokeapi.entities.items
-
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Effect
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
@@ -18,24 +16,20 @@ data class ItemFlingEffect(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The name for this resource.
      */
-    @JsonProperty("name")
     val name: String,
     /**
      * The result of this fling effect listed in different languages.
      * @see Effect
      */
-    @JsonProperty("effect_entries")
     val effectEntries: List<Effect>,
     /**
      * A list of items that have this fling effect.
      * @see NamedApiResource
      * @see Item
      */
-    @JsonProperty("items")
     val items: List<NamedApiResource<Item>>
-) : PokeApiObject
+) : PokeApiEndpointReference

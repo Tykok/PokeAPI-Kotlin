@@ -1,7 +1,7 @@
 package fr.tykok.pokeapi.entities.locations
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.games.Generation
@@ -64,4 +64,4 @@ data class Region(
      */
     @JsonProperty("version_groups")
     val versionGroups: List<NamedApiResource<VersionGroup>>
-) : PokeApiObject
+) : PokeApiEndpointReference

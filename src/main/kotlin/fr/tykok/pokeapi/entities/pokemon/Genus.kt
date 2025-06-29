@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.utility.Language
 
@@ -9,8 +9,6 @@ import fr.tykok.pokeapi.entities.utility.Language
  * @property language The language this genus is in.
  */
 data class Genus(
-    @JsonProperty("genus")
     val genus: String,
-    @JsonProperty("language")
     val language: NamedApiResource<Language>
-)
+) : PokeApiObject

@@ -1,7 +1,6 @@
 package fr.tykok.pokeapi.entities.contests
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.FlavorText
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.moves.Move
@@ -22,24 +21,20 @@ data class SuperContestEffects(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The level of appeal this super contest effect has.
      */
-    @JsonProperty("appeal")
     val appeal: Number,
     /**
      * The flavor text of this super contest effect listed in different languages.
      * @see FlavorText
      */
-    @JsonProperty("flavor_text_entries")
-    val flavorTextEntries: Array<FlavorText>,
+    val flavorTextEntries: List<FlavorText>,
     /**
      * A list of moves that have the effect when used in super contests.
      * @see NamedApiResource
      * @see Move
      */
-    @JsonProperty("moves")
     val moves: List<NamedApiResource<Move>>
-) : PokeApiObject
+) : PokeApiEndpointReference

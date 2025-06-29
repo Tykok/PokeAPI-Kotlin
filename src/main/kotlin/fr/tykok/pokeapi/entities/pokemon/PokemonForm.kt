@@ -1,7 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.games.VersionGroup
@@ -25,32 +24,18 @@ import fr.tykok.pokeapi.entities.games.VersionGroup
  * @property formNames The form specific form name of this Pokémon form, or empty if the form does not have a specific name.
  */
 data class PokemonForm(
-    @JsonProperty("id")
     val id: Int,
-    @JsonProperty("name")
     val name: String,
-    @JsonProperty("order")
     val order: Int,
-    @JsonProperty("form_order")
     val formOrder: Int,
-    @JsonProperty("is_default")
     val isDefault: Boolean,
-    @JsonProperty("is_battle_only")
     val isBattleOnly: Boolean,
-    @JsonProperty("is_mega")
     val isMega: Boolean,
-    @JsonProperty("form_name")
     val formName: String,
-    @JsonProperty("pokemon")
     val pokemon: NamedApiResource<Pokemon>,
-    @JsonProperty("types")
     val types: List<PokemonFormType>,
-    @JsonProperty("sprites")
     val sprites: PokemonFormSprites,
-    @JsonProperty("version_group")
     val versionGroup: NamedApiResource<VersionGroup>,
-    @JsonProperty("names")
     val names: List<Name>,
-    @JsonProperty("form_names")
     val formNames: List<Name>
-) : PokeApiObject
+) : PokeApiEndpointReference

@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.common
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.games.Generation
 
 /**
@@ -14,13 +14,11 @@ data class GenerationGameIndex(
     /**
      * The internal id of an API resource within game data.
      */
-    @JsonProperty("game_index")
     val gameIndex: Number,
     /**
      * The generation relevent to this game index.
      * @see NamedApiResource
      * @see Generation
      */
-    @JsonProperty("generation")
     val generation: NamedApiResource<Generation>
-)
+) : PokeApiObject

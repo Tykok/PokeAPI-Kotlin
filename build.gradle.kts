@@ -39,7 +39,6 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation(libs.okhttp)
     implementation(libs.jackson)
-    implementation(libs.gson)
 
     testImplementation(platform(libs.junitBom))
     testImplementation(libs.junitJupiter)

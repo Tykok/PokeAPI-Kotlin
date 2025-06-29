@@ -1,7 +1,7 @@
 package fr.tykok.pokeapi.entities.moves
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.APIResource
 import fr.tykok.pokeapi.entities.common.MachineVersionDetail
 import fr.tykok.pokeapi.entities.common.Name
@@ -171,4 +171,4 @@ data class Move(
      */
     @JsonProperty("type")
     val type: NamedApiResource<Type>
-) : PokeApiObject
+) : PokeApiEndpointReference
