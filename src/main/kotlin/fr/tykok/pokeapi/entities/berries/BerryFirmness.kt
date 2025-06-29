@@ -11,9 +11,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-07-27
  */
 data class BerryFirmness(
-
     val id: Number,
-
     val name: String,
     /**
      * A list of the berries with this firmness.
