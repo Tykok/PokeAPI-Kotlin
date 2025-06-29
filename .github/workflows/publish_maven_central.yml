@@ -26,6 +26,34 @@ jobs:
       - name: Publish PokeAPI
         run: sh gradlew build
 
+      - name: Get project version
+        run: |
+          PROJECT_VERSION=$(sh gradlew getProjectVersion | grep VERSION | cut -d ":" -f 2 | sed 's/ //g')
+          echo "### Project version $PROJECT_VERSION" >> $GITHUB_STEP_SUMMARY
+          echo "PROJECT_VERSION=$PROJECT_VERSION" >> ${GITHUB_ENV}
+
+      - name: Get latest release
+        id: get_release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const release = await github.rest.repos.getLatestRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            core.setOutput('tag_name', release.data.tag_name);
+
+      - name: Show latest release tag
+        run: |
+          echo "Latest release: ${{ steps.get_release.outputs.tag_name }}"
+          echo "LASTEST_PROJECT_VERSION=${{ steps.get_release.outputs.tag_name }}" >> ${GITHUB_ENV}
+
+
       - name: Publish PokeAPI
-        if: ${{ success() }}
-        run: sh gradlew publish
+        if: ${{ success() && env.LASTEST_PROJECT_VERSION != env.PROJECT_VERSION }}
+        run: |
+          curl -X 'POST'
+          'https://central.sonatype.com/api/v1/publisher/upload?publishingType=AUTOMATIC' \
+          -H 'accept: text/plain' \
+          -H 'Content-Type: multipart/form-data' \
+          -F "bundle=${{ github.workspace }}/build/libs/pokeapi-${{ env.PROJECT_VERSION }}.jar"
