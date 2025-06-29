@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.common
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.games.Version
 import fr.tykok.pokeapi.entities.utility.Language
 
@@ -11,20 +11,17 @@ data class FlavorText(
     /**
      * The localized flavor text for an API resource in a specific language
      */
-    @JsonProperty("flavor_text")
     val flavorText: String,
     /**
      * The language this name is in.
      * @see NamedApiResource
      * @see Language
      */
-    @JsonProperty("language")
     val language: NamedApiResource<Language>,
     /**
      * The game version this flavor text is extracted from.
      * @see NamedApiResource
      * @see Version
      */
-    @JsonProperty("version")
     val version: NamedApiResource<Version>?
-)
+) : PokeApiObject

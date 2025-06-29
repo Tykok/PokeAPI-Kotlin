@@ -1,7 +1,6 @@
 package fr.tykok.pokeapi.entities.berries
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.contests.ContestType
@@ -16,30 +15,30 @@ data class BerryFlavor(
     /**
      * The identifier of the BerryFlavor
      */
-    @JsonProperty("id")
+
     val id: Number,
     /**
      * The name of the BerryFlavor
      */
-    @JsonProperty("name")
+
     val name: String,
     /**
      * A list of the berries with this flavor.
      * @see FlavorBerryMap
      */
-    @JsonProperty("berries")
-    val berries: Array<FlavorBerryMap>,
+
+    val berries: List<FlavorBerryMap>,
     /**
      * The contest type that correlates with this berry flavor.
      * @see NamedApiResource
      * @see ContestType
      */
-    @JsonProperty("contest_type")
+
     val contestType: NamedApiResource<ContestType>,
     /**
      * The name of this resource listed in different languages.
      * @see Name
      */
-    @JsonProperty("names")
-    val names: Array<Name>
-) : PokeApiObject
+
+    val names: List<Name>
+) : PokeApiEndpointReference

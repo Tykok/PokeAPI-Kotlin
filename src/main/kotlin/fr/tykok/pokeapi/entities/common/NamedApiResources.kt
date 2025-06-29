@@ -1,16 +1,12 @@
 package fr.tykok.pokeapi.entities.common
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 
-data class NamedApiResources<T : Any>(
-    @JsonProperty("count")
+data class NamedApiResources<T : PokeApiObject>(
     val count: Int,
-    @JsonProperty("next")
     val next: String?,
-    @JsonProperty("previous")
     val previous: String?,
-    @JsonProperty("results")
     val results: List<NamedApiResource<T>>
-)
+) : PokeApiObject
 
-inline fun <reified T : Any> NamedApiResources<T>.get(): List<T> = this.results.map { it.get()!! }
+inline fun <reified T : PokeApiObject> NamedApiResources<T>.get(): List<T> = this.results.map { it.get()!! }

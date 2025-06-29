@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.games.Generation
 
@@ -12,5 +13,5 @@ data class PokemonTypePast(
     /**
      * The types the referenced pokémon had in the listed generation.
      */
-    val types: Array<PokemonType>
-)
+    val types: List<PokemonType>
+) : PokeApiObject

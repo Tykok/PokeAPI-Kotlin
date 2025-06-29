@@ -1,6 +1,7 @@
 package fr.tykok.pokeapi.entities.common
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.encounters.EncounterConditionValue
 import fr.tykok.pokeapi.entities.encounters.EncounterMethod
 
@@ -41,4 +42,4 @@ data class Encounter(
      */
     @JsonProperty("method")
     val method: NamedApiResource<EncounterMethod>
-)
+) : PokeApiObject

@@ -1,7 +1,5 @@
 package fr.tykok.pokeapi.entities.locations
-
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
@@ -20,42 +18,35 @@ data class LocationArea(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The name for this resource.
      */
-    @JsonProperty("name")
     val name: String,
     /**
      * The internal id of an API resource within game data.
      */
-    @JsonProperty("game_index")
     val gameIndex: Number,
     /**
      * A list of methods in which Pokémon may be encountered in this area and how likely the method
      * will occur depending on the version of the game.
      * @see EncounterMethodRate
      */
-    @JsonProperty("encounter_method_rates")
     val encounterMethodRates: List<EncounterMethodRate>,
     /**
      * The region this location area can be found in.
      * @see NamedApiResource
      * @see Location
      */
-    @JsonProperty("location")
     val location: NamedApiResource<Location>,
     /**
      * The name of this resource listed in different languages.
      * @see Name
      */
-    @JsonProperty("names")
     val names: List<Name>,
     /**
      * A list of Pokémon that can be encountered in this area along with version specific details about the encounter.
      * @see PokemonEncounter
      */
-    @JsonProperty("pokemon_encounters")
     val pokemonEncounters: List<PokemonEncounter>
-) : PokeApiObject
+) : PokeApiEndpointReference

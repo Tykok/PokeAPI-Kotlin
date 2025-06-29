@@ -1,12 +1,10 @@
 package fr.tykok.pokeapi
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import fr.tykok.pokeapi.entities.PokeApiObject
+import com.fasterxml.jackson.core.type.TypeReference
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.NamedApiResources
+import fr.tykok.pokeapi.http.JacksonUtils
 import fr.tykok.pokeapi.http.getEndpoint
-import okhttp3.OkHttpClient
-import okhttp3.Request
 
 /**
  * PokeApi main class, used to fetch resources from the PokeApi RESTful API.
@@ -23,45 +21,36 @@ abstract class PokeApi {
         /**
          * Get a resource by its id.
          */
-        inline fun <reified T : PokeApiObject> get(id: Int): T =
-            "$BASE_URL/${getEndpoint<T>()}/$id"
-                .let {
-                    Request.Builder().url(it).build()
-                }.let {
-                    OkHttpClient().newCall(it).execute()
-                }.let {
-                    Gson().fromJson(it.body?.string(), T::class.java)
+        inline fun <reified T : PokeApiEndpointReference> get(id: Int): T =
+            JacksonUtils
+                .executeHttpRequest(url = "$BASE_URL/${getEndpoint<T>()}/$id")
+                .let { response ->
+                    JacksonUtils.mapper.readValue(response.body?.string(), T::class.java)
                 }
 
         /**
          * Get a resource by its name.
          */
-        inline fun <reified T : PokeApiObject> get(name: String): T =
-            "$BASE_URL/${getEndpoint<T>()}/$name"
-                .let {
-                    Request.Builder().url(it).build()
-                }.let {
-                    OkHttpClient().newCall(it).execute()
-                }.let {
-                    Gson().fromJson(it.body?.string(), T::class.java)
+        inline fun <reified T : PokeApiEndpointReference> get(name: String): T =
+            JacksonUtils
+                .executeHttpRequest(url = "$BASE_URL/${getEndpoint<T>()}/$name")
+                .let { response ->
+                    JacksonUtils.mapper.readValue(response.body?.string(), T::class.java)
                 }
 
         /**
          * Get a list of resources.
          */
-        inline fun <reified T : PokeApiObject> get(
+        inline fun <reified T : PokeApiEndpointReference> get(
             limit: Int = 20,
             offset: Int = 20
         ): NamedApiResources<T> =
-            "$BASE_URL/${getEndpoint<T>()}?offset=$offset&limit=$limit"
-                .let {
-                    Request.Builder().url(it).build()
-                }.let {
-                    OkHttpClient().newCall(it).execute()
-                }.let {
-                    Gson().fromJson(
-                        it.body?.string(),
-                        object : TypeToken<NamedApiResources<T>>() {}.type
+            JacksonUtils
+                .executeHttpRequest(url = "$BASE_URL/${getEndpoint<T>()}?offset=$offset&limit=$limit")
+                .let { response ->
+                    JacksonUtils.mapper.readValue(
+                        response.body?.string(),
+                        object : TypeReference<NamedApiResources<T>>() {}
                     )
                 }
     }

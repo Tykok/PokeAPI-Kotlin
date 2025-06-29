@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.moves
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 
 /**
  * @see <a href="https://pokeapi.co/docs/v2#contestcombosets">Documentation of PokeApi</a>
@@ -14,12 +14,10 @@ data class ContestComboSets(
      * A detail of moves this move can be used before or after, granting additional appeal points in contests.
      * @see ContestComboDetail
      */
-    @JsonProperty("normal")
     val normal: ContestComboDetail,
     /**
      * A detail of moves this move can be used before or after, granting additional appeal points in super contests.
      * @see ContestComboDetail
      */
-    @JsonProperty("super")
     val `super`: ContestComboDetail
-)
+) : PokeApiObject

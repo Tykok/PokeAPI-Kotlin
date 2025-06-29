@@ -1,7 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.APIResource
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -22,22 +21,13 @@ import fr.tykok.pokeapi.entities.moves.MoveDamageClass
  * @property names The name of this resource listed in different languages.
  */
 data class Stat(
-    @JsonProperty("id")
     val id: Int,
-    @JsonProperty("name")
     val name: String,
-    @JsonProperty("game_index")
     val gameIndex: String,
-    @JsonProperty("is_battle_only")
     val isBattleOnly: Boolean,
-    @JsonProperty("affecting_moves")
     val affectingMoves: MoveStatAffectSets,
-    @JsonProperty("affecting_natures")
     val affectingNatures: NatureStatAffectSets,
-    @JsonProperty("characteristics")
     val characteristics: List<APIResource>,
-    @JsonProperty("move_damage_class")
     val moveDamageClass: NamedApiResource<MoveDamageClass>?,
-    @JsonProperty("names")
     val names: List<Name>
-) : PokeApiObject
+) : PokeApiEndpointReference

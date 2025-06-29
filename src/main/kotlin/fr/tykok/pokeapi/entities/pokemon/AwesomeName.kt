@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.utility.Language
 
@@ -9,8 +9,6 @@ import fr.tykok.pokeapi.entities.utility.Language
  * @property language The language this "scientific" name is in.
  */
 data class AwesomeName(
-    @JsonProperty("awesome_name")
     val awesomeName: String,
-    @JsonProperty("language")
     val language: NamedApiResource<Language>
-)
+) : PokeApiObject

@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.common
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.utility.Language
 
 /**
@@ -10,13 +10,11 @@ data class Effect(
     /**
      * The localized effect text for an API resource in a specific language
      */
-    @JsonProperty("effect")
     val effect: String,
     /**
      * The language this effect is in.
      * @see NamedApiResource
      * @see Language
      */
-    @JsonProperty("language")
     val language: NamedApiResource<Language>
-)
+) : PokeApiObject

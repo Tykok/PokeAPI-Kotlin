@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.common
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 
 /**
  * @see <a href="https://pokeapi.co/docs/v2#apiresource">Documentation of PokeApi</a>
@@ -13,6 +13,5 @@ data class APIResource(
     /**
      *The URL of the referenced resource.
      */
-    @JsonProperty("url")
     val url: String
-)
+) : PokeApiObject

@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.moves
 
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Description
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
@@ -24,10 +24,10 @@ data class MoveCategory(
      * @see NamedApiResource
      * @see Move
      */
-    val moves: Array<NamedApiResource<Move>>,
+    val moves: List<NamedApiResource<Move>>,
     /**
      * The description of this resource listed in different languages.
      * @see Move
      */
-    val descriptions: Array<Description>
-) : PokeApiObject
+    val descriptions: List<Description>
+) : PokeApiEndpointReference

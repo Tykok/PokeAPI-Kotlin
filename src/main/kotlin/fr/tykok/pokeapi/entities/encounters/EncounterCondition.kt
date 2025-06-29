@@ -1,7 +1,6 @@
 package fr.tykok.pokeapi.entities.encounters
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
@@ -20,24 +19,20 @@ data class EncounterCondition(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The name for this resource.
      */
-    @JsonProperty("name")
     val name: String,
     /**
      * The name of this resource listed in different languages.
      * @see Name
      */
-    @JsonProperty("names")
-    val names: Array<Name>,
+    val names: List<Name>,
     /**
      * A list of possible values for this encounter condition.
      * @see NamedApiResource
      * @see EncounterConditionValue
      */
-    @JsonProperty("values")
-    val values: Array<NamedApiResource<EncounterCondition>>
-) : PokeApiObject
+    val values: List<NamedApiResource<EncounterCondition>>
+) : PokeApiEndpointReference

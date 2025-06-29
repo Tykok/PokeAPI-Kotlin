@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 /**
@@ -9,10 +9,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @property area The pal park area where this encounter happens.
  */
 data class PalParkEncounterArea(
-    @JsonProperty("base_score")
     val baseScore: Number,
-    @JsonProperty("rate")
     val rate: Number,
-    @JsonProperty("area")
     val area: NamedApiResource<PalParkEncounterArea>
-)
+) : PokeApiObject

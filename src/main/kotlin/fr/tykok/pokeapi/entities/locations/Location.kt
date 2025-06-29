@@ -1,7 +1,5 @@
 package fr.tykok.pokeapi.entities.locations
-
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.GenerationGameIndex
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -20,37 +18,31 @@ data class Location(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The name for this resource.
      */
-    @JsonProperty("name")
     val name: String,
     /**
      * The region this location can be found in.
      * @see NamedApiResource
      * @ee Region
      */
-    @JsonProperty("region")
     val region: NamedApiResource<Region>,
     /**
      * The name of this resource listed in different languages.
      * @see Name
      */
-    @JsonProperty("names")
     val names: List<Name>,
     /**
      * A list of game indices relevent to this location by generation.
      * @see GenerationGameIndex
      */
-    @JsonProperty("game_indices")
     val gameIndices: List<GenerationGameIndex>,
     /**
      * Areas that can be found within this location.
      * @see NamedApiResource
      * @see LocationArea
      */
-    @JsonProperty("areas")
     val areas: List<NamedApiResource<LocationArea>>
-) : PokeApiObject
+) : PokeApiEndpointReference

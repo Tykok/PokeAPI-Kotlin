@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.items
 
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.games.Version
 
@@ -21,4 +22,4 @@ data class ItemHolderPokemonVersionDetail(
      * @see Version
      */
     val version: NamedApiResource<Version>
-)
+) : PokeApiObject

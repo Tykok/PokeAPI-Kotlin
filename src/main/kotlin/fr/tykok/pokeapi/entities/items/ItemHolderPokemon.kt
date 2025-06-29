@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.items
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.pokemon.Pokemon
 
@@ -17,12 +17,10 @@ class ItemHolderPokemon(
      * @see NamedApiResource
      * @see Pokemon
      */
-    @JsonProperty("pokemon")
     val pokemon: NamedApiResource<Pokemon>,
     /**
      * The details for the version that this item is held in by the Pokémon.
      * @see ItemHolderPokemonVersionDetail
      */
-    @JsonProperty("version_details")
     val versionDetails: ItemHolderPokemonVersionDetail
-)
+) : PokeApiObject

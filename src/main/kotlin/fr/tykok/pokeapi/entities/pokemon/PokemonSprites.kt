@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 
 /**
  * A class representing the sprites of a Pokémon.
@@ -15,38 +15,21 @@ import com.fasterxml.jackson.annotation.JsonProperty
  * @property backShinyFemale The shiny female depiction of this Pokémon from the back in battle.
  */
 data class PokemonSprites(
-    @JsonProperty("front_default")
     val frontDefault: String?,
-    @JsonProperty("front_shiny")
     val frontShiny: String?,
-    @JsonProperty("front_female")
     val frontFemale: String?,
-    @JsonProperty("front_shiny_female")
     val frontShinyFemale: String?,
-    @JsonProperty("back_default")
     val backDefault: String?,
-    @JsonProperty("back_shiny")
     val backShiny: String?,
-    @JsonProperty("back_female")
     val backFemale: String?,
-    @JsonProperty("back_shiny_female")
     val backShinyFemale: String?,
-    @JsonProperty("back_gray")
     val backGray: String?,
-    @JsonProperty("front_gray")
     val frontGray: String?,
-    @JsonProperty("back_transparent")
     val backTransparent: String?,
-    @JsonProperty("front_transparent")
     val frontTransparent: String?,
-    @JsonProperty("back_shiny_transparent")
     val backShinyTransparent: String?,
-    @JsonProperty("front_shiny_transparent")
     val frontShinyTransparent: String?,
-    @JsonProperty("animated")
     val animated: PokemonSprites?,
-    @JsonProperty("versions")
     val versions: Map<String, Map<String, PokemonSprites>>?,
-    @JsonProperty("other")
     val other: Map<String, PokemonSprites>?
-)
+) : PokeApiObject

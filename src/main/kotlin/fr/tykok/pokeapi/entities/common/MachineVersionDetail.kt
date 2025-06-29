@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.common
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.games.VersionGroup
 import fr.tykok.pokeapi.entities.machines.Machine
 
@@ -17,13 +17,11 @@ data class MachineVersionDetail(
      * @see NamedApiResource
      * @see Machine
      */
-    @JsonProperty("machine")
     val machine: APIResource,
     /**
      * The version group of this specific machine.
      * @see NamedApiResource
      * @see VersionGroup
      */
-    @JsonProperty("version_group")
     val versionGroup: NamedApiResource<VersionGroup>
-)
+) : PokeApiObject

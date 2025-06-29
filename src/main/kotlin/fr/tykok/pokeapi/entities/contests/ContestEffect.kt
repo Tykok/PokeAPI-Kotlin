@@ -1,7 +1,6 @@
 package fr.tykok.pokeapi.entities.contests
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Effect
 import fr.tykok.pokeapi.entities.common.FlavorText
 
@@ -20,28 +19,23 @@ data class ContestEffect(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The base number of hearts the user of this move gets.
      */
-    @JsonProperty("appeal")
     val appeal: Number,
     /**
      * The base number of hearts the user's opponent loses.
      */
-    @JsonProperty("jam")
     val jam: Number,
     /**
      * The result of this contest effect listed in different languages.
      * @see Effect
      */
-    @JsonProperty("effect_entries")
-    val effectEntries: Array<Effect>,
+    val effectEntries: List<Effect>,
     /**
      * The flavor text of this contest effect listed in different languages.
      * @see FlavorText
      */
-    @JsonProperty("flavor_text_entries")
-    val flavorTextEntries: Array<FlavorText>
-) : PokeApiObject
+    val flavorTextEntries: List<FlavorText>
+) : PokeApiEndpointReference

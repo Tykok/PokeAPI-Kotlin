@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.items.Item
 
@@ -11,5 +12,5 @@ data class PokemonHeldItem(
     /**
      * The details for the version that this item is held in by the Pokémon.
      */
-    val version_details: Array<PokemonHeldItemVersion>
-)
+    val version_details: List<PokemonHeldItemVersion>
+) : PokeApiObject

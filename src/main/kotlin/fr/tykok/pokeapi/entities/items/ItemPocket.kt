@@ -1,7 +1,5 @@
 package fr.tykok.pokeapi.entities.items
-
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
@@ -19,24 +17,20 @@ data class ItemPocket(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The name for this resource.
      */
-    @JsonProperty("name")
     val name: String,
     /**
      * A list of item categories that are relevant to this item pocket.
      * @see NamedApiResource
      * @see ItemCategory
      */
-    @JsonProperty("categories")
     val categories: List<NamedApiResource<ItemCategory>>,
     /**
      * The name of this resource listed in different languages.
      * @see Name
      */
-    @JsonProperty("names")
     val names: List<Name>
-) : PokeApiObject
+) : PokeApiEndpointReference

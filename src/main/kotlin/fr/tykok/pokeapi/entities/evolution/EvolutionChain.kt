@@ -1,7 +1,6 @@
 package fr.tykok.pokeapi.entities.evolution
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import fr.tykok.pokeapi.entities.PokeApiObject
+import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.items.Item
 
@@ -20,14 +19,12 @@ data class EvolutionChain(
     /**
      * The identifier for this resource.
      */
-    @JsonProperty("id")
     val id: Number,
     /**
      * The item that a Pokémon would be holding when mating that would trigger the egg hatching a baby Pokémon rather than a basic Pokémon.
      * @see NamedApiResource
      * @see Item
      */
-    @JsonProperty("baby_trigger_item")
     val babyTriggerItem: NamedApiResource<Item>?,
     /**
      * The base chain link object. Each link contains evolution details for a Pokémon in the chain.
@@ -35,6 +32,5 @@ data class EvolutionChain(
      *
      * @see ChainLink
      */
-    @JsonProperty("chain")
     val chain: ChainLink
-) : PokeApiObject
+) : PokeApiEndpointReference

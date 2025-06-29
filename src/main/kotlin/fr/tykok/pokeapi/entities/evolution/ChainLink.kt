@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.evolution
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.pokemon.PokemonSpecies
 
@@ -21,25 +21,21 @@ data class ChainLink(
     /**
      * Whether or not this link is for a baby Pokémon. This would only ever be true on the base link.
      */
-    @JsonProperty("is_baby")
     val isBaby: Boolean,
     /**
      * The Pokémon species at this point in the evolution chain.
      * @see NamedApiResource
      * @see PokemonSpecies
      */
-    @JsonProperty("species")
     val species: NamedApiResource<PokemonSpecies>,
     /**
      * All details regarding the specific details of the referenced Pokémon species evolution.
      * @see EvolutionDetail
      */
-    @JsonProperty("evolution_details")
-    val evolutionDetails: Array<EvolutionDetail>,
+    val evolutionDetails: List<EvolutionDetail>,
     /**
      * A List of chain objects.
      * @see ChainLink
      */
-    @JsonProperty("evolves_to")
-    val evolvesTo: Array<ChainLink>
-)
+    val evolvesTo: List<ChainLink>
+) : PokeApiObject

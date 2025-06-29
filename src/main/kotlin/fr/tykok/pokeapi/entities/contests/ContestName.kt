@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.contests
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.utility.Language
 
@@ -20,18 +20,15 @@ data class ContestName(
     /**
      * The name for this contest.
      */
-    @JsonProperty("name")
     val name: String,
     /**
      * The color associated with this contest's name.
      */
-    @JsonProperty("color")
     val color: String,
     /**
      * The language that this name is in.
      * @see NamedApiResource
      * @see Language
      */
-    @JsonProperty("language")
     val language: NamedApiResource<Language>
-)
+) : PokeApiObject
