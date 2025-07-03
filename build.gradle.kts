@@ -8,7 +8,7 @@ val mavenCentralPublishURI = uri("https://central.sonatype.com/api/v1/publisher/
 
 description = "PokeApi is a simple library you can use to make request to get data about Pokémon."
 group = "fr.tykok"
-version = "1.0.0"
+version = "2.0.0"
 
 plugins {
     alias(libs.plugins.netResearchgateRelease)
