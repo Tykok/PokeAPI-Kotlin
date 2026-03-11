@@ -1,26 +1,58 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 val artifact = "pokeapi"
 val projectName = "PokeApi"
 val projectDocUrl = "https://tykok.github.io/PokeAPI-Kotlin/"
 val projectUrl = "https://github.com/Tykok/PokeAPI-Kotlin"
-val mavenCentralPublishURI = uri("https://central.sonatype.com/api/v1/publisher/deployments/download/")
 
 description = "PokeApi is a simple library you can use to make request to get data about Pokémon."
 group = "fr.tykok"
 version = "2.0.0"
 
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("gradle-local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use(localProperties::load)
+    localProperties.forEach { (key, value) ->
+        val propertyName = key.toString()
+        val propertyValue = value.toString()
+        if (!project.hasProperty(propertyName)) {
+            project.extensions.extraProperties.set(propertyName, propertyValue)
+        }
+
+        // Make values available as true Gradle project properties for plugins that
+        // resolve them via ProviderFactory#gradleProperty(...)
+        val gradleSystemPropertyKey = "org.gradle.project.$propertyName"
+        if (System.getProperty(gradleSystemPropertyKey).isNullOrBlank()) {
+            System.setProperty(gradleSystemPropertyKey, propertyValue)
+        }
+    }
+}
+
+if (!project.hasProperty("signingInMemoryKey")) {
+    val signingInMemoryKeyFile = project.findProperty("signingInMemoryKeyFile")?.toString()
+    if (!signingInMemoryKeyFile.isNullOrBlank()) {
+        project.extensions.extraProperties.set(
+            "signingInMemoryKey",
+            file(signingInMemoryKeyFile).readText()
+        )
+    }
+}
+
 plugins {
+    kotlin("jvm") version "2.1.0"
+
+    `java-library`
+    `maven-publish`
+    application
+    jacoco
+
     alias(libs.plugins.netResearchgateRelease)
     alias(libs.plugins.dokka)
     alias(libs.plugins.ktlint)
-    `java-library`
-    `maven-publish`
-    signing
-    java
-    kotlin("jvm") version "2.0.0"
-    application
-    jacoco
+
+    id("com.vanniktech.maven.publish") version "0.33.0"
 }
 
 repositories {
@@ -30,9 +62,9 @@ repositories {
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
-
-    withSourcesJar()
-    withJavadocJar()
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 dependencies {
@@ -61,8 +93,9 @@ tasks.jacocoTestReport {
 }
 
 kotlin {
+    jvmToolchain(17)
     compilerOptions {
-        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0)
+        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_1)
         jvmTarget.set(JvmTarget.JVM_17)
     }
 }
@@ -73,20 +106,25 @@ tasks.create("getProjectVersion") {
     }
 }
 
-tasks.register<Jar>("dokkaHtmlJar") {
-    dependsOn(tasks.dokkaHtml)
-    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
-    archiveClassifier.set("html-docs")
-}
+dokka {
+    moduleName.set(projectName)
+    dokkaPublications.html {
+        suppressInheritedMembers.set(true)
+        failOnWarning.set(true)
+    }
+    dokkaSourceSets.main {
+        // includes.from("README.md")
+        sourceLink {
+            localDirectory.set(file("src/main/kotlin"))
+            remoteUrl("https://test.com")
+        }
+    }
 
-tasks.register<Jar>("dokkaJavadocJar") {
-    dependsOn(tasks.dokkaJavadoc)
-    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
-    archiveClassifier.set("javadoc")
-}
-
-project.tasks.named<Jar>("javadocJar") {
-    from(tasks.named("dokkaJavadoc"))
+    pluginsConfiguration.html {
+        // customStyleSheets.from("styles.css")
+        customAssets.from("docs/mkdocs-markdown/img/project_img.png")
+        footerMessage.set("Tykok")
+    }
 }
 
 task<Exec>("mkdocs-serve") {
@@ -97,59 +135,52 @@ task<Exec>("mkdocs-build") {
     commandLine("mkdocs", "build", "--config-file", "docs/mkdocs.yml")
 }
 
-application {
-    mainClass.set("fr.tykok.pokeapi.PokeApi")
-}
+mavenPublishing {
+    publishToMavenCentral(automaticRelease = false)
+    signAllPublications()
+    coordinates(groupId = group.toString(), artifactId = artifact, version = version.toString())
 
-sourceSets {
-    test {
-        kotlin {
-            srcDir("src/test/kotlin")
+    pom {
+        name.set(projectName)
+        description.set(project.description)
+        url.set(projectUrl)
+
+        licenses {
+            license {
+                name.set("MIT")
+                url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+
+        developers {
+            developer {
+                id.set("tykok")
+                name.set("Tykok")
+            }
+        }
+
+        scm {
+            url.set(projectUrl)
+            connection.set("scm:git:$projectUrl.git")
+            developerConnection.set("scm:git:ssh://git@github.com/Tykok/PokeAPI-Kotlin.git")
         }
     }
 }
 
-signing {
-    useGpgCmd()
-}
+extensions.configure<SigningExtension>("signing") {
+    fun prop(name: String): String? = findProperty(name)?.toString()?.takeIf { it.isNotBlank() }
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["kotlin"])
+    val inMemoryKey =
+        prop("signingInMemoryKey")
+            ?: prop("signingInMemoryKeyFile")?.let { file(it).readText() }
+    val keyPassword = prop("signingInMemoryKeyPassword") ?: prop("signing.password")
+    val keyId = prop("signingInMemoryKeyId")
 
-            groupId = groupId
-            artifactId = artifactId
-            version = version
-
-            pom {
-                name.set(projectName)
-                url.set(projectUrl)
-
-                licenses {
-                    license {
-                        name.set("MIT License")
-                    }
-                }
-
-                developers {
-                    developer {
-                        name.set("Tykok")
-                    }
-                }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = "sonatype"
-            url = mavenCentralPublishURI
-
-            credentials {
-                username = project.findProperty("ossrhUsername") as String? ?: System.getenv("OSSRH_USERNAME")
-                password = project.findProperty("ossrhPassword") as String? ?: System.getenv("OSSRH_PASSWORD")
-            }
+    if (!inMemoryKey.isNullOrBlank()) {
+        if (!keyId.isNullOrBlank()) {
+            useInMemoryPgpKeys(keyId, inMemoryKey, keyPassword)
+        } else {
+            useInMemoryPgpKeys(inMemoryKey, keyPassword)
         }
     }
 }

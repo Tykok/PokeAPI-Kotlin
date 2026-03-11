@@ -76,3 +76,8 @@ node_modules/
 out/
 outTmp/
 workspace.xml
+gradle-local.properties
+privateKey.gpg
+private-key.asc
+*.asc
+*.gpg

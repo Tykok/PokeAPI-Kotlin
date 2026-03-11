@@ -1,10 +1,10 @@
-<div align="center">
+<div style="text-align:center;">
 
 ![project_img.png](docs/mkdocs-markdown/img/project_img.png)
 
 </div>
 <br/><br/>
-<div align="center">
+<div style="text-align:center;">
 
 [![javadoc](https://javadoc.io/badge2/fr.tykok/pokeapi/javadoc.svg)](https://javadoc.io/doc/fr.tykok/pokeapi)
 [![Maven Central](https://img.shields.io/maven-central/v/fr.tykok/pokeapi)](https://central.sonatype.com/artifact/fr.tykok/pokeapi)
@@ -91,3 +91,21 @@ val pokemons = PokeApi.get<Pokemon>(limit = 10, offset = 10)
 
 Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and
 improvements, and how to build and test your changes to our PokeAPi Kotlin library.
+
+## Publish to Maven Central
+
+Use a JDK 17 or 21 runtime for Gradle.
+
+Local publish:
+
+```bash
+cp gradle-local.properties.example gradle-local.properties
+./gradlew clean publishAndReleaseToMavenCentral
+```
+
+GitHub Actions secrets required:
+
+- `MAVEN_CENTRAL_USERNAME`
+- `MAVEN_CENTRAL_PASSWORD`
+- `SIGNING_IN_MEMORY_KEY`
+- `SIGNING_IN_MEMORY_KEY_PASSWORD`
