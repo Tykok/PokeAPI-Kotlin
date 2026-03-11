@@ -1,59 +1,32 @@
-name : Publish PokeAPI
-
-env:
-  OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-  OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+name: Publish Maven Central
 
 on:
   release:
-    types: [created]
+    types: [published]
+  workflow_dispatch:
 
 jobs:
   publish:
     name: Publish PokeAPI
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
 
-      - name: Publish PokeAPI
-        run: sh gradlew build
-
-      - name: Get project version
-        run: |
-          PROJECT_VERSION=$(sh gradlew getProjectVersion | grep VERSION | cut -d ":" -f 2 | sed 's/ //g')
-          echo "### Project version $PROJECT_VERSION" >> $GITHUB_STEP_SUMMARY
-          echo "PROJECT_VERSION=$PROJECT_VERSION" >> ${GITHUB_ENV}
-
-      - name: Get latest release
-        id: get_release
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const release = await github.rest.repos.getLatestRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
-            core.setOutput('tag_name', release.data.tag_name);
-
-      - name: Show latest release tag
-        run: |
-          echo "Latest release: ${{ steps.get_release.outputs.tag_name }}"
-          echo "LASTEST_PROJECT_VERSION=${{ steps.get_release.outputs.tag_name }}" >> ${GITHUB_ENV}
-
-
-      - name: Publish PokeAPI
-        if: ${{ success() && env.LASTEST_PROJECT_VERSION != env.PROJECT_VERSION }}
-        run: |
-          curl -X 'POST'
-          'https://central.sonatype.com/api/v1/publisher/upload?publishingType=AUTOMATIC' \
-          -H 'accept: text/plain' \
-          -H 'Content-Type: multipart/form-data' \
-          -F "bundle=${{ github.workspace }}/build/libs/pokeapi-${{ env.PROJECT_VERSION }}.jar"
+      - name: Validate and publish to Maven Central
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_IN_MEMORY_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_IN_MEMORY_KEY_PASSWORD }}
+        run: ./gradlew --no-daemon clean publishAndReleaseToMavenCentral

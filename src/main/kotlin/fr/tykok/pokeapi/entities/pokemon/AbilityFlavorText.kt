@@ -13,7 +13,7 @@ data class AbilityFlavorText(
     /**
      * The language this text resource is in.
      * @see NamedApiResource
-     * @see Langage
+     * @see Language
      */
     val language: NamedApiResource<Language>,
     /**

@@ -77,7 +77,7 @@ data class Move(
     /**
      * The effect the move has when used in a contest.
      * @see APIResource
-     * @see ContestEffect
+     * @see fr.tykok.pokeapi.entities.contests.ContestEffect
      */
     @JsonProperty("contest_effect")
     val contestEffect: APIResource,
@@ -153,7 +153,7 @@ data class Move(
     /**
      * The effect the move has when used in a super contest.
      * @see APIResource
-     * @see SuperContestEffect
+     * @see SuperContestEffects
      */
     @JsonProperty("super_contest_effect")
     val superContestEffect: APIResource,

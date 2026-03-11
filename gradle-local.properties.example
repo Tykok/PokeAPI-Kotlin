@@ -1,0 +1,4 @@
+mavenCentralUsername=your-central-portal-token-username
+mavenCentralPassword=your-central-portal-token-password
+signingInMemoryKeyFile=./privateKey.gpg
+signingInMemoryKeyPassword=your-gpg-passphrase
