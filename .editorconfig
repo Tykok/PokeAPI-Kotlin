@@ -6,7 +6,7 @@ end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
-#max_line_length = 120
+max_line_length = 120
 tab_width = 4
 trim_trailing_whitespace = true
 ij_formatter_off_tag = @formatter:off
@@ -19,7 +19,10 @@ ij_wrap_on_typing = false
 [*.{json,yml,yaml}]
 indent_size = 2
 
-[*.{kt,kts}]
+[*.kts]
+ij_kotlin_allow_trailing_comma_on_call_site = false
+
+[*.kt]
 ij_kotlin_allow_trailing_comma = false
 ij_kotlin_allow_trailing_comma_on_call_site = false
 ktlint_standard_enum-entry-name-case = disabled
