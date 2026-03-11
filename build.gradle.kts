@@ -33,10 +33,7 @@ if (localPropertiesFile.exists()) {
 if (!project.hasProperty("signingInMemoryKey")) {
     val signingInMemoryKeyFile = project.findProperty("signingInMemoryKeyFile")?.toString()
     if (!signingInMemoryKeyFile.isNullOrBlank()) {
-        project.extensions.extraProperties.set(
-            "signingInMemoryKey",
-            file(signingInMemoryKeyFile).readText()
-        )
+        project.extensions.extraProperties.set("signingInMemoryKey", file(signingInMemoryKeyFile).readText())
     }
 }
 
@@ -88,6 +85,7 @@ tasks.test {
 tasks.test {
     finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
 }
+
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
 }
