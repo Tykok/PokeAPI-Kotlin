@@ -12,6 +12,6 @@ junitPlatform = { module = "org.junit.platform:junit-platform-launcher" }
 mockk = { module = "io.mockk:mockk", version = "1.13.11" }
 # https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 jackson = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version = "2.19.0"}
-okhttp = { module = "com.squareup.okhttp3:okhttp", version = "4.10.0"}
+okhttp = { module = "com.squareup.okhttp3:okhttp", version = "5.5.0"}
 
 [bundles]
