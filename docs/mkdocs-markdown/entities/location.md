@@ -1,8 +1,17 @@
 # Locations
 
+<div class="dex-entry">
+  <span class="dex-entry__icon" aria-hidden="true">🗺</span>
+  <span>
+    <span class="dex-entry__no">No. 008</span>
+    <span class="dex-entry__name">Location</span>
+  </span>
+  <span class="dex-entry__count">4 endpoints</span>
+</div>
+
 ## `Location`
 
-The `Location` class can be used to make request on `/location{id or name}` endpoint.
+The `Location` class can be used to make request on `/location/{id or name}` endpoint.
 
 ```kotlin
 val location = PokeApi.get<Location>(id = 1)

@@ -1,5 +1,14 @@
 # Berry
 
+<div class="dex-entry">
+  <span class="dex-entry__icon" aria-hidden="true">🍒</span>
+  <span>
+    <span class="dex-entry__no">No. 002</span>
+    <span class="dex-entry__name">Berry</span>
+  </span>
+  <span class="dex-entry__count">3 endpoints</span>
+</div>
+
 The `Berry` entities is used to map data from `https://pokeapi.co/api/v2/berry/...`.
 
 ![Berry](../img/berry.jpeg)

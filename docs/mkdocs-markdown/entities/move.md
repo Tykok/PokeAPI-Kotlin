@@ -1,5 +1,14 @@
 # Moves
 
+<div class="dex-entry">
+  <span class="dex-entry__icon" aria-hidden="true">⚡</span>
+  <span>
+    <span class="dex-entry__no">No. 010</span>
+    <span class="dex-entry__name">Move</span>
+  </span>
+  <span class="dex-entry__count">7 endpoints</span>
+</div>
+
 ## `Move`
 
 The `Move` class can be used to get data from `/move/{id or name}` endpoint.
