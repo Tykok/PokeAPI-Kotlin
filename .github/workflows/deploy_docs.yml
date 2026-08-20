@@ -9,6 +9,9 @@ on:
     paths:
       - "docs/**"
       - ".github/workflows/deploy_docs.yml"
+      # The site prints the version read from gradle.properties, so a release
+      # bump has to redeploy the docs or the chip goes stale.
+      - "gradle.properties"
   workflow_dispatch:
 
 permissions:

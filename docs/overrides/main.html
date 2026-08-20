@@ -1,6 +1,23 @@
 {% extends "base.html" %}
 
 {#
+  The version chip is rendered as a sibling of the header, not inside it, so
+  partials/header.html never has to be forked. CSS pins it to the top-right and
+  keys off .md-header--shadow for the scrolled state. The value comes from
+  gradle.properties via hooks/version.py.
+#}
+{% block header %}
+  {% include "partials/header.html" %}
+  <div class="dex-version">
+    <a class="dex-version__chip"
+       href="https://central.sonatype.com/artifact/fr.tykok/pokeapi/{{ config.extra.library_version }}"
+       title="This documentation describes version {{ config.extra.library_version }}">
+      v{{ config.extra.library_version }}
+    </a>
+  </div>
+{% endblock %}
+
+{#
   The chassis is CSS-only except for the control deck below: Material's header
   becomes the top of the shell and .md-main becomes the screen, so no other
   partial has to be forked (and upgrades stay painless).
