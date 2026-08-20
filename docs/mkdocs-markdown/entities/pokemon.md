@@ -1,5 +1,14 @@
 # Pokemon
 
+<div class="dex-entry">
+  <span class="dex-entry__icon" aria-hidden="true">🐾</span>
+  <span>
+    <span class="dex-entry__no">No. 001</span>
+    <span class="dex-entry__name">Pokemon</span>
+  </span>
+  <span class="dex-entry__count">16 endpoints</span>
+</div>
+
 In the Pokemon package, you'll get the following classes according to their endpoint. You can
 
 ## `Ability`

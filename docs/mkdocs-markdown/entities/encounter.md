@@ -1,12 +1,21 @@
-# Encouters
+# Encounters
 
-## EncounterMethod
+<div class="dex-entry">
+  <span class="dex-entry__icon" aria-hidden="true">🌿</span>
+  <span>
+    <span class="dex-entry__no">No. 004</span>
+    <span class="dex-entry__name">Encounter</span>
+  </span>
+  <span class="dex-entry__count">3 endpoints</span>
+</div>
+
+## `EncounterMethod`
 
 The `EncounterMethod` class can be used to retrieve information about encounter methods from the
-`/encounter-methods/{id or name}` endpoints of the API.
+`/encounter-method/{id or name}` endpoints of the API.
 
 ```kotlin
-val encounterMethod = PokeAPI.get<EncounterMethod>(id = 1)
+val encounterMethod = PokeApi.get<EncounterMethod>(id = 1)
 ```
 
 ## `EncounterCondition`

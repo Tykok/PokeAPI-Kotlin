@@ -1,5 +1,14 @@
 # Items
 
+<div class="dex-entry">
+  <span class="dex-entry__icon" aria-hidden="true">🎒</span>
+  <span>
+    <span class="dex-entry__no">No. 007</span>
+    <span class="dex-entry__name">Item</span>
+  </span>
+  <span class="dex-entry__count">5 endpoints</span>
+</div>
+
 ## `Item`
 
 The `Item` class can be used to get data from `/item/{id or name}` endpoint.

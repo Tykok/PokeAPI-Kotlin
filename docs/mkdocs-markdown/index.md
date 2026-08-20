@@ -1,22 +1,26 @@
-<div align="center">
-    <img src="img/project_img.png" alt="Image of the project" width="332"/>
-</div>
-<br/><br/>
-<div align="center">
-    <a href="https://javadoc.io/doc/fr.tykok/pokeapi"><img src="https://javadoc.io/badge2/fr.tykok/pokeapi/javadoc.svg" alt="Javadoc" /></a>
-    <a href="https://central.sonatype.com/artifact/fr.tykok/pokeapi"><img src="https://img.shields.io/maven-central/v/fr.tykok/pokeapi" alt="Maven Central" /></a>
-    <img src="https://img.shields.io/github/license/Tykok/PokeAPI-Kotlin" alt="License" />
-    <a href="https://discord.gg/gryDvNE9"><img src="https://img.shields.io/discord/903774510648533012"/></a>
-</div>
-<br/>
+---
+template: pokedex-home.html
+hide:
+  - navigation
+  - toc
+---
 
-Welcome to the wrapper of the [pokeapi.co][pokeapi] API. If you want to use the API,
-you can use this library to make it easier and faster.
+## How it works
 
-if you are interesting to contribute to the project, you can read
-the [contributing guide][CONTRIBUTING.md] file.
+You never name an endpoint. You name a **type**, and `PokeApi` resolves the endpoint from it:
 
+```kotlin
+val pikachu   = PokeApi.get<Pokemon>(name = "pikachu")   // GET /pokemon/pikachu
+val cheriBerry = PokeApi.get<Berry>(id = 1)              // GET /berry/1
+val firstTen  = PokeApi.get<Pokemon>(limit = 10, offset = 0) // GET /pokemon?offset=0&limit=10
+```
 
-[CONTRIBUTING.md]: https://github.com/Tykok/PokeAPI-Kotlin/blob/main/CONTRIBUTING.md
+Every response is mapped into a Kotlin data class, so the compiler — not the JSON — tells you what a
+resource contains.
 
-[pokeapi]: https://pokeapi.co/
+## Where to go next
+
+- [Getting started](getting-started.md) — add the dependency to Gradle or Maven
+- [Methods](methods.md) — the three `get()` overloads and their parameters
+- [API Reference](entities/index.md) — all 48 endpoints, grouped
+- [Contributing](https://github.com/Tykok/PokeAPI-Kotlin/blob/main/CONTRIBUTING.md) — issues and pull requests welcome

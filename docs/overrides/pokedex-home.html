@@ -1,0 +1,58 @@
+{% extends "main.html" %}
+
+{#
+  Home page only: the screen shows a dex readout for the library itself.
+  Everything after the readout is the rendered Markdown of index.md.
+#}
+{% block content %}
+  <div class="dex-home">
+    <section class="dex-readout" aria-label="Library entry">
+      <header class="dex-readout__head">
+        <span>No. 001</span>
+        <span>Kotlin library</span>
+      </header>
+      <h1 class="dex-readout__name">PokeApi</h1>
+      <p class="dex-readout__desc">
+        A Kotlin wrapper for <a href="https://pokeapi.co/">pokeapi.co</a>. One generic
+        <code>get()</code> resolves the endpoint from the entity type you ask for, then maps the
+        JSON response into a data class.
+      </p>
+      <ul class="dex-types">
+        <li class="dex-type">Kotlin 2.1</li>
+        <li class="dex-type">JVM 17</li>
+        <li class="dex-type">MIT</li>
+      </ul>
+      <dl class="dex-stats">
+        <div>
+          <dt>Endpoints</dt>
+          <dd>48</dd>
+        </div>
+        <div>
+          <dt>Entity groups</dt>
+          <dd>11</dd>
+        </div>
+        <div>
+          <dt>Coordinates</dt>
+          <dd>fr.tykok:pokeapi</dd>
+        </div>
+      </dl>
+    </section>
+
+    <div class="dex-home__actions">
+      <a href="{{ 'getting-started/' | url }}">Get started</a>
+      <a class="dex-home__actions--ghost" href="{{ 'entities/' | url }}">Browse the dex</a>
+      <a class="dex-home__actions--ghost" href="{{ config.repo_url }}">GitHub</a>
+    </div>
+
+    <div class="dex-home__badges">
+      <a href="https://central.sonatype.com/artifact/fr.tykok/pokeapi"><img src="https://img.shields.io/maven-central/v/fr.tykok/pokeapi?style=flat-square&amp;color=c62828" alt="Latest version on Maven Central"></a>
+      <a href="https://javadoc.io/doc/fr.tykok/pokeapi"><img src="https://javadoc.io/badge2/fr.tykok/pokeapi/javadoc.svg?style=flat-square" alt="Javadoc"></a>
+      <a href="{{ config.repo_url }}/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Tykok/PokeAPI-Kotlin?style=flat-square" alt="License"></a>
+      <a href="https://discord.gg/gryDvNE9"><img src="https://img.shields.io/discord/903774510648533012?style=flat-square&amp;label=discord" alt="Discord"></a>
+    </div>
+
+    <div class="dex-home__prose md-typeset">
+      {{ page.content }}
+    </div>
+  </div>
+{% endblock %}

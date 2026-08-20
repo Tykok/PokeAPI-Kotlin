@@ -1,53 +1,53 @@
 # Methods
 
-To use the methods, you need to import `PokeApi` class. Next, you can use the `get` methods to fetch data from the
-[pokeapi.co][pokeapi].
+Everything goes through `PokeApi`, and the endpoint is derived from the **type** you ask for — you
+never write a URL:
 
-You need to give the entities type as a generic parameter to the `get()` methods. The available entities types are available
-in the `fr.tykok.pokeapi.entities` package, all the documentation are given in the `API Resource` section of this website.
+```kotlin
+import fr.tykok.pokeapi.PokeApi
+import fr.tykok.pokeapi.entities.pokemon.Pokemon
+```
 
-All entities used to call a specific endpoint and is used to map the response of the endpoint.
-Each entities are described in the entities section.
+The type must be one of the entities in the `fr.tykok.pokeapi.entities` package; the full list is in
+the [API Reference](entities/index.md). Asking for an unmapped class throws `UnknownEndpointException`.
 
-Finally, you need to give an `id`, the `name`, or the `limit` of the list to get the entities or the list of entities
-given in the generic parameter.
-All parameters for the `get()` method are described below.
-
-## With `id` of the pokemon
-
-You can get a pokemon with the `id` of the pokemon. For example, you can get the pokemon with `id` 25 <img
-src="https://cdn-icons-png.flaticon.com/512/188/188987.png"
-width="3%"> as Pikachu.
+## `get(id)` — one resource by id
 
 ```kotlin
 val pikachu = PokeApi.get<Pokemon>(id = 25)
 ```
 
-## With `name` of the pokemon
+Resolves to `GET /pokemon/25`.
 
-Same thing, but here you can use the name of the pokemon. With the `name` of the pokemon you can get it <img
-src="https://cdn-icons-png.flaticon.com/512/188/188987.png"
-width="3%">.
+## `get(name)` — one resource by name
 
 ```kotlin
 val pikachu = PokeApi.get<Pokemon>(name = "pikachu")
 ```
 
-If you give a wrong name, you will throw an exception.
+Resolves to `GET /pokemon/pikachu`. An unknown name makes the call throw.
 
-## List of pokemon
+!!! note "Not every resource has a name"
 
-You can get a list of pokemon with the `limit` of the list. For example, you can get the first 10 pokemon.
+    A few endpoints are id-only. `EvolutionChain` is the usual one: use
+    `PokeApi.get<EvolutionChain>(id = 1)`, never the `name` overload.
 
-```kotlin
-val pokemonList = PokeApi.get<Pokemon>(limit = 10)
-```
-
-You can also get a list of pokemon with the `limit` and the `offset` of the list. For example, you can get a list of
-pokemon from 10 to 20 with `limit` = 10 and `offset` = 10 (you start at the 10th pokemon and you get the 10 next).
+## `get(limit, offset)` — a page of resources
 
 ```kotlin
-val pokemonList = PokeApi.get<Pokemon>(limit = 10, offset = 10)
+val page = PokeApi.get<Pokemon>(limit = 10, offset = 0)
 ```
 
-[pokeapi]: https://pokeapi.co/
+Resolves to `GET /pokemon?offset=0&limit=10` and returns `NamedApiResources<Pokemon>` — a page of
+references, not fully-loaded entities. Fetch a reference with `get(name)` or `get(id)` when you need
+its details.
+
+| Parameter | Default | Meaning |
+| --- | --- | --- |
+| `limit` | `20` | How many references to return |
+| `offset` | `20` | How many to skip first |
+
+!!! warning "`offset` defaults to 20, not 0"
+
+    `PokeApi.get<Pokemon>(limit = 10)` returns entries **21 to 30**, not the first ten. Pass
+    `offset = 0` explicitly whenever you want to start at the beginning.

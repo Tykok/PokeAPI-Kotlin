@@ -1,22 +1,98 @@
-site_name: PokeApi - Documentation
-repo_url: https://github.com/Tykok/PokeAPI-Kotlin
-repo_name: PokeAPI-Kotlin
-site_description: A Kotlin wrapper for the PokeApi
+site_name: PokeApi
+site_description: A Kotlin wrapper for the pokeapi.co API
 site_author: Tykok
 site_url: https://tykok.github.io/PokeAPI-Kotlin/
+repo_url: https://github.com/Tykok/PokeAPI-Kotlin
+repo_name: Tykok/PokeAPI-Kotlin
 edit_uri: edit/main/docs/mkdocs-markdown/
+copyright: >
+  Built by Tykok — a fan project, not affiliated with Nintendo, Game Freak or The Pokémon Company.
+
 docs_dir: mkdocs-markdown
+
 theme:
-  name: readthedocs
-  locale: en
-  highlightjs: true
-  hljs_style: github
+  name: material
+  # The Pokedex chassis lives in overrides/ + stylesheets/pokedex.css. It skins
+  # Material's own DOM instead of replacing it, so search, the mobile drawer and
+  # the dark mode keep working for free.
+  custom_dir: overrides
+  language: en
+  favicon: img/favicon.ico
+  logo: img/project_img.png
+  icon:
+    repo: fontawesome/brands/github
+  font:
+    text: Nunito
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.action.edit
+    - toc.follow
+  palette:
+    # "pokedex" is a custom scheme defined in stylesheets/pokedex.css.
+    - media: "(prefers-color-scheme: light)"
+      scheme: pokedex
+      toggle:
+        icon: material/moon-waning-crescent
+        name: Switch to night mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: red
+      accent: light blue
+      toggle:
+        icon: material/white-balance-sunny
+        name: Switch to day mode
+
+extra_css:
+  - stylesheets/pokedex.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Tykok/PokeAPI-Kotlin
+      name: PokeAPI-Kotlin on GitHub
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/gryDvNE9
+      name: Discord
+    - icon: fontawesome/brands/java
+      link: https://central.sonatype.com/artifact/fr.tykok/pokeapi
+      name: fr.tykok:pokeapi on Maven Central
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
 nav:
   - Home: index.md
   - Getting started: getting-started.md
   - Methods: methods.md
-  - About: about.md
   - API Reference:
+      - Overview: entities/index.md
       - Pokemon: entities/pokemon.md
       - Berry: entities/berry.md
       - Contest: entities/contest.md
@@ -28,4 +104,4 @@ nav:
       - Machine: entities/machine.md
       - Move: entities/move.md
       - Utility: entities/utility.md
-
+  - About: about.md
