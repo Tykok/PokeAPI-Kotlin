@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{#
+  The chassis is CSS-only except for the control deck below: Material's header
+  becomes the top of the shell and .md-main becomes the screen, so no other
+  partial has to be forked (and upgrades stay painless).
+#}
+{% block footer %}
+  <nav class="dex-deck" aria-label="Pokedex controls">
+    <div class="dex-dpad">
+      <a class="dex-dpad__btn dex-dpad__btn--up" href="{{ 'index.html' | url }}" title="Home">&#9650;</a>
+      <a class="dex-dpad__btn dex-dpad__btn--left" href="{{ 'getting-started/' | url }}" title="Getting started">&#9664;</a>
+      <a class="dex-dpad__btn dex-dpad__btn--right" href="{{ 'methods/' | url }}" title="Methods">&#9654;</a>
+      <a class="dex-dpad__btn dex-dpad__btn--down" href="{{ 'entities/' | url }}" title="API Reference">&#9660;</a>
+    </div>
+    <ul class="dex-deck__links">
+      <li><a href="{{ 'getting-started/' | url }}">Getting started</a></li>
+      <li><a href="{{ 'methods/' | url }}">Methods</a></li>
+      <li><a href="{{ 'entities/' | url }}">API Reference</a></li>
+      <li><a href="{{ 'about/' | url }}">About</a></li>
+      <li><a href="https://central.sonatype.com/artifact/fr.tykok/pokeapi">Maven Central</a></li>
+    </ul>
+  </nav>
+  {% include "partials/footer.html" %}
+{% endblock %}

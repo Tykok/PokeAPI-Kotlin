@@ -1,5 +1,14 @@
 # Games
 
+<div class="dex-entry">
+  <span class="dex-entry__icon" aria-hidden="true">🎮</span>
+  <span>
+    <span class="dex-entry__no">No. 006</span>
+    <span class="dex-entry__name">Game</span>
+  </span>
+  <span class="dex-entry__count">4 endpoints</span>
+</div>
+
 ## `Generation`
 
 The `Generation` class can be used to get data from `/generation/{id or name}` endpoint.
