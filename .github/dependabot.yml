@@ -1,0 +1,49 @@
+version: 2
+updates:
+  # Pinned action SHAs are unreadable by hand; Dependabot keeps them current
+  # and rewrites the trailing `# vX` comment along with the digest.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "[CI]"
+    labels:
+      - dependencies
+      - github-actions
+
+  - package-ecosystem: gradle
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      # Test-only bumps are low risk and can be reviewed as a single PR.
+      test-dependencies:
+        patterns:
+          - "org.junit*"
+          - "io.mockk*"
+      build-plugins:
+        patterns:
+          - "org.jetbrains.dokka*"
+          - "org.jlleitschuh.gradle.ktlint*"
+          - "com.vanniktech.maven.publish*"
+    commit-message:
+      prefix: "[Deps]"
+    labels:
+      - dependencies
+
+  - package-ecosystem: pip
+    directory: "/docs"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "[Doc]"
+    labels:
+      - dependencies
+      - documentation

@@ -1,4 +1,8 @@
+# Copy to `gradle-local.properties` (git-ignored) to publish from a workstation.
+# See RELEASING.md for where each value comes from.
 mavenCentralUsername=your-central-portal-token-username
 mavenCentralPassword=your-central-portal-token-password
 signingInMemoryKeyFile=./privateKey.gpg
 signingInMemoryKeyPassword=your-gpg-passphrase
+# Optional: only needed when your keyring holds several keys.
+#signingInMemoryKeyId=last-8-chars-of-the-key-id

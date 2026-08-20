@@ -1,14 +1,20 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
+import java.util.Base64
 import java.util.Properties
 
 val artifact = "pokeapi"
 val projectName = "PokeApi"
 val projectDocUrl = "https://tykok.github.io/PokeAPI-Kotlin/"
 val projectUrl = "https://github.com/Tykok/PokeAPI-Kotlin"
+val sonatypeBaseUrl = "https://central.sonatype.com/api/v1/"
+val publishedRegex = Regex("\"published\"\\s*:\\s*(true|false)")
 
 description = "PokeApi is a simple library you can use to make request to get data about Pokémon."
 group = "fr.tykok"
-version = "2.0.0"
 
 val localProperties = Properties()
 val localPropertiesFile = rootProject.file("gradle-local.properties")
@@ -42,10 +48,8 @@ plugins {
 
     `java-library`
     `maven-publish`
-    application
     jacoco
 
-    alias(libs.plugins.netResearchgateRelease)
     alias(libs.plugins.dokka)
     alias(libs.plugins.ktlint)
 
@@ -88,6 +92,28 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
+// Published artifacts must be byte-for-byte reproducible: without this the jars
+// embed build timestamps and a rebuild of the same commit produces a different file.
+tasks.withType<AbstractArchiveTask>().configureEach {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}
+
+tasks.jar {
+    manifest {
+        attributes(
+            "Implementation-Title" to projectName,
+            "Implementation-Version" to project.version,
+            "Implementation-Vendor" to "Tykok",
+            "Documentation-URL" to projectDocUrl
+        )
+    }
 }
 
 kotlin {
@@ -98,9 +124,70 @@ kotlin {
     }
 }
 
-tasks.create("getProjectVersion") {
+// The Central Portal bearer token is base64("username:password"), so the publishing credentials
+// already configured for `mavenPublishing` are enough - no extra secret to rotate.
+val centralUsername =
+    providers
+        .gradleProperty("mavenCentralUsername")
+        .orElse(providers.environmentVariable("ORG_GRADLE_PROJECT_mavenCentralUsername"))
+val centralPassword =
+    providers
+        .gradleProperty("mavenCentralPassword")
+        .orElse(providers.environmentVariable("ORG_GRADLE_PROJECT_mavenCentralPassword"))
+
+tasks.register("getProjectVersion") {
+    val projectVersion = project.version.toString()
     doLast {
-        logger.quiet("VERSION: $version")
+        logger.quiet("VERSION: $projectVersion")
+    }
+}
+
+tasks.register("isPublishedVersion") {
+    val namespace = project.group.toString()
+    val artifactId = artifact
+    val projectVersion = project.version.toString()
+    val username = centralUsername
+    val password = centralPassword
+
+    doLast {
+        val user = username.orNull
+        val pass = password.orNull
+        if (user.isNullOrBlank() || pass.isNullOrBlank()) {
+            throw GradleException(
+                "Missing Central Portal credentials: set mavenCentralUsername and mavenCentralPassword " +
+                    "(properties, or the ORG_GRADLE_PROJECT_* environment variables)."
+            )
+        }
+
+        logger.info("Checking if $namespace:$artifactId:$projectVersion is published on Maven Central...")
+        val bearer = Base64.getEncoder().encodeToString("$user:$pass".toByteArray())
+        val request =
+            HttpRequest
+                .newBuilder()
+                .uri(
+                    URI.create(
+                        "${sonatypeBaseUrl}publisher/published" +
+                            "?namespace=$namespace&name=$artifactId&version=$projectVersion"
+                    )
+                ).header("Authorization", "Bearer $bearer")
+                .GET()
+                .build()
+
+        val response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString())
+        val statusCode = response.statusCode()
+        val isPublished =
+            when {
+                statusCode == 200 -> publishedRegex.find(response.body())?.groupValues?.get(1) == "true"
+                // Central answers 404 when those coordinates were never published at all.
+                statusCode == 404 -> false
+                else ->
+                    throw GradleException(
+                        "Cannot check publication status of $namespace:$artifactId:$projectVersion " +
+                            "(HTTP $statusCode): ${response.body()}"
+                    )
+            }
+
+        logger.quiet("IS_PUBLISHED: $isPublished")
     }
 }
 
@@ -114,7 +201,8 @@ dokka {
         // includes.from("README.md")
         sourceLink {
             localDirectory.set(file("src/main/kotlin"))
-            remoteUrl("https://test.com")
+            remoteUrl("$projectUrl/blob/main/src/main/kotlin")
+            remoteLineSuffix.set("#L")
         }
     }
 
@@ -142,6 +230,7 @@ mavenPublishing {
         name.set(projectName)
         description.set(project.description)
         url.set(projectUrl)
+        inceptionYear.set("2022")
 
         licenses {
             license {
@@ -154,7 +243,13 @@ mavenPublishing {
             developer {
                 id.set("tykok")
                 name.set("Tykok")
+                url.set("https://github.com/Tykok")
             }
+        }
+
+        issueManagement {
+            system.set("GitHub Issues")
+            url.set("$projectUrl/issues")
         }
 
         scm {

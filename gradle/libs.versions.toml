@@ -1,7 +1,6 @@
 [versions]
 
 [plugins]
-netResearchgateRelease = { id = "net.researchgate.release", version = "3.0.2" }
 dokka = { id = "org.jetbrains.dokka", version = "2.1.0" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "11.6.0" }
 

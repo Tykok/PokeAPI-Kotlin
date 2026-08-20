@@ -30,7 +30,7 @@ To install this library, follow the instructions here.
 
 ```kotlin
 dependencies {
-    implementation("fr.tykok.pokeapi:{version}")
+    implementation("fr.tykok:pokeapi:2.0.0")
 }
 ```
 
@@ -38,19 +38,19 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'fr.tykok.pokeapi:{version}'
+    implementation 'fr.tykok:pokeapi:2.0.0'
 }
 ```
 
 ### Maven: `pom.xml`
 
 ```xml
-
 <dependencies>
-    <dependecy>
-        <groupId>fr.tykok.pokeapi</groupId>
-        <artifactId>{version}</artifactId>
-    </dependecy>
+    <dependency>
+        <groupId>fr.tykok</groupId>
+        <artifactId>pokeapi</artifactId>
+        <version>2.0.0</version>
+    </dependency>
 </dependencies>
 ```
 

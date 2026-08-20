@@ -1,67 +1,148 @@
 name: Push on main ⛳️
+
+# Release pipeline. Order matters: nothing is tagged or announced before the
+# artifacts are actually live on Maven Central, so a failed publication leaves
+# no dangling tag/release behind and the pipeline can simply be re-run.
 on:
   push:
     branches:
       - "main"
+  workflow_dispatch:
+
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  # Two releases must never run at once; queue instead of cancelling so an
+  # in-flight publication is never killed mid-upload.
+  group: release-main
+  cancel-in-progress: false
 
 jobs:
-  create-release:
-    name: Create PokeAPI Release
+  verify:
+    name: Verify
+    uses: ./.github/workflows/ci.yml
+
+  version:
+    name: Resolve version
+    needs: verify
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    timeout-minutes: 15
+    outputs:
+      # `env` does not cross job boundaries, so both values are exposed as job outputs.
+      version: ${{ steps.version.outputs.version }}
+      should_publish: ${{ steps.check_release.outputs.exists != 'true' }}
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
+      - name: Checkout repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
 
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '17'
 
-      - name: Get project version
-        run: |
-          PROJECT_VERSION=$(sh gradlew getProjectVersion | grep VERSION | cut -d ":" -f 2 | sed 's/ //g'   )
-          echo "### Project version $PROJECT_VERSION" >> $GITHUB_STEP_SUMMARY
-          echo "PROJECT_VERSION=$PROJECT_VERSION" >> ${GITHUB_ENV}
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@48b5f213c81028ace310571dc5ec0fbbca0b2947 # v4
 
-      - name: Build Changelog
-        uses: mikepenz/release-changelog-builder-action@v4.0.0-rc09
-        if: ${{ success() }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@48b5f213c81028ace310571dc5ec0fbbca0b2947 # v4
+
+      - name: Get project version
+        id: version
+        run: |
+          set -euo pipefail
+          # --console=plain overrides org.gradle.console=verbose, otherwise the value gets ANSI escapes.
+          PROJECT_VERSION=$(./gradlew --console=plain -q getProjectVersion | grep '^VERSION:' | cut -d ":" -f 2 | sed 's/ //g')
+          if [ -z "$PROJECT_VERSION" ]; then
+            echo "Could not resolve the project version" >&2
+            exit 1
+          fi
+          echo "### Project version \`$PROJECT_VERSION\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "version=$PROJECT_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Check if version is already on Maven Central
+        id: check_release
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+        run: |
+          set -euo pipefail
+          IS_ALREADY_RELEASED=$(./gradlew --console=plain -q isPublishedVersion | grep '^IS_PUBLISHED:' | cut -d ":" -f 2 | sed 's/ //g')
+          # Fail loudly rather than let an empty value be read as "not published" downstream.
+          case "$IS_ALREADY_RELEASED" in
+            true|false) ;;
+            *) echo "Unexpected isPublishedVersion output: '$IS_ALREADY_RELEASED'" >&2; exit 1 ;;
+          esac
+          echo "### Already released: \`$IS_ALREADY_RELEASED\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "exists=$IS_ALREADY_RELEASED" >> "$GITHUB_OUTPUT"
+
+  publish:
+    name: Publish to Maven Central 🚀
+    needs: version
+    if: ${{ needs.version.outputs.should_publish == 'true' }}
+    # Secrets are passed explicitly (no `secrets: inherit`) so the reusable
+    # workflow only ever sees the credentials it actually needs.
+    uses: ./.github/workflows/publish_maven_central.yml
+    with:
+      expected-version: ${{ needs.version.outputs.version }}
+    secrets:
+      MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+      MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+      SIGNING_IN_MEMORY_KEY: ${{ secrets.SIGNING_IN_MEMORY_KEY }}
+      SIGNING_IN_MEMORY_KEY_ID: ${{ secrets.SIGNING_IN_MEMORY_KEY_ID }}
+      SIGNING_IN_MEMORY_KEY_PASSWORD: ${{ secrets.SIGNING_IN_MEMORY_KEY_PASSWORD }}
+
+  github-release:
+    name: Create GitHub release
+    needs: [version, publish]
+    if: ${{ needs.version.outputs.should_publish == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      PROJECT_VERSION: ${{ needs.version.outputs.version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      # The very binaries verified by the CI job, not a fresh rebuild.
+      - name: Download built artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: libs
+          path: artifacts
+
+      - name: Build changelog
         id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@c9dc8369bccbc41e0ac887f8fd674f5925d315f7 # v5
         with:
           configuration: "${{ github.workspace }}/.github/changelog-builder.json"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build .jar
-        run: sh gradlew build
-
-      - name: Create Release
-        if: ${{ success() }}
-        id: create_release
-        uses: ncipollo/release-action@v1.20.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create release
+        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ env.PROJECT_VERSION }}
+          commit: ${{ github.sha }}
           name: ${{ env.PROJECT_VERSION }}
-          body: ${{steps.build_changelog.outputs.changelog}}
-          artifacts: "${{ github.workspace }}/build/libs/pokeapi-${{ env.PROJECT_VERSION }}.jar"
+          body: ${{ steps.build_changelog.outputs.changelog }}
+          # jar + sources + javadoc, exactly what was pushed to Maven Central.
+          artifacts: "artifacts/*.jar"
           makeLatest: "latest"
+          # Makes a re-run idempotent instead of failing on an existing tag.
+          allowUpdates: true
 
-  deploy-docs:
-    name: Deploy documentation to GitHub Pages 📚
-    runs-on: ubuntu-latest
-    needs: create-release
-    steps:
-      - name: Checkout main
-        uses: actions/checkout@v2
-      - name: Deploy docs with mkdocs 📃
-        uses: mhausenblas/mkdocs-deploy-gh-pages@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CONFIG_FILE: docs/mkdocs.yml
+      - name: Summary
+        run: |
+          {
+            echo "### Released \`fr.tykok:pokeapi:${PROJECT_VERSION}\` 🎉"
+            echo ""
+            echo "- Maven Central: https://central.sonatype.com/artifact/fr.tykok/pokeapi/${PROJECT_VERSION}"
+            echo "- GitHub release: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${PROJECT_VERSION}"
+          } >> "$GITHUB_STEP_SUMMARY"
