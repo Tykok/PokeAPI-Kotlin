@@ -1,0 +1,2 @@
+# Pinned so the documentation build is reproducible and Dependabot owns the bumps.
+mkdocs==1.6.1

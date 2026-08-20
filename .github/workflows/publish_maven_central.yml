@@ -1,32 +1,84 @@
 name: Publish Maven Central
 
+# Reusable workflow called by on-main-push.yml. It is intentionally NOT
+# triggerable on its own: a manual replay is done by re-running the "Push on
+# main" workflow, which re-checks Maven Central before calling this one.
 on:
-  release:
-    types: [published]
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      expected-version:
+        description: "Version the caller expects to publish. Guards against publishing a stale checkout."
+        type: string
+        required: true
+    secrets:
+      MAVEN_CENTRAL_USERNAME:
+        required: true
+      MAVEN_CENTRAL_PASSWORD:
+        required: true
+      SIGNING_IN_MEMORY_KEY:
+        required: true
+      SIGNING_IN_MEMORY_KEY_ID:
+        required: false
+      SIGNING_IN_MEMORY_KEY_PASSWORD:
+        required: true
+
+permissions:
+  contents: read
 
 jobs:
   publish:
     name: Publish PokeAPI
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     permissions:
       contents: read
+    # Gives a single place to scope the publishing secrets and, if wanted later,
+    # to require a manual approval before anything reaches Maven Central.
+    environment:
+      name: maven-central
+      url: https://central.sonatype.com/artifact/fr.tykok/pokeapi
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
         with:
           distribution: temurin
-          java-version: '21'
-          cache: gradle
+          java-version: '17'
 
-      - name: Validate and publish to Maven Central
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@48b5f213c81028ace310571dc5ec0fbbca0b2947 # v4
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@48b5f213c81028ace310571dc5ec0fbbca0b2947 # v4
+        with:
+          # Publishing must not poison the shared cache read by CI builds.
+          cache-read-only: true
+
+      # Publication is irreversible on Maven Central: refuse to run if the
+      # checkout does not build the version the caller resolved.
+      - name: Verify version matches the caller
+        run: |
+          set -euo pipefail
+          ACTUAL=$(./gradlew --console=plain -q getProjectVersion | grep '^VERSION:' | cut -d ":" -f 2 | sed 's/ //g')
+          EXPECTED='${{ inputs.expected-version }}'
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "Refusing to publish: checkout builds '$ACTUAL' but caller expected '$EXPECTED'." >&2
+            exit 1
+          fi
+          echo "Publishing version $ACTUAL"
+
+      - name: Publish to Maven Central
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_IN_MEMORY_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_IN_MEMORY_KEY_ID }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_IN_MEMORY_KEY_PASSWORD }}
-        run: ./gradlew --no-daemon clean publishAndReleaseToMavenCentral
+        run: ./gradlew --no-daemon --no-configuration-cache clean publishAndReleaseToMavenCentral
+
+      - name: Summary
+        if: success()
+        run: echo "### Published \`fr.tykok:pokeapi:${{ inputs.expected-version }}\` to Maven Central 🚀" >> "$GITHUB_STEP_SUMMARY"
