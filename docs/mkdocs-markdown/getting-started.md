@@ -8,7 +8,7 @@ The library is published on Maven Central as `fr.tykok:pokeapi`. Pick your build
 
     ```kotlin title="build.gradle.kts"
     dependencies {
-        implementation("fr.tykok:pokeapi:2.0.0")
+        implementation("fr.tykok:pokeapi:{{ version }}")
     }
     ```
 
@@ -16,7 +16,7 @@ The library is published on Maven Central as `fr.tykok:pokeapi`. Pick your build
 
     ```groovy title="build.gradle"
     dependencies {
-        implementation 'fr.tykok:pokeapi:2.0.0'
+        implementation 'fr.tykok:pokeapi:{{ version }}'
     }
     ```
 
@@ -27,16 +27,17 @@ The library is published on Maven Central as `fr.tykok:pokeapi`. Pick your build
         <dependency>
             <groupId>fr.tykok</groupId>
             <artifactId>pokeapi</artifactId>
-            <version>2.0.0</version>
+            <version>{{ version }}</version>
         </dependency>
     </dependencies>
     ```
 
-!!! tip "Latest version"
+!!! tip "Version"
 
-    The snippets above pin `2.0.0`. The badge on the [home page](index.md) always shows the latest
-    release, and so does the
-    [Maven Central listing](https://central.sonatype.com/artifact/fr.tykok/pokeapi).
+    The snippets above are filled in at build time from the version this site was published for, so
+    they always match the chip in the top-right corner. The
+    [Maven Central listing](https://central.sonatype.com/artifact/fr.tykok/pokeapi) is the
+    authoritative index of every published release.
 
 ## Requirements
 

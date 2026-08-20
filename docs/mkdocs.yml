@@ -10,6 +10,11 @@ copyright: >
 
 docs_dir: mkdocs-markdown
 
+hooks:
+  # Reads `version` from gradle.properties so the site never carries a stale
+  # version number. See docs/hooks/version.py.
+  - hooks/version.py
+
 theme:
   name: material
   # The Pokedex chassis lives in overrides/ + stylesheets/pokedex.css. It skins

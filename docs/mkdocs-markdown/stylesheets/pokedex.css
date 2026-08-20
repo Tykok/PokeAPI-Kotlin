@@ -23,11 +23,7 @@
   --dex-shell-dark: #8e1c1c;
   --dex-shell-light: #ef5350;
   --dex-hinge: #a02020;
-  --dex-lens: #2e86de;
-  --dex-lens-glare: #bfe0ff;
-  --dex-led-red: #f04a4a;
   --dex-led-amber: #f5d547;
-  --dex-led-green: #4caf50;
 
   --dex-bezel: #dcdcdc;
   --dex-bezel-shadow: rgba(0, 0, 0, 0.35);
@@ -42,6 +38,11 @@
   --dex-pad-edge: #171717;
 
   --dex-font-pixel: "Press Start 2P", "Courier New", monospace;
+
+  /* Horizontal room reserved in the header for the version chip, which is
+     fixed-positioned and therefore out of flow. Search is pushed left by this
+     much so the two never overlap. */
+  --dex-version-slot: 5.4rem;
 }
 
 /* Custom light scheme, selected in mkdocs.yml as `scheme: pokedex`. */
@@ -97,6 +98,20 @@ body {
   background: transparent;
   box-shadow: none;
   border-bottom: 4px solid var(--dex-hinge);
+  transition: background-color 200ms, border-color 200ms, color 200ms;
+}
+
+/* Material adds .md-header--shadow once the page is scrolled. Re-pointing
+   --md-primary-bg-color flips every child's foreground in one go, so the bar
+   turns into a neutral surface without restyling each element. */
+.md-header--shadow {
+  --md-primary-bg-color: var(--md-default-fg-color);
+  --md-primary-bg-color--light: var(--md-default-fg-color--light);
+  background-color: var(--md-default-bg-color);
+  border-bottom-color: transparent;
+  box-shadow:
+    0 0 0.2rem rgba(0, 0, 0, 0.1),
+    0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
 }
 
 .md-header__inner {
@@ -108,49 +123,11 @@ body {
   letter-spacing: 0.02em;
 }
 
-/* The logo slot becomes the big blue lens. */
-.md-logo {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  padding: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 28%, var(--dex-lens-glare) 0%, var(--dex-lens) 55%, #14508f 100%);
-  box-shadow:
-    0 0 0 0.15rem #ffffff,
-    0 0 0 0.3rem var(--dex-hinge),
-    inset 0 -0.1rem 0.25rem rgba(0, 0, 0, 0.45);
-}
-
+/* Logo stays the plain project PNG - no lens, no chrome around it. */
 .md-logo img,
 .md-logo svg {
-  width: 1.35rem;
-  height: 1.35rem;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
-}
-
-/* Three status LEDs, drawn from a single pseudo-element via stacked shadows. */
-.md-logo::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 3.1rem;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-top: -0.25rem;
-  border-radius: 50%;
-  background: var(--dex-led-red);
-  box-shadow:
-    0.85rem 0 0 var(--dex-led-amber),
-    1.7rem 0 0 var(--dex-led-green),
-    0 0 0.3rem var(--dex-led-red);
-}
-
-/* Keep the title clear of the LEDs. */
-.md-header__title {
-  margin-left: 2.6rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 /* Section tabs read as shell-mounted buttons. */
@@ -169,6 +146,74 @@ body {
   opacity: 1;
 }
 
+/* Version chip, pinned to the top-right of the page. Rendered as a sibling of
+   the header (see overrides/main.html) rather than inside it, so no Material
+   partial has to be forked. `right` only has to clear the repository link,
+   which Material itself hides below 76.25em. */
+.dex-version {
+  position: fixed;
+  top: 0;
+  right: 0.8rem;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  height: 2.4rem;
+  pointer-events: none;
+}
+
+.dex-version__chip {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+  font-family: var(--dex-font-pixel);
+  font-size: 0.5rem;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: auto;
+  transition: background-color 200ms, border-color 200ms, color 200ms;
+}
+
+.dex-version__chip:hover,
+.dex-version__chip:focus-visible {
+  border-color: var(--dex-led-amber);
+}
+
+/* Matches the header's scrolled state. */
+.md-header--shadow ~ .dex-version .dex-version__chip {
+  border-color: var(--md-default-fg-color--lighter);
+  background: var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color);
+}
+
+@media screen and (min-width: 76.25em) {
+  /* Clear of .md-header__source (11.7rem wide plus the header's own padding). */
+  .dex-version {
+    right: 12.3rem;
+  }
+}
+
+/* Push the search box out of the chip's way. Above 60em search is an inline
+   input floated right; below it collapses to an icon button. Both need the
+   same clearance. */
+@media screen and (min-width: 60em) {
+  .md-search__inner {
+    margin-right: var(--dex-version-slot);
+  }
+}
+
+@media screen and (max-width: 59.9375em) {
+  .md-header__button[for="__search"] {
+    margin-right: var(--dex-version-slot);
+  }
+}
+
 /* --------------------------------------------------------------------------
    3. The screen
    -------------------------------------------------------------------------- */
@@ -182,7 +227,9 @@ body {
     inset 0 0 0 1px rgba(0, 0, 0, 0.12),
     inset 0 0.4rem 1.2rem rgba(0, 0, 0, 0.06),
     0 1rem 2.4rem var(--dex-bezel-shadow);
-  overflow: hidden;
+  /* Deliberately NOT `overflow: hidden`: an ancestor that clips overflow kills
+     `position: sticky` on its descendants, and Material relies on it for the
+     table of contents. The rounded corners are handled per-element instead. */
 }
 
 /* Thin power line along the top edge of the screen. */
@@ -190,6 +237,8 @@ body {
   content: "";
   display: block;
   height: 0.18rem;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
   background: linear-gradient(90deg, transparent, var(--dex-screen-glow), transparent);
   opacity: 0.85;
 }
@@ -579,13 +628,21 @@ body {
    7. Responsive: below 768px the chassis flattens and content goes full width
    -------------------------------------------------------------------------- */
 
-@media screen and (max-width: 76.1875em) {
-  .md-header__title {
-    margin-left: 0.4rem;
+@media screen and (min-width: 60em) {
+  /* Material already makes the sidebars sticky; this only pins the table of
+     contents directly under the 2.4rem header instead of leaving the gap the
+     `navigation.tabs` feature reserves for tabs that have scrolled away. */
+  .md-sidebar--secondary {
+    top: 2.4rem;
   }
+}
 
-  /* No room for the LED strip next to the drawer button. */
-  .md-logo::after {
+@media screen and (min-width: 76.25em) {
+  /* The site is small enough to navigate from the tabs and the API Reference
+     overview, so the left sidebar only stole reading width. It is hidden rather
+     than removed from the DOM: below this breakpoint the same element IS the
+     mobile drawer, which must keep working. */
+  .md-sidebar--primary {
     display: none;
   }
 }

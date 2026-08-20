@@ -1,7 +1,6 @@
 ---
 template: pokedex-home.html
 hide:
-  - navigation
   - toc
 ---
 
