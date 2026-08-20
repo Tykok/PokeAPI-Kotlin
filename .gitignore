@@ -74,6 +74,10 @@ libraries/tools/kotlin-test-js-runner/lib/
 local.properties
 material_theme_project_new.xml
 node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
 out/
 outTmp/
 workspace.xml
