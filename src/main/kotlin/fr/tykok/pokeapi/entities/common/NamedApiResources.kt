@@ -9,4 +9,4 @@ data class NamedApiResources<T : PokeApiObject>(
     val results: List<NamedApiResource<T>>
 ) : PokeApiObject
 
-inline fun <reified T : PokeApiObject> NamedApiResources<T>.get(): List<T> = this.results.map { it.get()!! }
+inline fun <reified T : PokeApiObject> NamedApiResources<T>.get(): List<T> = this.results.mapNotNull { it.get() }
