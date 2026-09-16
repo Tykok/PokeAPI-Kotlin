@@ -62,17 +62,23 @@ internal class HttpEngine(
      * cancelled, which is the one case this guard needs to suppress.
      *
      * [block] runs on the thread OkHttp's `Callback.onResponse` is dispatched on - this engine's
-     * [client]'s own dispatcher, by default a bounded pool OkHttp owns - not on whatever dispatcher
-     * resumed the calling coroutine. That is what actually keeps the body read and the JSON parse
-     * off the caller's dispatcher; there is no separate `withContext` doing that job. A caller who
-     * supplies their own [OkHttpClient][PokeApiConfig.httpClient] with a constrained dispatcher (a
-     * low `maxRequests`) will have that same pool carry the parse, not just the network wait, for as
-     * long as [block] runs.
+     * [client]'s own dispatcher thread, not on whatever dispatcher resumed the calling coroutine.
+     * That is what actually keeps the body read and the JSON parse off the caller's dispatcher;
+     * there is no separate `withContext` doing that job. That thread pool itself is unbounded (the
+     * default `Dispatcher`'s executor is `ThreadPoolExecutor(0, Int.MAX_VALUE, SynchronousQueue)`) -
+     * what actually limits concurrency is `Dispatcher.maxRequests` (64) and, decisively for a
+     * single-host client like this one, `maxRequestsPerHost` (5). `Dispatcher.finished()` - which
+     * frees a call's per-host slot - runs only after `onResponse` returns, so for as long as [block]
+     * runs it now counts against that per-host limit too, not just the network wait it used to cover.
+     * A caller doing many concurrent requests to the same host, whether through the default client
+     * or their own [OkHttpClient][PokeApiConfig.httpClient], will see that limit throttle overall
+     * throughput a little more than before - a real trade-off, not a hazard, but worth knowing.
      *
      * Neither resume path needs an `onCancellation` handler to close anything: unlike a raw
-     * [Response], the value [block] returns is not a resource, and by the time either resume runs,
-     * [block] has already read (and, via [ResponseMapper], closed) the response - there is nothing
-     * left to leak if cancellation and delivery race.
+     * [Response], the value [block] returns is not a resource. The `finally` below closes the
+     * response itself either way - [ResponseMapper]'s own `use` already does this on the paths that
+     * go through it, and [Response.close] is idempotent, but the engine should not depend on every
+     * [block] remembering to close what it was handed.
      */
     suspend fun <T> withResponse(
         url: String,
@@ -99,9 +105,26 @@ internal class HttpEngine(
                         val result =
                             try {
                                 block(response)
-                            } catch (e: Exception) {
-                                if (continuation.isActive) continuation.resumeWithException(e)
+                            } catch (t: Throwable) {
+                                // Catching Throwable, not Exception, and NOT relabelling it: this is
+                                // not the "catch Exception only, let Error escape" rule from
+                                // ResponseMapper being violated - that rule exists so a fatal Error
+                                // is not disguised as a domain PokeApiException. Here `t` is resumed
+                                // into the caller completely unchanged; nothing is disguised. The
+                                // reason we must catch it at all is OkHttp: it marks this callback as
+                                // having already run *before* invoking it, so `AsyncCall.run` will not
+                                // route a Throwable escaping onResponse to onFailure - it rethrows on
+                                // the dispatcher thread instead, and the continuation would never be
+                                // resumed or cancelled. Letting `t` escape uncaught here would hang
+                                // the caller forever on exactly the one case (e.g. an
+                                // OutOfMemoryError while parsing a huge body) ResponseMapper
+                                // deliberately does not catch. Do not also rethrow after resuming:
+                                // that would kill a pooled dispatcher thread and double-report for no
+                                // benefit.
+                                if (continuation.isActive) continuation.resumeWithException(t)
                                 return
+                            } finally {
+                                response.close()
                             }
                         if (continuation.isActive) continuation.resumeWith(Result.success(result))
                     }
