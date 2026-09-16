@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.NamedApiResources
 import fr.tykok.pokeapi.http.EndpointResolver
+import fr.tykok.pokeapi.http.HttpEngine
 import fr.tykok.pokeapi.http.JacksonUtils
 
 /**
@@ -14,7 +15,10 @@ import fr.tykok.pokeapi.http.JacksonUtils
  */
 class PokeApiClient(
     @PublishedApi internal val config: PokeApiConfig = PokeApiConfig()
-) {
+) : AutoCloseable {
+    @PublishedApi
+    internal val engine: HttpEngine = HttpEngine(config)
+
     /** Get a resource by its id. */
     inline fun <reified T : PokeApiEndpointReference> get(id: Int): T =
         fetch(url = url<T>(id.toString()), type = T::class.java)
@@ -44,16 +48,19 @@ class PokeApiClient(
         url: String,
         type: Class<T>
     ): T {
-        val response = JacksonUtils.executeHttpRequest(url = url, config = config)
+        val response = engine.execute(url)
         return JacksonUtils.mapper.readValue(response.body?.string(), type)
     }
 
     @PublishedApi
     internal inline fun <reified T : PokeApiEndpointReference> fetchPage(url: String): NamedApiResources<T> {
-        val response = JacksonUtils.executeHttpRequest(url = url, config = config)
+        val response = engine.execute(url)
         return JacksonUtils.mapper.readValue(
             response.body?.string(),
             object : TypeReference<NamedApiResources<T>>() {}
         )
     }
+
+    /** Releases the connection pool and the dispatcher threads. */
+    override fun close() = engine.close()
 }
