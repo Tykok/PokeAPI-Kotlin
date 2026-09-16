@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.encounters
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 
@@ -16,6 +17,7 @@ import fr.tykok.pokeapi.entities.common.Name
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("encounter-method")
 data class EncounterMethod(
     /**
      * The identifier for this resource.

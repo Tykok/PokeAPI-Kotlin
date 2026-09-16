@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.berries
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.items.Item
@@ -13,6 +14,7 @@ import fr.tykok.pokeapi.entities.pokemon.Type
  * @version 1.0.0
  * @since 2022-07-27
  */
+@Endpoint("berry")
 data class Berry(
     /**
      * The identifier of the resource

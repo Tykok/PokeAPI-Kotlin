@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.APIResource
 import fr.tykok.pokeapi.entities.common.Name
@@ -20,6 +21,7 @@ import fr.tykok.pokeapi.entities.moves.MoveDamageClass
  * @property moveDamageClass The class of damage this stat is directly related to.
  * @property names The name of this resource listed in different languages.
  */
+@Endpoint("stat")
 data class Stat(
     val id: Int,
     val name: String,

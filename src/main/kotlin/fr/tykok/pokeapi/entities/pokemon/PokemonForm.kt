@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -23,6 +24,7 @@ import fr.tykok.pokeapi.entities.games.VersionGroup
  * @property names The form specific full name of this Pokémon form, or empty if the form does not have a specific name.
  * @property formNames The form specific form name of this Pokémon form, or empty if the form does not have a specific name.
  */
+@Endpoint("pokemon-form")
 data class PokemonForm(
     val id: Int,
     val name: String,

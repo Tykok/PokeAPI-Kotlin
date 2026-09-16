@@ -1,8 +1,10 @@
 package fr.tykok.pokeapi.entities.pokemon
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.common.VersionGameIndex
 
+@Endpoint("pokemon")
 data class Pokemon(
     /**
      * The identifier for this resource.

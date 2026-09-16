@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -7,6 +8,7 @@ import fr.tykok.pokeapi.entities.common.VerboseEffect
 import fr.tykok.pokeapi.entities.contests.SuperContestEffects
 import fr.tykok.pokeapi.entities.games.Generation
 
+@Endpoint("ability")
 data class Ability(
     /**
      * The identifier for this resource.

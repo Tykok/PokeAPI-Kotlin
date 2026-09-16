@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.locations
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 
@@ -10,6 +11,7 @@ import fr.tykok.pokeapi.entities.common.Name
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("pal-park-area")
 data class PalParkArea(
     /**
      * The identifier for this resource.

@@ -1,4 +1,5 @@
 package fr.tykok.pokeapi.entities.items
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Effect
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -12,6 +13,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("item-fling-effect")
 data class ItemFlingEffect(
     /**
      * The identifier for this resource.

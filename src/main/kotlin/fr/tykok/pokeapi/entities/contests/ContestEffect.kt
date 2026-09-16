@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.contests
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Effect
 import fr.tykok.pokeapi.entities.common.FlavorText
@@ -15,6 +16,7 @@ import fr.tykok.pokeapi.entities.common.FlavorText
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("contest-effect")
 data class ContestEffect(
     /**
      * The identifier for this resource.

@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.moves
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Description
 import fr.tykok.pokeapi.entities.common.Name
@@ -11,6 +12,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-08-30
  *
  */
+@Endpoint("move-target")
 data class MoveTarget(
     /**
      * The identifier for this resource.

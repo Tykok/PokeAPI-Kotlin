@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.berries
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -10,6 +11,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @version 1.0.0
  * @since 2022-07-27
  */
+@Endpoint("berry-firmness")
 data class BerryFirmness(
     val id: Number,
     val name: String,

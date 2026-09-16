@@ -1,9 +1,11 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Description
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
+@Endpoint("characteristic")
 data class Characteristic(
     /**
      * The identifier for this resource.

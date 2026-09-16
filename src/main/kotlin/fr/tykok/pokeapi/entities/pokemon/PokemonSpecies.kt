@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.APIResource
 import fr.tykok.pokeapi.entities.common.Description
@@ -11,6 +12,7 @@ import fr.tykok.pokeapi.entities.games.Generation
 /**
  * Represents a Pokémon species.
  */
+@Endpoint("pokemon-species")
 data class PokemonSpecies(
     val id: Number,
     val name: String,

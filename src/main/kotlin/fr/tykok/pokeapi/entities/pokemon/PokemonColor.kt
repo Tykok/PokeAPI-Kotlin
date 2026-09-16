@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -12,6 +13,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @property names The name of this resource listed in different languages.
  * @property pokemonSpecies A list of the Pokémon species that have this color.
  */
+@Endpoint("pokemon-color")
 data class PokemonColor(
     val id: Int,
     val name: String,
