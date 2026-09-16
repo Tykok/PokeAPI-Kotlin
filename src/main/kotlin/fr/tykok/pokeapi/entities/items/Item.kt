@@ -33,8 +33,10 @@ data class Item(
     val name: String,
     /**
      * The price of this item in stores.
+     * PokeAPI returns null here for some items (e.g. master-ball), so this must stay
+     * nullable rather than coercing that null away.
      */
-    val cost: Int,
+    val cost: Int?,
     /**
      * The power of the move Fling when used with this item.
      */
