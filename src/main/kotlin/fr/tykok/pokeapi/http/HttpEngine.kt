@@ -27,14 +27,12 @@ internal class HttpEngine(
             .callTimeout(config.callTimeout.toJavaDuration())
             .build()
 
-    fun execute(url: String): Response {
-        println(url)
-        return try {
+    fun execute(url: String): Response =
+        try {
             client.newCall(request(url)).execute()
         } catch (e: IOException) {
             throw PokeApiNetworkException(url = url, cause = e)
         }
-    }
 
     fun request(url: String): Request =
         Request
