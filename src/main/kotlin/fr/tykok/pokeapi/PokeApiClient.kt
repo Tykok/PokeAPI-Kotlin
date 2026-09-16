@@ -6,6 +6,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResources
 import fr.tykok.pokeapi.http.EndpointResolver
 import fr.tykok.pokeapi.http.HttpEngine
 import fr.tykok.pokeapi.http.JacksonUtils
+import fr.tykok.pokeapi.http.ResponseMapper
 
 /**
  * A configured entry point to the PokeApi RESTful API.
@@ -50,19 +51,16 @@ class PokeApiClient(
     internal fun <T> fetch(
         url: String,
         type: Class<T>
-    ): T {
-        val response = engine.execute(url)
-        return JacksonUtils.mapper.readValue(response.body?.string(), type)
-    }
+    ): T = ResponseMapper.map(engine.execute(url), url) { JacksonUtils.mapper.readValue(it, type) }
 
     @PublishedApi
     internal fun <T : PokeApiEndpointReference> fetchPage(
         url: String,
         typeReference: TypeReference<NamedApiResources<T>>
-    ): NamedApiResources<T> {
-        val response = engine.execute(url)
-        return JacksonUtils.mapper.readValue(response.body?.string(), typeReference)
-    }
+    ): NamedApiResources<T> =
+        ResponseMapper.map(engine.execute(url), url) {
+            JacksonUtils.mapper.readValue(it, typeReference)
+        }
 
     /** Releases the connection pool and the dispatcher threads. */
     override fun close() = engine.close()
