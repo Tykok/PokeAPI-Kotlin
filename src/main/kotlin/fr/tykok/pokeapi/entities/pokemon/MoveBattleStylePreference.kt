@@ -7,11 +7,11 @@ data class MoveBattleStylePreference(
     /**
      * Chance of using the move, in percent, if HP is under one half.
      */
-    val lowHpPreference: Number,
+    val lowHpPreference: Int,
     /**
      * Chance of using the move, in percent, if HP is over one half.
      */
-    val highHpPreference: Number,
+    val highHpPreference: Int,
     /**
      * The move battle style.
      * @see MoveBattleStyle

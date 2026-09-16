@@ -9,7 +9,7 @@ data class Pokemon(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The name for this resource.
      */
@@ -17,11 +17,11 @@ data class Pokemon(
     /**
      * The base experience gained for defeating this Pokémon.
      */
-    val baseExperience: Number,
+    val baseExperience: Int,
     /**
      * The height of this Pokémon in decimetres.
      */
-    val height: Number,
+    val height: Int,
     /**
      * Set for exactly one Pokémon used as the default for each species.
      */
@@ -29,11 +29,11 @@ data class Pokemon(
     /**
      * Order for sorting. Almost national order, except families are grouped together.
      */
-    val order: Number,
+    val order: Int,
     /**
      * The weight of this Pokémon in hectograms.
      */
-    val weight: Number,
+    val weight: Int,
     /**
      * A list of abilities this Pokémon could potentially have.
      */

@@ -32,7 +32,7 @@ data class Move(
      * The identifier for this resource.
      */
     @JsonProperty("id")
-    val id: Number,
+    val id: Int,
     /**
      * The name for this resource.
      */
@@ -42,27 +42,27 @@ data class Move(
      * The percent value of how likely this move is to be successful.
      */
     @JsonProperty("accuracy")
-    val accuracy: Number,
+    val accuracy: Int?,
     /**
      * The percent value of how likely it is this moves effect will happen.
      */
     @JsonProperty("effect_chance")
-    val effectChance: Number? = null,
+    val effectChance: Int? = null,
     /**
      * Power points. The number of times this move can be used.
      */
     @JsonProperty("pp")
-    val pp: Number,
+    val pp: Int,
     /**
      * A value between -8 and 8. Sets the order in which moves are executed during battle. See Bulbapedia for greater detail.
      */
     @JsonProperty("priority")
-    val priority: Number,
+    val priority: Int,
     /**
      * The base power of this move with a value of 0 if it does not have a base power.
      */
     @JsonProperty("power")
-    val power: Number,
+    val power: Int?,
     /**
      * A detail of normal and super contest combos that require this move.
      * @see ContestComboSets

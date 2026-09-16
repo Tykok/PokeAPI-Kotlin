@@ -31,7 +31,7 @@ data class ContestType(
     /**
      * Identifier of the resource
      */
-    val id: Number,
+    val id: Int,
     /**
      * Name of the resource
      */

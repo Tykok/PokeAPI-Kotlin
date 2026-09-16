@@ -13,7 +13,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  */
 @Endpoint("berry-firmness")
 data class BerryFirmness(
-    val id: Number,
+    val id: Int,
     val name: String,
     /**
      * A list of the berries with this firmness.

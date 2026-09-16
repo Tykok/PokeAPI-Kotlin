@@ -9,7 +9,7 @@ data class PokeathlonStat(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The name for this resource.
      */

@@ -11,7 +11,7 @@ data class AbilityPokemon(
     /**
      * Pokémon have 3 ability 'slots' which hold references to possible abilities they could have. This is the slot of this ability for the referenced pokemon.
      */
-    val slot: Number,
+    val slot: Int,
     /**
      * The Pokémon this ability could belong to.
      * @see Pokemon

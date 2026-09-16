@@ -24,7 +24,7 @@ data class Machine(
      * The identifier for this resource.
      */
     @JsonProperty("id")
-    val id: Number,
+    val id: Int,
     /**
      * The TM or HM item that corresponds to this machine.
      * @see NamedApiResource

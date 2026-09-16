@@ -17,12 +17,12 @@ data class Encounter(
      * The lowest level the Pokémon could be encountered at.
      */
     @JsonProperty("min_level")
-    val minLevel: Number,
+    val minLevel: Int,
     /**
      * The highest level the Pokémon could be encountered at.
      */
     @JsonProperty("max_level")
-    val maxLevel: Number,
+    val maxLevel: Int,
     /**
      * A list of condition values that must be in effect for this encounter to occur.
      * @see EncounterConditionValue
@@ -34,7 +34,7 @@ data class Encounter(
      * Percent chance that this encounter will occur.
      */
     @JsonProperty("chance")
-    val chance: Number,
+    val chance: Int,
     /**
      * The method by which this encounter happens.
      * @see EncounterMethod

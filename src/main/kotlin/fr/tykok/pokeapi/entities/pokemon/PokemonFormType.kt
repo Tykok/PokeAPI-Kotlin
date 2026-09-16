@@ -7,7 +7,7 @@ data class PokemonFormType(
     /**
      * The order the Pokémon's types are listed in.
      */
-    val slot: Number,
+    val slot: Int,
     /**
      * The type the referenced Form has.
      * @see Type

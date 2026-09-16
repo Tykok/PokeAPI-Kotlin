@@ -14,7 +14,7 @@ data class Language(
     /**
      * The identifier for this resource
      */
-    val id: Number,
+    val id: Int,
     /**
      * The name for this resource.
      */

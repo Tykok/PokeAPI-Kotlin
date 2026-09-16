@@ -12,5 +12,5 @@ data class PokemonHeldItemVersion(
     /**
      * How often the item is held.
      */
-    val rarity: Number
+    val rarity: Int
 ) : PokeApiObject

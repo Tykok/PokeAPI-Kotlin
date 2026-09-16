@@ -19,5 +19,5 @@ data class PokemonMoveVersion(
     /**
      * The minimum level to learn the move. Specified for each different move learn method.
      */
-    val levelLearnedAt: Number
+    val levelLearnedAt: Int
 ) : PokeApiObject

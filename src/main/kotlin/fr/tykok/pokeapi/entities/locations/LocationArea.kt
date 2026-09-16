@@ -20,7 +20,7 @@ data class LocationArea(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The name for this resource.
      */
@@ -28,7 +28,7 @@ data class LocationArea(
     /**
      * The internal id of an API resource within game data.
      */
-    val gameIndex: Number,
+    val gameIndex: Int,
     /**
      * A list of methods in which Pokémon may be encountered in this area and how likely the method
      * will occur depending on the version of the game.

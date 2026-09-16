@@ -16,7 +16,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  */
 @Endpoint("pokemon-shape")
 data class PokemonShape(
-    val id: Number,
+    val id: Int,
     val name: String,
     val awesomeNames: List<AwesomeName>,
     val names: List<Name>,

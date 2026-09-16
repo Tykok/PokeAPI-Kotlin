@@ -14,7 +14,7 @@ data class FlavorBerryMap(
      * How powerful the referenced flavor is for this berry.
      */
 
-    val potency: Number,
+    val potency: Int,
     /**
      * The berry with the referenced flavor.
      * @see NamedApiResource

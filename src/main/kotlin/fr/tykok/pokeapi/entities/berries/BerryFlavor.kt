@@ -18,7 +18,7 @@ data class BerryFlavor(
      * The identifier of the BerryFlavor
      */
 
-    val id: Number,
+    val id: Int,
     /**
      * The name of the BerryFlavor
      */

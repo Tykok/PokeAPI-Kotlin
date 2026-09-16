@@ -14,11 +14,11 @@ data class PalParkEncounterSpecies(
     /**
      * The base score given to the player when this Pokémon is caught during a pal park run
      */
-    val baseScore: Number,
+    val baseScore: Int,
     /**
      * The base rate for encountering this Pokémon in this pal park area
      */
-    val rate: Number,
+    val rate: Int,
     /**
      * The Pokémon species being encountered
      * @see NamedApiResource

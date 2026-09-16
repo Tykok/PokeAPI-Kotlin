@@ -16,7 +16,7 @@ data class PalParkArea(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The name for this resource.
      */

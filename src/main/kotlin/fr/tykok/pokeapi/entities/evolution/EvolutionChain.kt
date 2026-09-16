@@ -21,7 +21,7 @@ data class EvolutionChain(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The item that a Pokémon would be holding when mating that would trigger the egg hatching a baby Pokémon rather than a basic Pokémon.
      * @see NamedApiResource

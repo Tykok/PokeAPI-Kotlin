@@ -21,15 +21,15 @@ data class ContestEffect(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The base number of hearts the user of this move gets.
      */
-    val appeal: Number,
+    val appeal: Int,
     /**
      * The base number of hearts the user's opponent loses.
      */
-    val jam: Number,
+    val jam: Int,
     /**
      * The result of this contest effect listed in different languages.
      * @see Effect

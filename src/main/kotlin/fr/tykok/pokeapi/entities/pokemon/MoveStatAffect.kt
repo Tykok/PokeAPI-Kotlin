@@ -9,6 +9,6 @@ import fr.tykok.pokeapi.entities.moves.Move
  * @property move The move causing the change.
  */
 data class MoveStatAffect(
-    val change: Number,
+    val change: Int,
     val move: NamedApiResource<Move>
 ) : PokeApiObject

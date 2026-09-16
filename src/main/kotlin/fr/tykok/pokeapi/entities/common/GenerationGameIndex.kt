@@ -14,7 +14,7 @@ data class GenerationGameIndex(
     /**
      * The internal id of an API resource within game data.
      */
-    val gameIndex: Number,
+    val gameIndex: Int,
     /**
      * The generation relevent to this game index.
      * @see NamedApiResource

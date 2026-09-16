@@ -9,6 +9,6 @@ import fr.tykok.pokeapi.entities.games.Pokedex
  * @property pokedex The Pokédex the referenced Pokémon species can be found in.
  */
 data class PokemonSpeciesDexEntry(
-    val entryNumber: Number,
+    val entryNumber: Int,
     val pokedex: NamedApiResource<Pokedex>
 ) : PokeApiObject

@@ -20,7 +20,7 @@ data class VersionGroup(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The name for this resource.
      */
@@ -28,7 +28,7 @@ data class VersionGroup(
     /**
      * Order for sorting. Almost by date of release, except similar versions are grouped together.
      */
-    val order: Number,
+    val order: Int,
     /**
      * The generation this version was introduced in.
      * @see NamedApiResource
