@@ -49,16 +49,24 @@ The library is published on Maven Central as `fr.tykok:pokeapi`. Pick your build
 
 ## First request
 
+`get` and `list` are `suspend` functions, so they need a coroutine — here, `suspend fun main()`:
+
 ```kotlin
 import fr.tykok.pokeapi.PokeApi
 import fr.tykok.pokeapi.entities.pokemon.Pokemon
 
-fun main() {
+suspend fun main() {
     val pikachu = PokeApi.get<Pokemon>(name = "pikachu")
     println(pikachu.name)   // pikachu
     println(pikachu.weight) // 60
 }
 ```
 
-Head to [Methods](methods.md) for the full set of `get()` overloads, or browse the
+From synchronous code — no coroutine in scope — use the blocking counterpart instead:
+
+```kotlin
+val pikachu = PokeApi.getBlocking<Pokemon>(name = "pikachu")
+```
+
+Head to [Methods](methods.md) for every `get`/`list` overload, or browse the
 [API Reference](entities/index.md) for every entity you can ask for.
