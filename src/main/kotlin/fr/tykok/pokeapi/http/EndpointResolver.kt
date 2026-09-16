@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
  */
 @PublishedApi
 internal object EndpointResolver {
-    private val paths = ConcurrentHashMap<Class<*>, String>()
+    internal val paths = ConcurrentHashMap<Class<*>, String>()
 
     fun resolve(type: Class<*>): String =
         paths.getOrPut(type) {

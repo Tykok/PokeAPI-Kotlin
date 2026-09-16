@@ -50,7 +50,8 @@ import fr.tykok.pokeapi.entities.pokemon.Stat
 import fr.tykok.pokeapi.entities.pokemon.Type
 import fr.tykok.pokeapi.exception.UnknownEndpointException
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertSame
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -125,13 +126,22 @@ class EndpointResolverTest {
             assertThrows<UnknownEndpointException> {
                 EndpointResolver.resolve(String::class.java)
             }
-        assertEquals(true, error.message!!.contains("String"))
+        assertTrue(error.message!!.contains("String"))
     }
 
     @Test
-    fun `memoises resolution`() {
-        val first = EndpointResolver.resolve(Berry::class.java)
-        val second = EndpointResolver.resolve(Berry::class.java)
-        assertSame(first, second)
+    fun `caches a resolved path so a second resolution does not grow the cache`() {
+        EndpointResolver.paths.remove(Berry::class.java)
+        assertFalse(EndpointResolver.paths.containsKey(Berry::class.java))
+
+        val resolved = EndpointResolver.resolve(Berry::class.java)
+
+        assertEquals("berry", resolved)
+        assertEquals("berry", EndpointResolver.paths[Berry::class.java])
+        val sizeAfterFirstResolve = EndpointResolver.paths.size
+
+        EndpointResolver.resolve(Berry::class.java)
+
+        assertEquals(sizeAfterFirstResolve, EndpointResolver.paths.size)
     }
 }
