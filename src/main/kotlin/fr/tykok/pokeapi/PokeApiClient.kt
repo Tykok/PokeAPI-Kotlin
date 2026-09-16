@@ -86,19 +86,32 @@ class PokeApiClient(
             JacksonUtils.mapper.readValue(it, typeReference)
         }
 
+    // No withContext(Dispatchers.IO) here: engine.withResponse already runs the body read and the
+    // Jackson parse inside OkHttp's own Callback.onResponse, on that call's dispatcher thread, before
+    // ever resuming this coroutine - see HttpEngine.withResponse's KDoc. Wrapping that in withContext
+    // would only add a redundant redispatch around a call that, from here, does nothing but suspend.
+    //
+    // engine.withResponse, not a header-only call: it keeps the underlying HTTP call cancellable for
+    // the body read too, not just the header wait, so cancelling mid-download still aborts the call
+    // instead of leaving it running into OkHttp's own read timeout.
     @PublishedApi
     internal suspend fun <T> fetchAsync(
         url: String,
         type: Class<T>
-    ): T = ResponseMapper.map(engine.executeAsync(url), url) { JacksonUtils.mapper.readValue(it, type) }
+    ): T =
+        engine.withResponse(url) { response ->
+            ResponseMapper.map(response, url) { JacksonUtils.mapper.readValue(it, type) }
+        }
 
     @PublishedApi
     internal suspend fun <T : PokeApiEndpointReference> fetchPageAsync(
         url: String,
         typeReference: TypeReference<NamedApiResources<T>>
     ): NamedApiResources<T> =
-        ResponseMapper.map(engine.executeAsync(url), url) {
-            JacksonUtils.mapper.readValue(it, typeReference)
+        engine.withResponse(url) { response ->
+            ResponseMapper.map(response, url) {
+                JacksonUtils.mapper.readValue(it, typeReference)
+            }
         }
 
     /** Releases the connection pool and the dispatcher threads. */
