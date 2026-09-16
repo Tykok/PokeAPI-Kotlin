@@ -1,6 +1,7 @@
 package fr.tykok.pokeapi.http
 
 import fr.tykok.pokeapi.PokeApiConfig
+import fr.tykok.pokeapi.cache.CacheConfig
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import mockwebserver3.MockResponse
@@ -20,7 +21,11 @@ class HttpEngineTest {
     fun `a hundred calls reuse the same connection pool`() {
         repeat(100) { server.enqueue(MockResponse(code = 200, body = "{}")) }
 
-        HttpEngine(PokeApiConfig(baseUrl = server.url("/").toString())).use { engine ->
+        // This test counts *requests reaching the mock server*, so the response cache — on by
+        // default — must be off here: otherwise the 99 repeats of the same URL would be served
+        // from the store instead of the network, which is a caching behaviour this test does not
+        // exercise and would otherwise falsify its own assertion below.
+        HttpEngine(PokeApiConfig(baseUrl = server.url("/").toString(), cache = CacheConfig.Disabled)).use { engine ->
             repeat(100) { engine.execute(server.url("/berry/1").toString()).close() }
 
             assertEquals(100, server.requestCount)
@@ -53,6 +58,27 @@ class HttpEngineTest {
                 "newBuilder must preserve the caller's pool"
             )
         }
+    }
+
+    @Test
+    fun `a supplied client still works after the engine is closed`() {
+        val supplied = okhttp3.OkHttpClient()
+        server.enqueue(MockResponse(code = 200, body = "{}"))
+
+        HttpEngine(PokeApiConfig(httpClient = supplied)).use { }
+
+        // close() must only release resources the engine itself created. The dispatcher and
+        // connection pool of a *supplied* client are the caller's own, and shutting them down
+        // breaks any other use the caller still has for that client.
+        assertTrue(!supplied.dispatcher.executorService.isShutdown, "the caller's dispatcher must survive")
+        val request =
+            okhttp3.Request
+                .Builder()
+                .url(server.url("/berry/1"))
+                .build()
+        val response = supplied.newCall(request).execute()
+        response.close()
+        assertEquals(200, response.code)
     }
 
     // `(): Unit =` is load-bearing, not cosmetic: runBlocking returns whatever its lambda

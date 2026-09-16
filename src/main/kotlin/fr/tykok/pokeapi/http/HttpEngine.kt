@@ -1,8 +1,11 @@
 package fr.tykok.pokeapi.http
 
 import fr.tykok.pokeapi.PokeApiConfig
+import fr.tykok.pokeapi.cache.CacheConfig
 import fr.tykok.pokeapi.exception.PokeApiNetworkException
 import kotlinx.coroutines.suspendCancellableCoroutine
+import okhttp3.Cache
+import okhttp3.CacheControl
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -20,20 +23,49 @@ import kotlin.time.toJavaDuration
  * resources cost one pool instead of a hundred.
  *
  * `newBuilder()` is deliberate: it shares the caller's pools and dispatcher rather than starting
- * fresh ones, so a supplied client keeps its own tuning.
+ * fresh ones, so a supplied client keeps its own tuning. Because of that, [close] must only
+ * release what this engine itself created — see [close].
  */
 internal class HttpEngine(
     private val config: PokeApiConfig
 ) : AutoCloseable {
+    /**
+     * The engine's own on-disk cache, or `null` when [CacheConfig.Disabled]. Kept so
+     * [fr.tykok.pokeapi.cache.PokeApiCache] can inspect and evict it, and so [close] can release it
+     * — this store is always the engine's own, supplied client or not.
+     */
+    internal val okHttpCache: Cache? =
+        when (val c = config.cache) {
+            is CacheConfig.Disabled -> null
+            is CacheConfig.OnDisk -> Cache(directory = c.directory, maxSize = c.maxSize)
+        }
+
     val client: OkHttpClient =
         (config.httpClient ?: OkHttpClient())
             .newBuilder()
             .callTimeout(config.callTimeout.toJavaDuration())
-            .build()
+            .apply {
+                okHttpCache?.let { cache(it) }
+                (config.cache as? CacheConfig.OnDisk)?.let { onDisk ->
+                    // PokeApi does not always send a usable Cache-Control, so the configured TTL
+                    // is imposed here rather than hoped for.
+                    addNetworkInterceptor { chain ->
+                        chain
+                            .proceed(chain.request())
+                            .newBuilder()
+                            .header("Cache-Control", "public, max-age=${onDisk.ttl.inWholeSeconds}")
+                            .removeHeader("Pragma")
+                            .build()
+                    }
+                }
+            }.build()
 
-    fun execute(url: String): Response =
+    fun execute(
+        url: String,
+        refresh: Boolean = false
+    ): Response =
         try {
-            client.newCall(request(url)).execute()
+            client.newCall(request(url, refresh)).execute()
         } catch (e: IOException) {
             throw PokeApiNetworkException(url = url, cause = e)
         }
@@ -82,10 +114,11 @@ internal class HttpEngine(
      */
     suspend fun <T> withResponse(
         url: String,
+        refresh: Boolean = false,
         block: (Response) -> T
     ): T =
         suspendCancellableCoroutine { continuation ->
-            val call = client.newCall(request(url))
+            val call = client.newCall(request(url, refresh))
             continuation.invokeOnCancellation { call.cancel() }
             call.enqueue(
                 object : Callback {
@@ -132,15 +165,32 @@ internal class HttpEngine(
             )
         }
 
-    fun request(url: String): Request =
+    fun request(
+        url: String,
+        refresh: Boolean = false
+    ): Request =
         Request
             .Builder()
             .url(url)
             .header("User-Agent", config.userAgent)
+            .apply { if (refresh) cacheControl(CacheControl.FORCE_NETWORK) }
             .build()
 
+    /**
+     * Releases only what this engine created.
+     *
+     * `client` is always built with `newBuilder()`, which — deliberately — shares the caller's
+     * dispatcher and connection pool when [PokeApiConfig.httpClient] was supplied. Shutting those
+     * down would break the caller's own client for any use outside this library, so that only
+     * happens when this engine built the [OkHttpClient] itself. [okHttpCache], on the other hand,
+     * is always this engine's own — built from [CacheConfig.OnDisk] regardless of whether the
+     * client was supplied — so it is always closed here.
+     */
     override fun close() {
-        client.dispatcher.executorService.shutdown()
-        client.connectionPool.evictAll()
+        if (config.httpClient == null) {
+            client.dispatcher.executorService.shutdown()
+            client.connectionPool.evictAll()
+        }
+        okHttpCache?.close()
     }
 }

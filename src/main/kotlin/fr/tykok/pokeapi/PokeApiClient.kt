@@ -1,6 +1,7 @@
 package fr.tykok.pokeapi
 
 import com.fasterxml.jackson.core.type.TypeReference
+import fr.tykok.pokeapi.cache.PokeApiCache
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.NamedApiResources
 import fr.tykok.pokeapi.http.EndpointResolver
@@ -19,13 +20,20 @@ class PokeApiClient(
 ) : AutoCloseable {
     internal val engine: HttpEngine = HttpEngine(config)
 
+    /** Inspection and eviction for this client's response cache. */
+    val cache: PokeApiCache = PokeApiCache(engine.okHttpCache)
+
     /** Get a resource by its id. */
-    suspend inline fun <reified T : PokeApiEndpointReference> get(id: Int): T =
-        fetchAsync(url = url<T>(id.toString()), type = T::class.java)
+    suspend inline fun <reified T : PokeApiEndpointReference> get(
+        id: Int,
+        refresh: Boolean = false
+    ): T = fetchAsync(url = url<T>(id.toString()), type = T::class.java, refresh = refresh)
 
     /** Get a resource by its name. */
-    suspend inline fun <reified T : PokeApiEndpointReference> get(name: String): T =
-        fetchAsync(url = url<T>(name), type = T::class.java)
+    suspend inline fun <reified T : PokeApiEndpointReference> get(
+        name: String,
+        refresh: Boolean = false
+    ): T = fetchAsync(url = url<T>(name), type = T::class.java, refresh = refresh)
 
     /**
      * Get a page of resources.
@@ -36,29 +44,37 @@ class PokeApiClient(
      */
     suspend inline fun <reified T : PokeApiEndpointReference> list(
         limit: Int = 20,
-        offset: Int = 0
+        offset: Int = 0,
+        refresh: Boolean = false
     ): NamedApiResources<T> =
         fetchPageAsync(
             url = "${url<T>()}?offset=$offset&limit=$limit",
-            typeReference = object : TypeReference<NamedApiResources<T>>() {}
+            typeReference = object : TypeReference<NamedApiResources<T>>() {},
+            refresh = refresh
         )
 
     /** Get a resource by its id, blocking the calling thread. */
-    inline fun <reified T : PokeApiEndpointReference> getBlocking(id: Int): T =
-        fetch(url = url<T>(id.toString()), type = T::class.java)
+    inline fun <reified T : PokeApiEndpointReference> getBlocking(
+        id: Int,
+        refresh: Boolean = false
+    ): T = fetch(url = url<T>(id.toString()), type = T::class.java, refresh = refresh)
 
     /** Get a resource by its name, blocking the calling thread. */
-    inline fun <reified T : PokeApiEndpointReference> getBlocking(name: String): T =
-        fetch(url = url<T>(name), type = T::class.java)
+    inline fun <reified T : PokeApiEndpointReference> getBlocking(
+        name: String,
+        refresh: Boolean = false
+    ): T = fetch(url = url<T>(name), type = T::class.java, refresh = refresh)
 
     /** Get a page of resources, blocking the calling thread. */
     inline fun <reified T : PokeApiEndpointReference> listBlocking(
         limit: Int = 20,
-        offset: Int = 0
+        offset: Int = 0,
+        refresh: Boolean = false
     ): NamedApiResources<T> =
         fetchPage(
             url = "${url<T>()}?offset=$offset&limit=$limit",
-            typeReference = object : TypeReference<NamedApiResources<T>>() {}
+            typeReference = object : TypeReference<NamedApiResources<T>>() {},
+            refresh = refresh
         )
 
     @PublishedApi
@@ -74,15 +90,17 @@ class PokeApiClient(
     @PublishedApi
     internal fun <T> fetch(
         url: String,
-        type: Class<T>
-    ): T = ResponseMapper.map(engine.execute(url), url) { JacksonUtils.mapper.readValue(it, type) }
+        type: Class<T>,
+        refresh: Boolean = false
+    ): T = ResponseMapper.map(engine.execute(url, refresh), url) { JacksonUtils.mapper.readValue(it, type) }
 
     @PublishedApi
     internal fun <T : PokeApiEndpointReference> fetchPage(
         url: String,
-        typeReference: TypeReference<NamedApiResources<T>>
+        typeReference: TypeReference<NamedApiResources<T>>,
+        refresh: Boolean = false
     ): NamedApiResources<T> =
-        ResponseMapper.map(engine.execute(url), url) {
+        ResponseMapper.map(engine.execute(url, refresh), url) {
             JacksonUtils.mapper.readValue(it, typeReference)
         }
 
@@ -97,23 +115,29 @@ class PokeApiClient(
     @PublishedApi
     internal suspend fun <T> fetchAsync(
         url: String,
-        type: Class<T>
+        type: Class<T>,
+        refresh: Boolean = false
     ): T =
-        engine.withResponse(url) { response ->
+        engine.withResponse(url, refresh) { response ->
             ResponseMapper.map(response, url) { JacksonUtils.mapper.readValue(it, type) }
         }
 
     @PublishedApi
     internal suspend fun <T : PokeApiEndpointReference> fetchPageAsync(
         url: String,
-        typeReference: TypeReference<NamedApiResources<T>>
+        typeReference: TypeReference<NamedApiResources<T>>,
+        refresh: Boolean = false
     ): NamedApiResources<T> =
-        engine.withResponse(url) { response ->
+        engine.withResponse(url, refresh) { response ->
             ResponseMapper.map(response, url) {
                 JacksonUtils.mapper.readValue(it, typeReference)
             }
         }
 
-    /** Releases the connection pool and the dispatcher threads. */
+    /**
+     * Releases what this client's engine created: the cache always, and the connection pool and
+     * dispatcher threads only when no [PokeApiConfig.httpClient] was supplied — see
+     * [fr.tykok.pokeapi.http.HttpEngine.close].
+     */
     override fun close() = engine.close()
 }
