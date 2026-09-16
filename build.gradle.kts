@@ -44,16 +44,14 @@ if (!project.hasProperty("signingInMemoryKey")) {
 }
 
 plugins {
-    kotlin("jvm") version "2.4.10"
-
     `java-library`
     `maven-publish`
     jacoco
 
+    alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.dokka)
     alias(libs.plugins.ktlint)
-
-    id("com.vanniktech.maven.publish") version "0.33.0"
+    alias(libs.plugins.mavenPublish)
 }
 
 repositories {

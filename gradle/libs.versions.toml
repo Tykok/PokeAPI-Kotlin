@@ -1,9 +1,14 @@
 [versions]
+kotlin = "2.4.10"
+ktlint = "14.2.0"
+dokka = "2.1.0"
+mavenPublish = "0.33.0"
 
 [plugins]
-dokka = { id = "org.jetbrains.dokka", version = "2.1.0" }
-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "11.6.0" }
-
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
 
 [libraries]
 junitBom = { module = "org.junit:junit-bom", version = "6.1.3" }
