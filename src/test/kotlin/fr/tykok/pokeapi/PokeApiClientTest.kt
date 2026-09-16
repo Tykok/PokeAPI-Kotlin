@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi
 
+import fr.tykok.pokeapi.cache.CacheConfig
 import fr.tykok.pokeapi.entities.berries.Berry
 import kotlinx.coroutines.test.runTest
 import mockwebserver3.MockResponse
@@ -17,8 +18,16 @@ class PokeApiClientTest {
             .bufferedReader()
             .readText()
 
+    // cache = Disabled: none of these tests exercise caching, and every default-cache client
+    // otherwise shares the one machine-wide directory CacheConfig.OnDisk() defaults to - a test
+    // suite should not write there. See CacheTest for the tests that actually exercise caching.
     private fun client(): PokeApiClient =
-        PokeApiClient(PokeApiConfig(baseUrl = server.url("/api/v2").toString().trimEnd('/')))
+        PokeApiClient(
+            PokeApiConfig(
+                baseUrl = server.url("/api/v2").toString().trimEnd('/'),
+                cache = CacheConfig.Disabled
+            )
+        )
 
     @Test
     fun `get by name requests the endpoint path and deserializes the body`() =
