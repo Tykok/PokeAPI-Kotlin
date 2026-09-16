@@ -68,13 +68,16 @@ java {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation(libs.okhttp)
+    // PokeApiConfig.httpClient exposes OkHttpClient in a public signature, so consumers need
+    // it on their own compile classpath - api, not implementation.
+    api(libs.okhttp)
     implementation(libs.jackson)
 
     testImplementation(platform(libs.junitBom))
     testImplementation(libs.junitJupiter)
     testRuntimeOnly(libs.junitPlatform)
     testImplementation(libs.mockk)
+    testImplementation(libs.mockwebserver)
 }
 
 tasks.test {
@@ -186,6 +189,37 @@ tasks.register("isPublishedVersion") {
             }
 
         logger.quiet("IS_PUBLISHED: $isPublished")
+    }
+}
+
+// The user agent must never drift from the published coordinates, so the version is
+// generated from the Gradle property rather than typed into the source a second time.
+val generateVersionConstant by tasks.registering {
+    val outputDir = layout.buildDirectory.dir("generated/source/version/main/kotlin")
+    val libraryVersion = project.version.toString()
+    outputs.dir(outputDir)
+    doLast {
+        val file = outputDir.get().file("fr/tykok/pokeapi/LibraryVersion.kt").asFile
+        file.parentFile.mkdirs()
+        file.writeText(
+            """
+            package fr.tykok.pokeapi
+
+            internal const val LIBRARY_VERSION: String = "$libraryVersion"
+
+            """.trimIndent()
+        )
+    }
+}
+
+kotlin.sourceSets.main {
+    kotlin.srcDir(generateVersionConstant)
+}
+
+ktlint {
+    // Generated sources are not hand-written and must not be linted.
+    filter {
+        exclude { it.file.path.startsWith(layout.buildDirectory.get().asFile.path) }
     }
 }
 
