@@ -38,7 +38,11 @@ class HttpEngineTest {
 
     @Test
     fun `close shuts the dispatcher and the connection pool down`() {
-        val engine = HttpEngine(PokeApiConfig())
+        // cache = Disabled: this test performs no request at all, so caching plays no part in it -
+        // but every default-cache client still points at the one shared, machine-wide directory
+        // (CacheConfig.OnDisk's default), and a test suite should not write there. See CacheTest for
+        // the tests that actually exercise caching, isolated behind @TempDir.
+        val engine = HttpEngine(PokeApiConfig(cache = CacheConfig.Disabled))
         val client = engine.client
 
         engine.close()
@@ -51,7 +55,8 @@ class HttpEngineTest {
     fun `a supplied client is reused rather than replaced`() {
         val supplied = okhttp3.OkHttpClient()
 
-        HttpEngine(PokeApiConfig(httpClient = supplied)).use { engine ->
+        // cache = Disabled: no request is made here either; see the note above.
+        HttpEngine(PokeApiConfig(httpClient = supplied, cache = CacheConfig.Disabled)).use { engine ->
             assertSame(
                 supplied.connectionPool,
                 engine.client.connectionPool,
@@ -65,7 +70,10 @@ class HttpEngineTest {
         val supplied = okhttp3.OkHttpClient()
         server.enqueue(MockResponse(code = 200, body = "{}"))
 
-        HttpEngine(PokeApiConfig(httpClient = supplied)).use { }
+        // cache = Disabled: the engine built here is never used to make a request (only built and
+        // closed); the request below goes straight through `supplied`, bypassing the engine
+        // entirely. Disabling still keeps this test from touching the shared default directory.
+        HttpEngine(PokeApiConfig(httpClient = supplied, cache = CacheConfig.Disabled)).use { }
 
         // close() must only release resources the engine itself created. The dispatcher and
         // connection pool of a *supplied* client are the caller's own, and shutting them down
@@ -100,7 +108,11 @@ class HttpEngineTest {
             // so a regression fails loudly rather than hanging the suite.
             server.enqueue(MockResponse(code = 200, body = "{}"))
 
-            HttpEngine(PokeApiConfig(baseUrl = server.url("/").toString())).use { engine ->
+            // cache = Disabled: this test makes exactly one request, so caching does not change its
+            // outcome, but every default-cache client still shares the one machine-wide directory.
+            HttpEngine(
+                PokeApiConfig(baseUrl = server.url("/").toString(), cache = CacheConfig.Disabled)
+            ).use { engine ->
                 withTimeout(5_000) {
                     assertFailsWith<StackOverflowError> {
                         engine.withResponse(server.url("/berry/1").toString()) {

@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi
 
+import fr.tykok.pokeapi.cache.CacheConfig
 import fr.tykok.pokeapi.entities.berries.Berry
 import fr.tykok.pokeapi.exception.PokeApiNetworkException
 import kotlinx.coroutines.CompletableDeferred
@@ -36,8 +37,22 @@ class SuspendApiTest {
             .bufferedReader()
             .readText()
 
+    // cache = Disabled: chosen over distinct urls because this helper is shared by every test in
+    // this class, most of which build a fresh client() per call and none of which are testing
+    // caching. `the suspending and blocking forms return the same value` below builds TWO separate
+    // clients against the SAME url - with the cache on by default, both point at the same
+    // machine-wide on-disk store, so the second (blocking) client silently reads the first
+    // (suspending) client's cached response instead of making its own request. The assertion still
+    // passed (a cache hit returns byte-for-byte the same body), but requestCount == 1, not 2: the
+    // test stopped proving the blocking path independently reaches the network, which is its whole
+    // point.
     private fun client(): PokeApiClient =
-        PokeApiClient(PokeApiConfig(baseUrl = server.url("/api/v2").toString().trimEnd('/')))
+        PokeApiClient(
+            PokeApiConfig(
+                baseUrl = server.url("/api/v2").toString().trimEnd('/'),
+                cache = CacheConfig.Disabled
+            )
+        )
 
     @Test
     fun `the suspending and blocking forms return the same value`() =
@@ -49,6 +64,9 @@ class SuspendApiTest {
             val blocking = client().getBlocking<Berry>("cheri")
 
             assertEquals(blocking, suspended)
+            // Proves both paths independently reached the network rather than the second serving
+            // the first's cached response - see the cache = Disabled note on client() above.
+            assertEquals(2, server.requestCount)
         }
 
     @Test
@@ -112,7 +130,8 @@ class SuspendApiTest {
                 PokeApiClient(
                     PokeApiConfig(
                         baseUrl = server.url("/api/v2").toString().trimEnd('/'),
-                        callTimeout = 500.milliseconds
+                        callTimeout = 500.milliseconds,
+                        cache = CacheConfig.Disabled
                     )
                 )
 
@@ -162,7 +181,8 @@ class SuspendApiTest {
                 PokeApiClient(
                     PokeApiConfig(
                         baseUrl = server.url("/api/v2").toString().trimEnd('/'),
-                        httpClient = httpClient
+                        httpClient = httpClient,
+                        cache = CacheConfig.Disabled
                     )
                 )
 
@@ -246,7 +266,8 @@ class SuspendApiTest {
                 PokeApiClient(
                     PokeApiConfig(
                         baseUrl = server.url("/api/v2").toString().trimEnd('/'),
-                        httpClient = httpClient
+                        httpClient = httpClient,
+                        cache = CacheConfig.Disabled
                     )
                 )
 
