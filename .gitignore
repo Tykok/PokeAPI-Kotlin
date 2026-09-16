@@ -36,6 +36,9 @@
 .idea/libraries/Gradle*.xml
 .idea/libraries/Maven*.xml
 .idea/misc.xml
+.idea/copilot.data.migration.ask2agent.xml
+.idea/discord.xml
+.idea/jpa-buddy.xml
 .idea/modules
 .idea/modules.xml
 .idea/remote-targets.xml
