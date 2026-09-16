@@ -3,8 +3,8 @@ package fr.tykok.pokeapi
 import com.fasterxml.jackson.core.type.TypeReference
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.NamedApiResources
+import fr.tykok.pokeapi.http.EndpointResolver
 import fr.tykok.pokeapi.http.JacksonUtils
-import fr.tykok.pokeapi.http.getEndpoint
 
 /**
  * PokeApi main class, used to fetch resources from the PokeApi RESTful API.
@@ -23,7 +23,7 @@ abstract class PokeApi {
          */
         inline fun <reified T : PokeApiEndpointReference> get(id: Int): T =
             JacksonUtils
-                .executeHttpRequest(url = "$BASE_URL/${getEndpoint<T>()}/$id")
+                .executeHttpRequest(url = "$BASE_URL/${EndpointResolver.resolve(T::class.java)}/$id")
                 .let { response ->
                     JacksonUtils.mapper.readValue(response.body?.string(), T::class.java)
                 }
@@ -33,7 +33,7 @@ abstract class PokeApi {
          */
         inline fun <reified T : PokeApiEndpointReference> get(name: String): T =
             JacksonUtils
-                .executeHttpRequest(url = "$BASE_URL/${getEndpoint<T>()}/$name")
+                .executeHttpRequest(url = "$BASE_URL/${EndpointResolver.resolve(T::class.java)}/$name")
                 .let { response ->
                     JacksonUtils.mapper.readValue(response.body?.string(), T::class.java)
                 }
@@ -46,8 +46,9 @@ abstract class PokeApi {
             offset: Int = 20
         ): NamedApiResources<T> =
             JacksonUtils
-                .executeHttpRequest(url = "$BASE_URL/${getEndpoint<T>()}?offset=$offset&limit=$limit")
-                .let { response ->
+                .executeHttpRequest(
+                    url = "$BASE_URL/${EndpointResolver.resolve(T::class.java)}?offset=$offset&limit=$limit"
+                ).let { response ->
                     JacksonUtils.mapper.readValue(
                         response.body?.string(),
                         object : TypeReference<NamedApiResources<T>>() {}

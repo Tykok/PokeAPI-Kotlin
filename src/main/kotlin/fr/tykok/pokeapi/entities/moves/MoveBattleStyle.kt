@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.moves
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 
@@ -9,6 +10,7 @@ import fr.tykok.pokeapi.entities.common.Name
  * @since 2022-08-30
  *
  */
+@Endpoint("move-battle-style")
 data class MoveBattleStyle(
     /**
      * The identifier for this resource.

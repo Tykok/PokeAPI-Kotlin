@@ -1,8 +1,10 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
+@Endpoint("gender")
 data class Gender(
     /**
      * The identifier for this resource.

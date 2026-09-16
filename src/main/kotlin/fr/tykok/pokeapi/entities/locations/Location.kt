@@ -1,4 +1,5 @@
 package fr.tykok.pokeapi.entities.locations
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.GenerationGameIndex
 import fr.tykok.pokeapi.entities.common.Name
@@ -14,6 +15,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("location")
 data class Location(
     /**
      * The identifier for this resource.

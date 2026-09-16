@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.GenerationGameIndex
 import fr.tykok.pokeapi.entities.common.Name
@@ -8,6 +9,7 @@ import fr.tykok.pokeapi.entities.games.Generation
 import fr.tykok.pokeapi.entities.moves.Move
 import fr.tykok.pokeapi.entities.moves.MoveDamageClass
 
+@Endpoint("type")
 data class Type(
     val id: Int,
     val name: String,

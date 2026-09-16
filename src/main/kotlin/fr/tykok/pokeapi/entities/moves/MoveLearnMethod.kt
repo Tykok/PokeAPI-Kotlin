@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.moves
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Description
 import fr.tykok.pokeapi.entities.common.Name
@@ -12,6 +13,7 @@ import fr.tykok.pokeapi.entities.games.VersionGroup
  * @since 2022-08-30
  *
  */
+@Endpoint("move-learn-method")
 data class MoveLearnMethod(
     /**
      * The identifier for this resource.

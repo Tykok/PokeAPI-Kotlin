@@ -1,4 +1,5 @@
 package fr.tykok.pokeapi.entities.games
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Description
 import fr.tykok.pokeapi.entities.common.Name
@@ -17,6 +18,7 @@ import fr.tykok.pokeapi.entities.locations.Region
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("pokedex")
 data class Pokedex(
     /**
      * The identifier for this resource.

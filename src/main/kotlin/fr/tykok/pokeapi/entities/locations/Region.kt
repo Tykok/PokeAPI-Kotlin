@@ -1,6 +1,7 @@
 package fr.tykok.pokeapi.entities.locations
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -19,6 +20,7 @@ import fr.tykok.pokeapi.entities.games.VersionGroup
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("region")
 data class Region(
     /**
      * The identifier for this resource.

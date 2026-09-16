@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.contests
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.berries.BerryFlavor
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -25,6 +26,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("contest-type")
 data class ContestType(
     /**
      * Identifier of the resource

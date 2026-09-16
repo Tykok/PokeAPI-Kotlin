@@ -1,6 +1,7 @@
 package fr.tykok.pokeapi.entities.moves
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.APIResource
 import fr.tykok.pokeapi.entities.common.MachineVersionDetail
@@ -25,6 +26,7 @@ import fr.tykok.pokeapi.entities.pokemon.Type
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("move")
 data class Move(
     /**
      * The identifier for this resource.

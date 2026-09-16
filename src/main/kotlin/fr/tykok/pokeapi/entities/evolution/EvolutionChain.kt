@@ -1,5 +1,6 @@
 package fr.tykok.pokeapi.entities.evolution
 
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.items.Item
@@ -15,6 +16,7 @@ import fr.tykok.pokeapi.entities.items.Item
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("evolution-chain")
 data class EvolutionChain(
     /**
      * The identifier for this resource.

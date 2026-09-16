@@ -1,4 +1,5 @@
 package fr.tykok.pokeapi.entities.games
+import fr.tykok.pokeapi.annotation.Endpoint
 import fr.tykok.pokeapi.entities.PokeApiEndpointReference
 import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
@@ -20,6 +21,7 @@ import fr.tykok.pokeapi.entities.pokemon.Type
  * @version 1.0.0
  * @since 2022-08-27
  */
+@Endpoint("generation")
 data class Generation(
     val id: Number,
     val name: String,
