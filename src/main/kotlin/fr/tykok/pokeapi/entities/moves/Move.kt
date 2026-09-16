@@ -65,10 +65,12 @@ data class Move(
     val power: Int?,
     /**
      * A detail of normal and super contest combos that require this move.
+     * PokeAPI returns null here for some moves (e.g. recover), so this must stay
+     * nullable rather than coercing that null away.
      * @see ContestComboSets
      */
     @JsonProperty("contest_combos")
-    val contestCombos: ContestComboSets,
+    val contestCombos: ContestComboSets?,
     /**
      * The type of appeal this move gives a Pokémon when used in a contest.
      * @see ContestType
