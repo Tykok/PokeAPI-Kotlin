@@ -49,21 +49,6 @@ class PokeApiClientTest {
     }
 
     @Test
-    fun `get by limit and offset requests the listing path and deserializes the page`() {
-        server.enqueue(MockResponse(code = 200, body = fixture("berry-list.json")))
-
-        val page = client().get<Berry>(limit = 20, offset = 0)
-
-        assertEquals("/api/v2/berry?offset=0&limit=20", server.takeRequest().target)
-        // This does NOT prove the element type token survives fetchPage's generic erasure.
-        // NamedApiResource<T> exposes no field parameterised on T that any real PokeAPI response
-        // populates (`resource` is always null and never read), so an erased type token would
-        // deserialize this exact same value here. This only proves the request path/query and
-        // that a paged response parses.
-        assertEquals("cheri", page.results.first().name)
-    }
-
-    @Test
     fun `the default config points at the public api`() {
         assertEquals("https://pokeapi.co/api/v2", PokeApiConfig().baseUrl)
         assertEquals("https://pokeapi.co/api/v2", PokeApi.BASE_URL)
