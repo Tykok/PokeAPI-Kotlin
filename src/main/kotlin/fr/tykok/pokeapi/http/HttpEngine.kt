@@ -1,9 +1,11 @@
 package fr.tykok.pokeapi.http
 
 import fr.tykok.pokeapi.PokeApiConfig
+import fr.tykok.pokeapi.exception.PokeApiNetworkException
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import java.io.IOException
 import kotlin.time.toJavaDuration
 
 /**
@@ -27,7 +29,11 @@ internal class HttpEngine(
 
     fun execute(url: String): Response {
         println(url)
-        return client.newCall(request(url)).execute()
+        return try {
+            client.newCall(request(url)).execute()
+        } catch (e: IOException) {
+            throw PokeApiNetworkException(url = url, cause = e)
+        }
     }
 
     fun request(url: String): Request =
