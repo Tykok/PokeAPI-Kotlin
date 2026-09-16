@@ -16,7 +16,6 @@ import kotlin.time.toJavaDuration
  * `newBuilder()` is deliberate: it shares the caller's pools and dispatcher rather than starting
  * fresh ones, so a supplied client keeps its own tuning.
  */
-@PublishedApi
 internal class HttpEngine(
     private val config: PokeApiConfig
 ) : AutoCloseable {
@@ -26,8 +25,7 @@ internal class HttpEngine(
             .callTimeout(config.callTimeout.toJavaDuration())
             .build()
 
-    @PublishedApi
-    internal fun execute(url: String): Response {
+    fun execute(url: String): Response {
         println(url)
         return client.newCall(request(url)).execute()
     }

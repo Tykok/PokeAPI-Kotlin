@@ -16,7 +16,6 @@ import fr.tykok.pokeapi.http.JacksonUtils
 class PokeApiClient(
     @PublishedApi internal val config: PokeApiConfig = PokeApiConfig()
 ) : AutoCloseable {
-    @PublishedApi
     internal val engine: HttpEngine = HttpEngine(config)
 
     /** Get a resource by its id. */
@@ -31,7 +30,11 @@ class PokeApiClient(
     inline fun <reified T : PokeApiEndpointReference> get(
         limit: Int = 20,
         offset: Int = 20
-    ): NamedApiResources<T> = fetchPage(url = "${url<T>()}?offset=$offset&limit=$limit")
+    ): NamedApiResources<T> =
+        fetchPage(
+            url = "${url<T>()}?offset=$offset&limit=$limit",
+            typeReference = object : TypeReference<NamedApiResources<T>>() {}
+        )
 
     @PublishedApi
     internal inline fun <reified T : PokeApiEndpointReference> url(suffix: String? = null): String {
@@ -53,12 +56,12 @@ class PokeApiClient(
     }
 
     @PublishedApi
-    internal inline fun <reified T : PokeApiEndpointReference> fetchPage(url: String): NamedApiResources<T> {
+    internal fun <T : PokeApiEndpointReference> fetchPage(
+        url: String,
+        typeReference: TypeReference<NamedApiResources<T>>
+    ): NamedApiResources<T> {
         val response = engine.execute(url)
-        return JacksonUtils.mapper.readValue(
-            response.body?.string(),
-            object : TypeReference<NamedApiResources<T>>() {}
-        )
+        return JacksonUtils.mapper.readValue(response.body?.string(), typeReference)
     }
 
     /** Releases the connection pool and the dispatcher threads. */

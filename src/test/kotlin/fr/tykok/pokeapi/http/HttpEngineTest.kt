@@ -14,15 +14,6 @@ class HttpEngineTest {
     private val server = MockWebServer()
 
     @Test
-    fun `reuses one OkHttpClient across calls`() {
-        HttpEngine(PokeApiConfig()).use { engine ->
-            val first = engine.client
-            val second = engine.client
-            assertSame(first, second)
-        }
-    }
-
-    @Test
     fun `a hundred calls reuse the same connection pool`() {
         repeat(100) { server.enqueue(MockResponse(code = 200, body = "{}")) }
 

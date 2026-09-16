@@ -22,5 +22,12 @@ data class NamedApiResource<T : PokeApiObject>(
     val resource: T? = null
 ) : PokeApiObject
 
+/**
+ * Fetches the referenced resource, or `null` if this reference carries no [url].
+ *
+ * This always goes through [PokeApi.defaultClient], never the caller's own [fr.tykok.pokeapi.PokeApiClient].
+ * A client built with custom interceptors, a proxy, or a different timeout loses all of that the
+ * moment a link is followed through this extension.
+ */
 inline fun <reified T : PokeApiObject> NamedApiResource<T>.get(): T? =
     url?.let { PokeApi.defaultClient.fetch(url = it, type = T::class.java) }
