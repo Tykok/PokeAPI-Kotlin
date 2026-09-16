@@ -13,6 +13,7 @@ class JacksonUtils {
         val mapper: ObjectMapper =
             jacksonObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true)
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
 
         fun executeHttpRequest(url: String): Response {

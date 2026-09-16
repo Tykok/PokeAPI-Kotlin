@@ -1,9 +1,11 @@
 package fr.tykok.pokeapi.entities
 
 import fr.tykok.pokeapi.entities.moves.Move
+import fr.tykok.pokeapi.entities.pokemon.GrowthRateExperienceLevel
 import fr.tykok.pokeapi.http.JacksonUtils
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class EntityNullabilityTest {
@@ -40,5 +42,17 @@ class EntityNullabilityTest {
         // Harden (id 106) never misses: PokeAPI returns accuracy = null for it.
         assertNull(harden.accuracy)
         assertEquals("harden", harden.name)
+    }
+
+    @Test
+    fun `a null read into a non-null numeric field is rejected rather than read as zero`() {
+        // GrowthRateExperienceLevel.experience is a non-null Int. Without
+        // FAIL_ON_NULL_FOR_PRIMITIVES, Jackson would silently coerce this JSON null
+        // to 0, masking the fact that the API never sent a value for the field.
+        val json = """{"level": 1, "experience": null}"""
+
+        assertThrows(Exception::class.java) {
+            JacksonUtils.mapper.readValue(json, GrowthRateExperienceLevel::class.java)
+        }
     }
 }
