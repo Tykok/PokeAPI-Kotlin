@@ -1,6 +1,7 @@
 package fr.tykok.pokeapi.entities.common
 
 import com.fasterxml.jackson.core.type.TypeReference
+import fr.tykok.pokeapi.PokeApiConfig
 import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.http.JacksonUtils
 
@@ -23,9 +24,9 @@ data class NamedApiResource<T : PokeApiObject>(
     val resource: T? = null
 ) : PokeApiObject
 
-inline fun <reified T : PokeApiObject> NamedApiResource<T>.get(): T? =
+inline fun <reified T : PokeApiObject> NamedApiResource<T>.get(config: PokeApiConfig = PokeApiConfig()): T? =
     if (this.url != null) {
-        val response = JacksonUtils.executeHttpRequest(url = this.url)
+        val response = JacksonUtils.executeHttpRequest(url = this.url, config = config)
         JacksonUtils.mapper.readValue(response.body?.string(), object : TypeReference<T>() {})
     } else {
         null
