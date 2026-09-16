@@ -29,8 +29,8 @@ object PokeApi {
     inline fun <reified T : PokeApiEndpointReference> get(name: String): T = defaultClient.get<T>(name)
 
     /** Get a page of resources. */
-    inline fun <reified T : PokeApiEndpointReference> get(
+    inline fun <reified T : PokeApiEndpointReference> list(
         limit: Int = 20,
-        offset: Int = 20
-    ): NamedApiResources<T> = defaultClient.get<T>(limit = limit, offset = offset)
+        offset: Int = 0
+    ): NamedApiResources<T> = defaultClient.list<T>(limit = limit, offset = offset)
 }

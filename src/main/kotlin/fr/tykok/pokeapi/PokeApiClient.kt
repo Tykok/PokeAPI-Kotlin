@@ -27,10 +27,16 @@ class PokeApiClient(
     inline fun <reified T : PokeApiEndpointReference> get(name: String): T =
         fetch(url = url<T>(name), type = T::class.java)
 
-    /** Get a page of resources. */
-    inline fun <reified T : PokeApiEndpointReference> get(
+    /**
+     * Get a page of resources.
+     *
+     * Named `list` rather than `get` because `get(id)` and a defaulted `get(limit, offset)` are both
+     * callable with a single [Int], which made `get<Pokemon>(50)` silently mean "the Pokémon with id
+     * 50" instead of "fifty Pokémon".
+     */
+    inline fun <reified T : PokeApiEndpointReference> list(
         limit: Int = 20,
-        offset: Int = 20
+        offset: Int = 0
     ): NamedApiResources<T> =
         fetchPage(
             url = "${url<T>()}?offset=$offset&limit=$limit",
