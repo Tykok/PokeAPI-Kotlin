@@ -67,6 +67,19 @@ class EntityNullabilityTest {
     }
 
     @Test
+    fun `a healing move deserializes with a null contest combo set`() {
+        // recover (id 105) returns contest_combos = null. If Move.contestCombos were
+        // reverted to a non-null ContestComboSets, this fixture would throw
+        // (KotlinInvalidNullException: missing therefore NULL value for a non-nullable
+        // creator parameter) instead of deserializing, so the assertNull below would
+        // never be reached and the test would fail.
+        val recover = JacksonUtils.mapper.readValue(fixture("move-recover.json"), Move::class.java)
+
+        assertEquals("recover", recover.name)
+        assertNull(recover.contestCombos)
+    }
+
+    @Test
     fun `a null read into a non-null numeric field is rejected rather than read as zero`() {
         // GrowthRateExperienceLevel.experience is a non-null Int. Without
         // FAIL_ON_NULL_FOR_PRIMITIVES, Jackson would silently coerce this JSON null
