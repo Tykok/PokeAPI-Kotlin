@@ -20,12 +20,12 @@ class PokeApiClient(
     internal val engine: HttpEngine = HttpEngine(config)
 
     /** Get a resource by its id. */
-    inline fun <reified T : PokeApiEndpointReference> get(id: Int): T =
-        fetch(url = url<T>(id.toString()), type = T::class.java)
+    suspend inline fun <reified T : PokeApiEndpointReference> get(id: Int): T =
+        fetchAsync(url = url<T>(id.toString()), type = T::class.java)
 
     /** Get a resource by its name. */
-    inline fun <reified T : PokeApiEndpointReference> get(name: String): T =
-        fetch(url = url<T>(name), type = T::class.java)
+    suspend inline fun <reified T : PokeApiEndpointReference> get(name: String): T =
+        fetchAsync(url = url<T>(name), type = T::class.java)
 
     /**
      * Get a page of resources.
@@ -34,7 +34,25 @@ class PokeApiClient(
      * callable with a single [Int], which made `get<Pokemon>(50)` silently mean "the Pokémon with id
      * 50" instead of "fifty Pokémon".
      */
-    inline fun <reified T : PokeApiEndpointReference> list(
+    suspend inline fun <reified T : PokeApiEndpointReference> list(
+        limit: Int = 20,
+        offset: Int = 0
+    ): NamedApiResources<T> =
+        fetchPageAsync(
+            url = "${url<T>()}?offset=$offset&limit=$limit",
+            typeReference = object : TypeReference<NamedApiResources<T>>() {}
+        )
+
+    /** Get a resource by its id, blocking the calling thread. */
+    inline fun <reified T : PokeApiEndpointReference> getBlocking(id: Int): T =
+        fetch(url = url<T>(id.toString()), type = T::class.java)
+
+    /** Get a resource by its name, blocking the calling thread. */
+    inline fun <reified T : PokeApiEndpointReference> getBlocking(name: String): T =
+        fetch(url = url<T>(name), type = T::class.java)
+
+    /** Get a page of resources, blocking the calling thread. */
+    inline fun <reified T : PokeApiEndpointReference> listBlocking(
         limit: Int = 20,
         offset: Int = 0
     ): NamedApiResources<T> =
@@ -65,6 +83,21 @@ class PokeApiClient(
         typeReference: TypeReference<NamedApiResources<T>>
     ): NamedApiResources<T> =
         ResponseMapper.map(engine.execute(url), url) {
+            JacksonUtils.mapper.readValue(it, typeReference)
+        }
+
+    @PublishedApi
+    internal suspend fun <T> fetchAsync(
+        url: String,
+        type: Class<T>
+    ): T = ResponseMapper.map(engine.executeAsync(url), url) { JacksonUtils.mapper.readValue(it, type) }
+
+    @PublishedApi
+    internal suspend fun <T : PokeApiEndpointReference> fetchPageAsync(
+        url: String,
+        typeReference: TypeReference<NamedApiResources<T>>
+    ): NamedApiResources<T> =
+        ResponseMapper.map(engine.executeAsync(url), url) {
             JacksonUtils.mapper.readValue(it, typeReference)
         }
 

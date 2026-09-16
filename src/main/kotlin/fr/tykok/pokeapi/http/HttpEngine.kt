@@ -2,10 +2,15 @@ package fr.tykok.pokeapi.http
 
 import fr.tykok.pokeapi.PokeApiConfig
 import fr.tykok.pokeapi.exception.PokeApiNetworkException
+import kotlinx.coroutines.suspendCancellableCoroutine
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.time.toJavaDuration
 
 /**
@@ -32,6 +37,38 @@ internal class HttpEngine(
             client.newCall(request(url)).execute()
         } catch (e: IOException) {
             throw PokeApiNetworkException(url = url, cause = e)
+        }
+
+    /**
+     * Runs the call without holding a thread.
+     *
+     * `enqueue` rather than `execute`, so the coroutine suspends instead of blocking, and
+     * `invokeOnCancellation` so cancelling the coroutine cancels the in-flight HTTP call rather than
+     * leaving it to finish into nothing.
+     */
+    suspend fun executeAsync(url: String): Response =
+        suspendCancellableCoroutine { continuation ->
+            val call = client.newCall(request(url))
+            continuation.invokeOnCancellation { call.cancel() }
+            call.enqueue(
+                object : Callback {
+                    override fun onFailure(
+                        call: Call,
+                        e: IOException
+                    ) {
+                        if (!call.isCanceled()) {
+                            continuation.resumeWithException(PokeApiNetworkException(url = url, cause = e))
+                        }
+                    }
+
+                    override fun onResponse(
+                        call: Call,
+                        response: Response
+                    ) {
+                        continuation.resume(response)
+                    }
+                }
+            )
         }
 
     fun request(url: String): Request =

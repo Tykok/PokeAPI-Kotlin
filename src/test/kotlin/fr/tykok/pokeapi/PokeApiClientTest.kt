@@ -1,6 +1,7 @@
 package fr.tykok.pokeapi
 
 import fr.tykok.pokeapi.entities.berries.Berry
+import kotlinx.coroutines.test.runTest
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
 import mockwebserver3.junit5.StartStop
@@ -20,33 +21,36 @@ class PokeApiClientTest {
         PokeApiClient(PokeApiConfig(baseUrl = server.url("/api/v2").toString().trimEnd('/')))
 
     @Test
-    fun `get by name requests the endpoint path and deserializes the body`() {
-        server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
+    fun `get by name requests the endpoint path and deserializes the body`() =
+        runTest {
+            server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
 
-        val berry = client().get<Berry>("cheri")
+            val berry = client().get<Berry>("cheri")
 
-        assertEquals("/api/v2/berry/cheri", server.takeRequest().target)
-        assertEquals("cheri", berry.name)
-    }
-
-    @Test
-    fun `get by id requests the numeric path`() {
-        server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
-
-        client().get<Berry>(1)
-
-        assertEquals("/api/v2/berry/1", server.takeRequest().target)
-    }
+            assertEquals("/api/v2/berry/cheri", server.takeRequest().target)
+            assertEquals("cheri", berry.name)
+        }
 
     @Test
-    fun `snake case json maps onto camel case properties`() {
-        server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
+    fun `get by id requests the numeric path`() =
+        runTest {
+            server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
 
-        val berry = client().get<Berry>("cheri")
+            client().get<Berry>(1)
 
-        assertEquals(3, berry.growthTime)
-        assertEquals(5, berry.maxHarvest)
-    }
+            assertEquals("/api/v2/berry/1", server.takeRequest().target)
+        }
+
+    @Test
+    fun `snake case json maps onto camel case properties`() =
+        runTest {
+            server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
+
+            val berry = client().get<Berry>("cheri")
+
+            assertEquals(3, berry.growthTime)
+            assertEquals(5, berry.maxHarvest)
+        }
 
     @Test
     fun `the default config points at the public api`() {
@@ -55,11 +59,12 @@ class PokeApiClientTest {
     }
 
     @Test
-    fun `the user agent carries the library version`() {
-        server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
+    fun `the user agent carries the library version`() =
+        runTest {
+            server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
 
-        client().get<Berry>("cheri")
+            client().get<Berry>("cheri")
 
-        assertEquals("PokeAPI-Kotlin/$LIBRARY_VERSION", server.takeRequest().headers["User-Agent"])
-    }
+            assertEquals("PokeAPI-Kotlin/$LIBRARY_VERSION", server.takeRequest().headers["User-Agent"])
+        }
 }

@@ -23,14 +23,26 @@ object PokeApi {
     internal val defaultClient: PokeApiClient by lazy { PokeApiClient() }
 
     /** Get a resource by its id. */
-    inline fun <reified T : PokeApiEndpointReference> get(id: Int): T = defaultClient.get<T>(id)
+    suspend inline fun <reified T : PokeApiEndpointReference> get(id: Int): T = defaultClient.get<T>(id)
 
     /** Get a resource by its name. */
-    inline fun <reified T : PokeApiEndpointReference> get(name: String): T = defaultClient.get<T>(name)
+    suspend inline fun <reified T : PokeApiEndpointReference> get(name: String): T = defaultClient.get<T>(name)
 
     /** Get a page of resources. */
-    inline fun <reified T : PokeApiEndpointReference> list(
+    suspend inline fun <reified T : PokeApiEndpointReference> list(
         limit: Int = 20,
         offset: Int = 0
     ): NamedApiResources<T> = defaultClient.list<T>(limit = limit, offset = offset)
+
+    /** Get a resource by its id, blocking the calling thread. */
+    inline fun <reified T : PokeApiEndpointReference> getBlocking(id: Int): T = defaultClient.getBlocking<T>(id)
+
+    /** Get a resource by its name, blocking the calling thread. */
+    inline fun <reified T : PokeApiEndpointReference> getBlocking(name: String): T = defaultClient.getBlocking<T>(name)
+
+    /** Get a page of resources, blocking the calling thread. */
+    inline fun <reified T : PokeApiEndpointReference> listBlocking(
+        limit: Int = 20,
+        offset: Int = 0
+    ): NamedApiResources<T> = defaultClient.listBlocking<T>(limit = limit, offset = offset)
 }

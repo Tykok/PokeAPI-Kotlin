@@ -72,12 +72,16 @@ dependencies {
     // it on their own compile classpath - api, not implementation.
     api(libs.okhttp)
     implementation(libs.jackson)
+    // suspendCancellableCoroutine is confined to the non-inline HttpEngine.executeAsync, so no
+    // kotlinx.coroutines type reaches a consumer's bytecode - implementation, not api.
+    implementation(libs.coroutinesCore)
 
     testImplementation(platform(libs.junitBom))
     testImplementation(libs.junitJupiter)
     testRuntimeOnly(libs.junitPlatform)
     testImplementation(libs.mockk)
     testImplementation(libs.mockwebserver)
+    testImplementation(libs.coroutinesTest)
 }
 
 tasks.test {
