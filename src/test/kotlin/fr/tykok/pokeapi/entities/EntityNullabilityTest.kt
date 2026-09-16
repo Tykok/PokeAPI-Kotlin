@@ -45,6 +45,28 @@ class EntityNullabilityTest {
     }
 
     @Test
+    fun `a past move stat entry deserializes with null accuracy, power, effect chance and type`() {
+        // swords-dance (id 14) carries one past_values entry (version group x-y) where
+        // PokeAPI returns null for accuracy, power, effect_chance AND type. Observed
+        // against the live API. If any of these four fields were reverted to a
+        // non-null Int/NamedApiResource, this fixture would throw instead of
+        // deserializing (FAIL_ON_NULL_FOR_PRIMITIVES / a null into a non-null
+        // reference type), so this assertion would fail.
+        val swordsDance = JacksonUtils.mapper.readValue(fixture("move-swords-dance.json"), Move::class.java)
+
+        assertEquals(1, swordsDance.pastValues.size)
+        val pastValue = swordsDance.pastValues.first()
+
+        assertNull(pastValue.accuracy)
+        assertNull(pastValue.power)
+        assertNull(pastValue.effectChance)
+        assertNull(pastValue.type)
+        // pp and versionGroup are NOT part of the bug: they stay populated and non-null.
+        assertEquals(30, pastValue.pp)
+        assertEquals("x-y", pastValue.versionGroup.name)
+    }
+
+    @Test
     fun `a null read into a non-null numeric field is rejected rather than read as zero`() {
         // GrowthRateExperienceLevel.experience is a non-null Int. Without
         // FAIL_ON_NULL_FOR_PRIMITIVES, Jackson would silently coerce this JSON null

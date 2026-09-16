@@ -14,16 +14,22 @@ import fr.tykok.pokeapi.entities.pokemon.Type
 data class PastMoveStatValues(
     /**
      * The percent value of how likely this move is to be successful.
+     * PokeAPI returns null here for some moves (e.g. swords-dance, recover), so this
+     * must stay nullable rather than coercing that null away.
      */
-    val accuracy: Int,
+    val accuracy: Int?,
     /**
      * The percent value of how likely it is this moves effect will take effect.
+     * PokeAPI returns null here for some moves (e.g. swords-dance, recover), so this
+     * must stay nullable rather than coercing that null away.
      */
-    val effectChance: Int,
+    val effectChance: Int?,
     /**
      * The base power of this move with a value of 0 if it does not have a base power.
+     * PokeAPI returns null here for some moves (e.g. swords-dance, recover), so this
+     * must stay nullable rather than coercing that null away.
      */
-    val power: Int,
+    val power: Int?,
     /**
      * Power points. The number of times this move can be used.
      */
@@ -35,10 +41,12 @@ data class PastMoveStatValues(
     val effectEntries: List<VerboseEffect>,
     /**
      * The elemental type of this move.
+     * PokeAPI returns null here for some moves (e.g. swords-dance, recover), so this
+     * must stay nullable rather than coercing that null away.
      * @see NamedApiResource
      * @see Type
      */
-    val type: NamedApiResource<Type>,
+    val type: NamedApiResource<Type>?,
     /**
      * The version group in which these move stat values were in effect.
      * @see NamedApiResource
