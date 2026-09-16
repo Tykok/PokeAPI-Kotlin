@@ -23,11 +23,11 @@ data class SuperContestEffects(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The level of appeal this super contest effect has.
      */
-    val appeal: Number,
+    val appeal: Int,
     /**
      * The flavor text of this super contest effect listed in different languages.
      * @see FlavorText

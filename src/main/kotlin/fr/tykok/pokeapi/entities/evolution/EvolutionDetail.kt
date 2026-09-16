@@ -34,7 +34,7 @@ data class EvolutionDetail(
     /**
      * The id of the gender of the evolving Pokémon species must be in order to evolve into this Pokémon species.
      */
-    val gender: Number?,
+    val gender: Int?,
     /**
      * The item the evolving Pokémon species must be holding during the evolution trigger event to evolve into this Pokémon species.
      * @see NamedApiResource
@@ -62,19 +62,19 @@ data class EvolutionDetail(
     /**
      * The minimum required level of the evolving Pokémon species to evolve into this Pokémon species.
      */
-    val minLevel: Number,
+    val minLevel: Int,
     /**
      * The minimum required level of happiness the evolving Pokémon species to evolve into this Pokémon species.
      */
-    val minHappiness: Number?,
+    val minHappiness: Int?,
     /**
      * The minimum required level of beauty the evolving Pokémon species to evolve into this Pokémon species.
      */
-    val minBeauty: Number?,
+    val minBeauty: Int?,
     /**
      * The minimum required level of affection the evolving Pokémon species to evolve into this Pokémon species.
      */
-    val minAffection: Number?,
+    val minAffection: Int?,
     /**
      * Whether or not it must be raining in the overworld to cause evolution this Pokémon species.
      */
@@ -84,7 +84,7 @@ data class EvolutionDetail(
      * @see NamedApiResource
      * @see PokemonSpecies
      */
-    val partySpecies: Number?,
+    val partySpecies: Int?,
     /**
      * The player must have a Pokémon of this type in their party during the evolution trigger event in order for
      * the evolving Pokémon species to evolve into this Pokémon species.
@@ -95,7 +95,7 @@ data class EvolutionDetail(
     /**
      * The required relation between the Pokémon's Attack and Defense stats. 1 means Attack > Defense. 0 means Attack = Defense. -1 means Attack < Defense.
      */
-    val relativePhysicalStats: Number?,
+    val relativePhysicalStats: Int?,
     /**
      * The required time of day. Day or night.
      */

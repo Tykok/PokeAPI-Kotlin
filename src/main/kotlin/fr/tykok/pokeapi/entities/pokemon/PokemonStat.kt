@@ -12,9 +12,9 @@ data class PokemonStat(
     /**
      * The effort points (EV) the Pokémon has in the stat.
      */
-    val effort: Number,
+    val effort: Int,
     /**
      * The base value of the stat.
      */
-    val baseStat: Number
+    val baseStat: Int
 ) : PokeApiObject

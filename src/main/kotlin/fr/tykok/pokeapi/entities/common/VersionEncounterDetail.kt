@@ -20,7 +20,7 @@ data class VersionEncounterDetail(
     /**
      * The total percentage of all encounter potential.
      */
-    val maxChance: Number,
+    val maxChance: Int,
     /**
      * A list of encounters and their specifics.
      */

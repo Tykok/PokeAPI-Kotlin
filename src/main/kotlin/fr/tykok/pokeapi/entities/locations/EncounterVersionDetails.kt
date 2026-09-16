@@ -15,7 +15,7 @@ data class EncounterVersionDetails(
     /**
      * The chance of an encounter to occur.
      */
-    val rate: Number,
+    val rate: Int,
     /**
      * The version of the game in which the encounter can occur with the given chance.
      * @see NamedApiResource

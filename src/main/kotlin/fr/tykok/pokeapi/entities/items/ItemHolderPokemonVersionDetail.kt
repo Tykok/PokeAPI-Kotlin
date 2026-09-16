@@ -15,7 +15,7 @@ data class ItemHolderPokemonVersionDetail(
     /**
      * How often this Pokémon holds this item in this version.
      */
-    val rarity: Number,
+    val rarity: Int,
     /**
      * The version that this item is held in by the Pokémon.
      * @see NamedApiResource

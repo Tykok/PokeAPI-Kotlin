@@ -20,7 +20,7 @@ data class Berry(
      * The identifier of the resource
      */
 
-    val id: Number,
+    val id: Int,
     /**
      * The name of the resource
      */
@@ -31,33 +31,33 @@ data class Berry(
      * Berry trees go through four of these growth stages before they can be picked.
      */
 
-    val growthTime: Number,
+    val growthTime: Int,
     /**
      * The maximum number of these berries that can grow on one tree in Generation IV.
      */
 
-    val maxHarvest: Number,
+    val maxHarvest: Int,
     /**
      * The power of the move "Natural Gift" when used with this Berry.
      */
 
-    val naturalGiftPower: Number,
+    val naturalGiftPower: Int,
     /**
      * The size of this Berry, in millimeters.
      */
 
-    val size: Number,
+    val size: Int,
     /**
      * The smoothness of this Berry, used in making Pokéblocks or Poffins.
      */
 
-    val smoothness: Number,
+    val smoothness: Int,
     /**
      * The speed at which this Berry dries out the soil as it grows.
      * A higher rate means the soil dries more quickly.
      */
 
-    val soilDryness: Number,
+    val soilDryness: Int,
     /**
      * The firmness of this berry, used in making Pokéblocks or Poffins.
      * @see NamedApiResource

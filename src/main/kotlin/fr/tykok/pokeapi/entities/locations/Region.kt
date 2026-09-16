@@ -26,7 +26,7 @@ data class Region(
      * The identifier for this resource.
      */
     @JsonProperty("id")
-    val id: Number,
+    val id: Int,
     /**
      * A list of locations that can be found in this region.
      * @see NamedApiResource

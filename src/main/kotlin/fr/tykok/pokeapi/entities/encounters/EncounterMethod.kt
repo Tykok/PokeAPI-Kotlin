@@ -22,7 +22,7 @@ data class EncounterMethod(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The name for this resource.
      */
@@ -30,7 +30,7 @@ data class EncounterMethod(
     /**
      * A good value for sorting.
      */
-    val order: Number,
+    val order: Int,
     /**
      * The name of this resource listed in different languages.
      * @see Name

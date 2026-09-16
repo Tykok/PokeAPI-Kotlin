@@ -14,16 +14,16 @@ import fr.tykok.pokeapi.entities.games.Generation
  */
 @Endpoint("pokemon-species")
 data class PokemonSpecies(
-    val id: Number,
+    val id: Int,
     val name: String,
-    val order: Number,
-    val genderRate: Number,
-    val captureRate: Number,
-    val baseHappiness: Number,
+    val order: Int,
+    val genderRate: Int,
+    val captureRate: Int,
+    val baseHappiness: Int,
     val isBaby: Boolean,
     val isLegendary: Boolean,
     val isMythical: Boolean,
-    val hatchCounter: Number,
+    val hatchCounter: Int,
     val hasGenderDifferences: Boolean,
     val formsSwitchable: Boolean,
     val growthRate: NamedApiResource<GrowthRate>,

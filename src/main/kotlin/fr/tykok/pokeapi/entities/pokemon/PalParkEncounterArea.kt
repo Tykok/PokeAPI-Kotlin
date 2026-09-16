@@ -9,7 +9,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @property area The pal park area where this encounter happens.
  */
 data class PalParkEncounterArea(
-    val baseScore: Number,
-    val rate: Number,
+    val baseScore: Int,
+    val rate: Int,
     val area: NamedApiResource<PalParkEncounterArea>
 ) : PokeApiObject

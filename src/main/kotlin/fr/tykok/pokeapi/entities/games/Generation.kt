@@ -23,7 +23,7 @@ import fr.tykok.pokeapi.entities.pokemon.Type
  */
 @Endpoint("generation")
 data class Generation(
-    val id: Number,
+    val id: Int,
     val name: String,
     /**
      * @see NamedApiResource

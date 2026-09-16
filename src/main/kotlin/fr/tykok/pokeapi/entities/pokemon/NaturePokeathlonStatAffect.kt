@@ -7,7 +7,7 @@ data class NaturePokeathlonStatAffect(
     /**
      *  The maximum amount of change to the referenced Pokéathlon stat.
      */
-    val maxChange: Number,
+    val maxChange: Int,
     /**
      * The nature causing the change.
      * @see Nature

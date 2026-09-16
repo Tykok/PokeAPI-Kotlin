@@ -15,7 +15,7 @@ data class PokemonEntry(
     /**
      * The index of this Pokémon species entry within the Pokédex.
      */
-    val entryNumber: Number,
+    val entryNumber: Int,
     /**
      * The Pokémon species being encountered.
      * @see NamedApiResource

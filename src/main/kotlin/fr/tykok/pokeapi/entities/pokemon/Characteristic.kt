@@ -10,11 +10,11 @@ data class Characteristic(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The remainder of the highest stat/IV divided by 5.
      */
-    val geneModulo: Number,
+    val geneModulo: Int,
     /**
      * The possible values of the highest stat that would result in a Pokémon recieving this characteristic when divided by 5.
      */

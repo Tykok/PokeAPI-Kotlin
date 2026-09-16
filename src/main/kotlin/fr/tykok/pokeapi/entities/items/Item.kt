@@ -26,7 +26,7 @@ data class Item(
     /**
      * The identifier for this resource.
      */
-    val id: Number,
+    val id: Int,
     /**
      * The name for this resource.
      */
@@ -38,7 +38,7 @@ data class Item(
     /**
      * The power of the move Fling when used with this item.
      */
-    val flingPower: Number?,
+    val flingPower: Int?,
     /**
      * The effect of the move Fling when used with this item.
      * @see NamedApiResource

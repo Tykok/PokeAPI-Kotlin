@@ -4,9 +4,9 @@ data class GrowthRateExperienceLevel(
     /**
      * The level gained.
      */
-    val level: Number,
+    val level: Int,
     /**
      * The amount of experience required to reach the referenced level.
      */
-    val experience: Number
+    val experience: Int
 )

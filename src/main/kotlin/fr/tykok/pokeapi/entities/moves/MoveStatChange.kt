@@ -13,7 +13,7 @@ data class MoveStatChange(
     /**
      * The amount of change.
      */
-    val change: Number,
+    val change: Int,
     /**
      * The stat being affected.
      * @see NamedApiResource
