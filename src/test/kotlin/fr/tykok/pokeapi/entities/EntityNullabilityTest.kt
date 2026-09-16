@@ -32,4 +32,13 @@ class EntityNullabilityTest {
         val id: Int = growl.id
         assertEquals(45, id)
     }
+
+    @Test
+    fun `a self-buff move deserializes with a null accuracy`() {
+        val harden = JacksonUtils.mapper.readValue(fixture("move-harden.json"), Move::class.java)
+
+        // Harden (id 106) never misses: PokeAPI returns accuracy = null for it.
+        assertNull(harden.accuracy)
+        assertEquals("harden", harden.name)
+    }
 }
