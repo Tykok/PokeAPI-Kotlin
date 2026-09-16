@@ -3,6 +3,7 @@ package fr.tykok.pokeapi.http
 import fr.tykok.pokeapi.PokeApiClient
 import fr.tykok.pokeapi.PokeApiConfig
 import fr.tykok.pokeapi.entities.berries.Berry
+import fr.tykok.pokeapi.entities.encounters.EncounterMethod
 import fr.tykok.pokeapi.exception.PokeApiException
 import fr.tykok.pokeapi.exception.PokeApiHttpException
 import fr.tykok.pokeapi.exception.PokeApiNetworkException
@@ -57,6 +58,22 @@ class ErrorMappingTest {
         server.enqueue(MockResponse(code = 200, body = "{ not json"))
 
         assertThrows<PokeApiParseException> { client().get<Berry>("cheri") }
+    }
+
+    @Test
+    fun `a null in a non-null numeric field becomes PokeApiParseException`() {
+        // Well-formed JSON that violates the schema is the realistic parse failure: PokeAPI
+        // serves valid JSON, but FAIL_ON_NULL_FOR_PRIMITIVES rejects a null where
+        // EncounterMethod.order (a non-null Int) is expected. This must surface as
+        // PokeApiParseException through the real client path, not as a raw Jackson exception.
+        server.enqueue(
+            MockResponse(
+                code = 200,
+                body = """{"id": 1, "name": "walk", "order": null, "names": []}"""
+            )
+        )
+
+        assertThrows<PokeApiParseException> { client().get<EncounterMethod>("walk") }
     }
 
     @Test

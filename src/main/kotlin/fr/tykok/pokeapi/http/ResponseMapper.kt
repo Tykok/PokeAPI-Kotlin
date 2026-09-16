@@ -23,8 +23,16 @@ internal object ResponseMapper {
             val body = r.body.string()
             when {
                 r.isSuccessful ->
-                    runCatching { read(body) }
-                        .getOrElse { throw PokeApiParseException(url = url, cause = it) }
+                    // Deliberately not `runCatching`: it catches Throwable, so a fatal
+                    // Error (e.g. OutOfMemoryError while parsing a huge body) would be
+                    // relabeled as a PokeApiParseException, and a caller catching
+                    // PokeApiException would then swallow a dying JVM as if the payload
+                    // were merely malformed. Catch Exception only, and let Error escape.
+                    try {
+                        read(body)
+                    } catch (e: Exception) {
+                        throw PokeApiParseException(url = url, cause = e)
+                    }
                 r.code == 404 -> throw ResourceNotFoundException(url = url)
                 else -> throw PokeApiHttpException(code = r.code, url = url, body = body)
             }
