@@ -29,5 +29,9 @@ data class NamedApiResource<T : PokeApiObject>(
  * A client built with custom interceptors, a proxy, or a different timeout loses all of that the
  * moment a link is followed through this extension.
  */
-inline fun <reified T : PokeApiObject> NamedApiResource<T>.get(): T? =
+suspend inline fun <reified T : PokeApiObject> NamedApiResource<T>.get(): T? =
+    url?.let { PokeApi.defaultClient.fetchAsync(url = it, type = T::class.java) }
+
+/** Follows the reference, blocking the calling thread. */
+inline fun <reified T : PokeApiObject> NamedApiResource<T>.getBlocking(): T? =
     url?.let { PokeApi.defaultClient.fetch(url = it, type = T::class.java) }

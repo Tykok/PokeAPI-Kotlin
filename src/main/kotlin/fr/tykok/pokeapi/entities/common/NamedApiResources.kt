@@ -17,4 +17,9 @@ data class NamedApiResources<T : PokeApiObject>(
  * [NamedApiResources.results]'s size to detect that a page had fewer resolvable entries than it
  * reported.
  */
-inline fun <reified T : PokeApiObject> NamedApiResources<T>.get(): List<T> = this.results.mapNotNull { it.get() }
+suspend inline fun <reified T : PokeApiObject> NamedApiResources<T>.get(): List<T> =
+    this.results.mapNotNull { it.get() }
+
+/** Follows every reference in the page, blocking the calling thread. */
+inline fun <reified T : PokeApiObject> NamedApiResources<T>.getBlocking(): List<T> =
+    this.results.mapNotNull { it.getBlocking() }
