@@ -238,6 +238,17 @@ kotlin.sourceSets.main {
 //
 // The Markdown is the single source of truth: nothing here is a hand-maintained copy of a
 // sample, so there is nothing to drift out of sync with what the reader actually sees.
+//
+// Scope: every non-declaration block is wrapped in a `private suspend fun`, so this gate proves a
+// sample still matches the library's signatures - it does NOT prove the sample would compile at
+// its documented call site (e.g. a context-free one-liner actually needs a coroutine scope or a
+// `runBlocking`/`getBlocking`). That call-context gap is exactly the 3.0.0 breakage shape for the
+// bulk of these one-liners; this task narrows it to "does the API surface still match", which is
+// still the thing that silently rotted last time.
+//
+// Total blocks found is checked against a hardcoded floor (see expectedTotalDocBlocks below) so
+// that a doc path moving, or a fence quietly losing its language tag, cannot make this task pass
+// while checking nothing.
 val docSampleMarkdownFiles =
     (listOf(file("README.md")) + fileTree("docs/mkdocs-markdown") { include("**/*.md") }.files)
         .sortedBy { it.path }
@@ -289,10 +300,14 @@ val extractDocSamples by tasks.registering {
         symbolTable.getOrPut("Interceptor") { mutableSetOf() }.add("okhttp3.Interceptor")
         symbolTable.getOrPut("OkHttpClient") { mutableSetOf() }.add("okhttp3.OkHttpClient")
 
-        // ---- 2. Extract every ```kotlin fenced block from the Markdown.
+        // ---- 2. Extract every Kotlin-tagged fenced block from the Markdown. Pygments (and so
+        // MkDocs' highlighter) treats `kotlin`, `kt` and `kts` as the same language and renders
+        // them identically, so all three info strings must be caught here - otherwise renaming a
+        // fence from ```kotlin to ```kt would drop a block from this gate with a byte-identical
+        // rendered page and no trace in the skip list.
         data class DocBlock(val file: File, val lineNumber: Int, val rawLines: List<String>)
 
-        val fenceOpen = Regex("""^```kotlin\b""")
+        val fenceOpen = Regex("""^```(kotlin|kts|kt)\b""")
         val blocks = mutableListOf<DocBlock>()
         docSampleMarkdownFiles.forEach { md ->
             val lines = md.readLines()
@@ -327,12 +342,34 @@ val extractDocSamples by tasks.registering {
         // in this documentation is skipped, and this list is printed on every run so a reviewer
         // sees immediately if it grows.
         val gradleDslMarker = Regex("""^(dependencies|plugins|repositories)\s*\{""")
-        val importLine = Regex("""^import\s+[\w.]+$""")
+        // Matches a plain import, a wildcard import (`import x.y.*`) and an aliased import
+        // (`import x.Y as Z`) - anything narrower left an import line sitting in the code body,
+        // where it either fails with a confusing "imports are only allowed in the beginning of
+        // file", or - worse - was misread as the block's first line of code, which could mask
+        // the Gradle-DSL check above.
+        val importLine = Regex("""^import\s+\S+(\s+as\s+\w+)?$""")
 
         fun firstNonBlankCode(rawLines: List<String>): String? =
             rawLines.map { it.trim() }.firstOrNull { it.isNotEmpty() && !importLine.matches(it) }
 
         val (skipped, checked) = blocks.partition { gradleDslMarker.containsMatchIn(firstNonBlankCode(it.rawLines) ?: "") }
+
+        // A hardcoded floor: this number must be updated by hand (in the same commit as the doc
+        // change) whenever a ```kotlin/kt/kts block is genuinely added or removed. That is a
+        // deliberate speed bump - without it, a doc path moving, a fence losing its language tag,
+        // or this task's own extraction regressing would all quietly report "checked 0(s)
+        // skipped 0(s)" and a green build, which is the one failure mode a printed count cannot
+        // by itself catch.
+        val expectedTotalDocBlocks = 72
+        if (blocks.size != expectedTotalDocBlocks) {
+            throw GradleException(
+                "extractDocSamples found ${blocks.size} ```kotlin/kt/kts block(s) in the " +
+                    "documentation, but expectedTotalDocBlocks in build.gradle.kts is set to " +
+                    "$expectedTotalDocBlocks. If you deliberately added or removed a documentation " +
+                    "sample, update expectedTotalDocBlocks to match. If you did not, a block silently " +
+                    "stopped being checked - find out why before changing the number."
+            )
+        }
 
         // ---- 4. Generate one compilable Kotlin file per checked block.
         val topLevelBodyStart =
@@ -368,15 +405,22 @@ val extractDocSamples by tasks.registering {
                     .mapNotNull { name -> symbolTable[name]?.let { name to it } }
                     .toMap()
 
+            // Two library classes can share a simple name (PokemonEncounter already does, in
+            // entities.pokemon and entities.locations). Silently guessing which one a sample
+            // meant is exactly the false-pass this gate exists to prevent - a wrong guess can
+            // compile clean against the wrong type and prove nothing. Fail loudly instead, and
+            // tell the author how to fix it: write the import explicitly in the Markdown block,
+            // which lifts it above this auto-import step entirely and is better documentation
+            // for the reader besides.
             val autoImports =
                 neededImports.entries.map { (name, candidates) ->
                     if (candidates.size > 1) {
-                        val chosen = candidates.sorted().first()
-                        logger.warn(
-                            "extractDocSamples: '$name' is ambiguous (${candidates.sorted()}) in " +
-                                "$relativePath:${block.lineNumber} - using $chosen"
+                        throw GradleException(
+                            "extractDocSamples: '$name' is ambiguous at $relativePath:${block.lineNumber} " +
+                                "- candidates: ${candidates.sorted()}. Add an explicit " +
+                                "`import <the one you mean>` to that ```kotlin block in the Markdown " +
+                                "to disambiguate."
                         )
-                        chosen
                     } else {
                         candidates.single()
                     }
@@ -399,20 +443,38 @@ val extractDocSamples by tasks.registering {
                 // function body.
                 content.appendLine(bodyText)
             } else {
-                // A plain sequence of statements. Split on blank lines and on standalone
-                // full-line comments (the Markdown's own way of introducing "or, blocking:"
-                // alternatives that reuse a variable name) so that two alternatives shown in one
-                // fenced block do not redeclare the same local in the same scope. Each segment
-                // becomes its own private suspend fun, wrapping the suspending call sites.
-                val segments = mutableListOf<MutableList<String>>()
-                codeLines.forEach { raw ->
-                    val trimmedLine = raw.trim()
-                    val startsNewSegment =
-                        segments.isEmpty() || trimmedLine.isEmpty() || trimmedLine.startsWith("//")
-                    if (startsNewSegment) segments.add(mutableListOf())
-                    if (trimmedLine.isNotEmpty()) segments.last().add(raw)
-                }
-                segments.filter { it.isNotEmpty() }.forEachIndexed { segIndex, segment ->
+                // A plain sequence of statements. Try ONE private suspend fun for the whole
+                // block first - splitting on every blank line regardless of need used to break
+                // an ordinary two-paragraph sample where the second paragraph uses a variable
+                // the first paragraph declared, with a confusing "Unresolved reference" pointing
+                // at a generated file the author never wrote. Re-split into paragraphs only when
+                // the block itself would not compile as one scope - i.e. it redeclares the same
+                // `val`/`var` name twice, the way "or, blocking:" alternatives intentionally do.
+                val localDeclaration = Regex("""\b(?:val|var)\s+(\w+)""")
+                val declaredLocalNames =
+                    codeLines.flatMap { localDeclaration.findAll(it).map { m -> m.groupValues[1] } }
+                val hasNameCollision = declaredLocalNames.size != declaredLocalNames.toSet().size
+
+                val segments =
+                    (if (!hasNameCollision) {
+                        listOf(codeLines)
+                    } else {
+                        // Split on blank lines and on standalone full-line comments (the
+                        // Markdown's own way of introducing "or, blocking:" alternatives) so
+                        // that two alternatives shown in one fenced block, which intentionally
+                        // reuse a variable name, do not redeclare it in the same scope.
+                        val built = mutableListOf<MutableList<String>>()
+                        codeLines.forEach { raw ->
+                            val trimmedLine = raw.trim()
+                            val startsNewSegment =
+                                built.isEmpty() || trimmedLine.isEmpty() || trimmedLine.startsWith("//")
+                            if (startsNewSegment) built.add(mutableListOf())
+                            if (trimmedLine.isNotEmpty()) built.last().add(raw)
+                        }
+                        built.filter { it.isNotEmpty() }
+                    }).filter { it.isNotEmpty() }
+
+                segments.forEachIndexed { segIndex, segment ->
                     content.appendLine("private suspend fun sample$segIndex() {")
                     segment.forEach { content.appendLine("    $it") }
                     content.appendLine("}")
