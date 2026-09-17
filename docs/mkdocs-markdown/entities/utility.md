@@ -15,7 +15,7 @@
 
 ```kotlin
 data class Language(
-    val id: Number,
+    val id: Int,
     val name: String,
     val official: Boolean,
     val iso639: String,
