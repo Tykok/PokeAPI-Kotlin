@@ -73,9 +73,17 @@ class SuspendApiTest {
     fun `the suspending list form pages like the blocking one`() =
         runTest {
             server.enqueue(MockResponse(code = 200, body = fixture("berry-list.json")))
+            server.enqueue(MockResponse(code = 200, body = fixture("berry-list.json")))
 
-            client().list<Berry>(limit = 5, offset = 10)
+            val suspended = client().list<Berry>(limit = 5, offset = 10)
+            val blocking = client().listBlocking<Berry>(limit = 5, offset = 10)
 
+            assertEquals(blocking, suspended)
+            // Proves both paths independently reached the network with the same paging
+            // parameters, rather than one of them never having been called at all - see the
+            // cache = Disabled note on client() above for why two separate clients are needed to
+            // prove that.
+            assertEquals("/api/v2/berry?offset=10&limit=5", server.takeRequest().target)
             assertEquals("/api/v2/berry?offset=10&limit=5", server.takeRequest().target)
         }
 
