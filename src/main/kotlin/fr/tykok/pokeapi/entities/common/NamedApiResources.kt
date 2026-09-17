@@ -13,9 +13,9 @@ public data class NamedApiResources<T : PokeApiObject>(
  * Fetches every referenced resource in this page.
  *
  * Entries whose [NamedApiResource.url] is `null` are silently omitted rather than fetched, so the
- * returned list can be shorter than [results]. Compare the returned list's size against
- * [NamedApiResources.results]'s size to detect that a page had fewer resolvable entries than it
- * reported.
+ * returned list can be shorter than [NamedApiResources.results]. Compare the returned list's size
+ * against [NamedApiResources.results]'s size to detect that a page had fewer resolvable entries
+ * than it reported.
  */
 public suspend inline fun <reified T : PokeApiObject> NamedApiResources<T>.get(): List<T> =
     this.results.mapNotNull { it.get() }

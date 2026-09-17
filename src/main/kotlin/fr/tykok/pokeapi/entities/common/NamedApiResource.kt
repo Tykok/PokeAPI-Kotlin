@@ -28,7 +28,7 @@ public data class NamedApiResource<T : PokeApiObject>(
 ) : PokeApiObject
 
 /**
- * Fetches the referenced resource, or `null` if this reference carries no [url].
+ * Fetches the referenced resource, or `null` if this reference carries no [NamedApiResource.url].
  *
  * This always goes through [PokeApi.defaultClient], never the caller's own [fr.tykok.pokeapi.PokeApiClient].
  * A client built with custom interceptors, a proxy, or a different timeout loses all of that the
