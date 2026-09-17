@@ -1,10 +1,27 @@
 # API Reference
 
-Every entity class maps one endpoint of [pokeapi.co](https://pokeapi.co/docs/v2). Pass the class as the generic parameter of `PokeApi.get()` and the endpoint is resolved for you:
+Every entity class maps one endpoint of [pokeapi.co](https://pokeapi.co/docs/v2). Pass the class as the generic parameter of `PokeApi.get()` and the endpoint is resolved for you.
+
+## Suspending calls
+
+`PokeApi.get()` and `PokeApi.list()` are `suspend` functions. Every one-liner on this page and on
+the 11 entity pages linked below is written exactly as it looks inside a coroutine — without
+repeating that setup fifty times over — but it will not compile at a plain call site. A real call
+site looks like this:
 
 ```kotlin
-val pikachu = PokeApi.get<Pokemon>(name = "pikachu")
+suspend fun main() {
+    val pikachu = PokeApi.get<Pokemon>(name = "pikachu")
+}
 ```
+
+Calling from code with no coroutine in scope? Use the blocking counterpart instead:
+
+```kotlin
+val pikachu = PokeApi.getBlocking<Pokemon>(name = "pikachu")
+```
+
+See [Methods](../methods.md) for every `get`/`list` overload and its blocking twin.
 
 48 endpoints are wired across 11 groups.
 

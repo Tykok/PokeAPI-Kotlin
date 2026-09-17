@@ -64,8 +64,8 @@ force that one call past the cache and back to the network:
 val freshPikachu = PokeApi.get<Pokemon>(name = "pikachu", refresh = true)
 ```
 
-See the [README's cache section](https://github.com/Tykok/PokeAPI-Kotlin#cache) for how the cache
-itself is configured, including why concurrently running clients need distinct cache directories.
+See [Configuration](configuration.md#cacheconfig) for how the cache itself is configured, including
+why concurrently running clients need distinct cache directories.
 
 ## Errors
 

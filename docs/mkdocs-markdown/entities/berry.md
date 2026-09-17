@@ -9,6 +9,10 @@
   <span class="dex-entry__count">3 endpoints</span>
 </div>
 
+!!! info "Suspending calls"
+
+    Every `PokeApi.get()` snippet below is `suspend` — see [Suspending calls](index.md#suspending-calls) for what that means and the `getBlocking` alternative.
+
 The `Berry` entities is used to map data from `https://pokeapi.co/api/v2/berry/...`.
 
 ![Berry](../img/berry.jpeg)

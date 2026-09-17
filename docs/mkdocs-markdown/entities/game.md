@@ -9,6 +9,10 @@
   <span class="dex-entry__count">4 endpoints</span>
 </div>
 
+!!! info "Suspending calls"
+
+    Every `PokeApi.get()` snippet below is `suspend` — see [Suspending calls](index.md#suspending-calls) for what that means and the `getBlocking` alternative.
+
 ## `Generation`
 
 The `Generation` class can be used to get data from `/generation/{id or name}` endpoint.

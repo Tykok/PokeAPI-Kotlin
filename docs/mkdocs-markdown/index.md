@@ -23,5 +23,6 @@ callers outside a coroutine.
 
 - [Getting started](getting-started.md) — add the dependency to Gradle or Maven
 - [Methods](methods.md) — `get`, `list`, and their blocking counterparts
+- [Configuration](configuration.md) — the cache, timeouts, your own `OkHttpClient`, and `close()`
 - [API Reference](entities/index.md) — all 48 endpoints, grouped
 - [Contributing](https://github.com/Tykok/PokeAPI-Kotlin/blob/main/CONTRIBUTING.md) — issues and pull requests welcome

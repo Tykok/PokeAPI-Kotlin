@@ -96,6 +96,7 @@ nav:
   - Home: index.md
   - Getting started: getting-started.md
   - Methods: methods.md
+  - Configuration: configuration.md
   - API Reference:
       - Overview: entities/index.md
       - Pokemon: entities/pokemon.md
