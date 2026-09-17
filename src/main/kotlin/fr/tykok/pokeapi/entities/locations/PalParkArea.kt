@@ -12,7 +12,7 @@ import fr.tykok.pokeapi.entities.common.Name
  * @since 2022-08-27
  */
 @Endpoint("pal-park-area")
-data class PalParkArea(
+public data class PalParkArea(
     /**
      * The identifier for this resource.
      */

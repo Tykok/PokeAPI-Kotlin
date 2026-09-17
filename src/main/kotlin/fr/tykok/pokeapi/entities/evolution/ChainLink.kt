@@ -17,7 +17,7 @@ import fr.tykok.pokeapi.entities.pokemon.PokemonSpecies
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class ChainLink(
+public data class ChainLink(
     /**
      * Whether or not this link is for a baby Pokémon. This would only ever be true on the base link.
      */

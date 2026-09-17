@@ -16,7 +16,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-08-27
  */
 @Endpoint("encounter-condition-value")
-data class EncounterConditionValue(
+public data class EncounterConditionValue(
     /**
      * The identifier for this resource.
      */

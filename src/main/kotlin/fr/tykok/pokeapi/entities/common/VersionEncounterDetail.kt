@@ -10,7 +10,7 @@ import fr.tykok.pokeapi.entities.games.Version
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class VersionEncounterDetail(
+public data class VersionEncounterDetail(
     /**
      * The game version this encounter happens in.
      * @see NamedApiResource

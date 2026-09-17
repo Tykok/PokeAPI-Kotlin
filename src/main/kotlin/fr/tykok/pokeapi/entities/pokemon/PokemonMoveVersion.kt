@@ -5,7 +5,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.games.VersionGroup
 import fr.tykok.pokeapi.entities.moves.MoveLearnMethod
 
-data class PokemonMoveVersion(
+public data class PokemonMoveVersion(
     /**
      * The method by which the move is learned.
      * @see MoveLearnMethod

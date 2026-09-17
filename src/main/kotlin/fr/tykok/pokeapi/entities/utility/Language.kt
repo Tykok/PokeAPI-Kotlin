@@ -10,7 +10,7 @@ import fr.tykok.pokeapi.entities.common.Name
  * @version 1.0.0
  * @since 2022-07-27
  */
-data class Language(
+public data class Language(
     /**
      * The identifier for this resource
      */

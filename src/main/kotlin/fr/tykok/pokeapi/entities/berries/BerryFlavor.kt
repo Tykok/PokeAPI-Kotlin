@@ -13,7 +13,7 @@ import fr.tykok.pokeapi.entities.contests.ContestType
  * @since 2022-07-27
  */
 @Endpoint("berry-flavor")
-data class BerryFlavor(
+public data class BerryFlavor(
     /**
      * The identifier of the BerryFlavor
      */

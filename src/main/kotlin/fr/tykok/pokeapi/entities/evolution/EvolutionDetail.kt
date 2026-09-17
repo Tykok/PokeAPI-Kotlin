@@ -18,7 +18,7 @@ import fr.tykok.pokeapi.entities.pokemon.Type
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class EvolutionDetail(
+public data class EvolutionDetail(
     /**
      * The item required to cause evolution this into Pokémon species.
      * @see NamedApiResource

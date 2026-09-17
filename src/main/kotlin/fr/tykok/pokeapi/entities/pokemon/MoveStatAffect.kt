@@ -8,7 +8,7 @@ import fr.tykok.pokeapi.entities.moves.Move
  * @property change The maximum amount of change to the referenced stat.
  * @property move The move causing the change.
  */
-data class MoveStatAffect(
+public data class MoveStatAffect(
     val change: Int,
     val move: NamedApiResource<Move>
 ) : PokeApiObject

@@ -19,7 +19,7 @@ import fr.tykok.pokeapi.entities.moves.Move
  * @since 2022-08-27
  */
 @Endpoint("super-contest-effect")
-data class SuperContestEffects(
+public data class SuperContestEffects(
     /**
      * The identifier for this resource.
      */

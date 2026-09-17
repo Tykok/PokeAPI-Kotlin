@@ -18,7 +18,7 @@ import fr.tykok.pokeapi.entities.common.Name
  * @since 2022-08-27
  */
 @Endpoint("encounter-method")
-data class EncounterMethod(
+public data class EncounterMethod(
     /**
      * The identifier for this resource.
      */

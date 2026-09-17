@@ -14,7 +14,7 @@ import fr.tykok.pokeapi.entities.games.VersionGroup
  *
  */
 @Endpoint("move-learn-method")
-data class MoveLearnMethod(
+public data class MoveLearnMethod(
     /**
      * The identifier for this resource.
      */

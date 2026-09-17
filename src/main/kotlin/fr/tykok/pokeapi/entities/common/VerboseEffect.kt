@@ -10,7 +10,7 @@ import fr.tykok.pokeapi.entities.utility.Language
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class VerboseEffect(
+public data class VerboseEffect(
     /**
      * The localized effect text for an API resource in a specific language.
      */

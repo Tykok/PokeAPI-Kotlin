@@ -10,7 +10,7 @@ import fr.tykok.pokeapi.entities.games.Generation
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class GenerationGameIndex(
+public data class GenerationGameIndex(
     /**
      * The internal id of an API resource within game data.
      */

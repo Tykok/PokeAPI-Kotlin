@@ -15,7 +15,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-08-27
  */
 @Endpoint("item-pocket")
-data class ItemPocket(
+public data class ItemPocket(
     /**
      * The identifier for this resource.
      */

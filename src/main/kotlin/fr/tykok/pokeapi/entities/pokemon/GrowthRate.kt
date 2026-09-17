@@ -6,7 +6,7 @@ import fr.tykok.pokeapi.entities.common.Description
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 @Endpoint("growth-rate")
-data class GrowthRate(
+public data class GrowthRate(
     /**
      * The identifier for this resource.
      */

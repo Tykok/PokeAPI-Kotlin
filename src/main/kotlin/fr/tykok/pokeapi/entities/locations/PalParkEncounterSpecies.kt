@@ -10,7 +10,7 @@ import fr.tykok.pokeapi.entities.pokemon.PokemonSpecies
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class PalParkEncounterSpecies(
+public data class PalParkEncounterSpecies(
     /**
      * The base score given to the player when this Pokémon is caught during a pal park run
      */

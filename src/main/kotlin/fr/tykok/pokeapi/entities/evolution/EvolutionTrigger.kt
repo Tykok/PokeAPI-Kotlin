@@ -16,7 +16,7 @@ import fr.tykok.pokeapi.entities.pokemon.PokemonSpecies
  * @since 2022-08-27
  */
 @Endpoint("evolution-trigger")
-data class EvolutionTrigger(
+public data class EvolutionTrigger(
     /**
      * The identifier for this resource.
      */

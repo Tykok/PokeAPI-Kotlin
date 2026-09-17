@@ -12,7 +12,7 @@ import fr.tykok.pokeapi.entities.encounters.EncounterMethod
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class Encounter(
+public data class Encounter(
     /**
      * The lowest level the Pokémon could be encountered at.
      */

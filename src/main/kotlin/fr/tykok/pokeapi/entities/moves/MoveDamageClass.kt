@@ -13,7 +13,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  *
  */
 @Endpoint("move-damage-class")
-data class MoveDamageClass(
+public data class MoveDamageClass(
     /**
      * The identifier for this resource.
      */

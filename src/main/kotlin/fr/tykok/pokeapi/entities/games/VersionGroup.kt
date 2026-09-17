@@ -16,7 +16,7 @@ import fr.tykok.pokeapi.entities.moves.MoveLearnMethod
  * @since 2022-08-27
  */
 @Endpoint("version-group")
-data class VersionGroup(
+public data class VersionGroup(
     /**
      * The identifier for this resource.
      */

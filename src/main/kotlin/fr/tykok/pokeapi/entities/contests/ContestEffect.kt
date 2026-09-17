@@ -17,7 +17,7 @@ import fr.tykok.pokeapi.entities.common.FlavorText
  * @since 2022-08-27
  */
 @Endpoint("contest-effect")
-data class ContestEffect(
+public data class ContestEffect(
     /**
      * The identifier for this resource.
      */

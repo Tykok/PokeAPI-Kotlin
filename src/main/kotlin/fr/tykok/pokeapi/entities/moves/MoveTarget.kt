@@ -13,7 +13,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  *
  */
 @Endpoint("move-target")
-data class MoveTarget(
+public data class MoveTarget(
     /**
      * The identifier for this resource.
      */

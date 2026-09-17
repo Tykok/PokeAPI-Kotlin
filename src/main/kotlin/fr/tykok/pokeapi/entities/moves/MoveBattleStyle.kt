@@ -11,7 +11,7 @@ import fr.tykok.pokeapi.entities.common.Name
  *
  */
 @Endpoint("move-battle-style")
-data class MoveBattleStyle(
+public data class MoveBattleStyle(
     /**
      * The identifier for this resource.
      */

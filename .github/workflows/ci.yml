@@ -107,6 +107,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
 
+      # Fails the pull request when the public signature changed without a matching
+      # `./gradlew apiDump`, so a breaking change shows up in the diff.
+      - name: Check the public API surface
+        run: ./gradlew --no-daemon apiCheck
+
       # Builds exactly the three files Maven Central requires (binary, sources,
       # javadoc) so a missing/failing one is caught on the PR, not at publish time.
       - name: Assemble jar, sources and javadoc

@@ -9,7 +9,7 @@ import fr.tykok.pokeapi.entities.PokeApiObject
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class APIResource(
+public data class APIResource(
     /**
      *The URL of the referenced resource.
      */

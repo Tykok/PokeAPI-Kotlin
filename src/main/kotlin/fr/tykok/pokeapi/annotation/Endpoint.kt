@@ -8,6 +8,6 @@ package fr.tykok.pokeapi.annotation
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Endpoint(
+public annotation class Endpoint(
     val path: String
 )

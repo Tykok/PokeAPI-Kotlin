@@ -10,7 +10,7 @@ import fr.tykok.pokeapi.entities.moves.Move
 import fr.tykok.pokeapi.entities.moves.MoveDamageClass
 
 @Endpoint("type")
-data class Type(
+public data class Type(
     val id: Int,
     val name: String,
     val damageRelations: TypeRelations,

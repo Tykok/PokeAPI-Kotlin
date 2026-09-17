@@ -6,7 +6,7 @@ import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 @Endpoint("egg-group")
-data class EggGroup(
+public data class EggGroup(
     /**
      * The identifier for this resource.
      */

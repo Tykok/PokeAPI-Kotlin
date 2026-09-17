@@ -19,7 +19,7 @@ import fr.tykok.pokeapi.entities.moves.Move
  * @since 2022-08-27
  */
 @Endpoint("machine")
-data class Machine(
+public data class Machine(
     /**
      * The identifier for this resource.
      */

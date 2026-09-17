@@ -14,7 +14,7 @@ import fr.tykok.pokeapi.entities.PokeApiObject
  * @property backFemale The female depiction of this Pokémon from the back in battle.
  * @property backShinyFemale The shiny female depiction of this Pokémon from the back in battle.
  */
-data class PokemonSprites(
+public data class PokemonSprites(
     val frontDefault: String?,
     val frontShiny: String?,
     val frontFemale: String?,

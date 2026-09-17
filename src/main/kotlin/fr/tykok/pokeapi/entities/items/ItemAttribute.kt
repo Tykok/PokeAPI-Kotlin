@@ -16,7 +16,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-08-27
  */
 @Endpoint("item-attribute")
-data class ItemAttribute(
+public data class ItemAttribute(
     /**
      * The identifier for this resource.
      */

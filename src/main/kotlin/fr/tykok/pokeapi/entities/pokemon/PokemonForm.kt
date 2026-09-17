@@ -25,7 +25,7 @@ import fr.tykok.pokeapi.entities.games.VersionGroup
  * @property formNames The form specific form name of this Pokémon form, or empty if the form does not have a specific name.
  */
 @Endpoint("pokemon-form")
-data class PokemonForm(
+public data class PokemonForm(
     val id: Int,
     val name: String,
     val order: Int,

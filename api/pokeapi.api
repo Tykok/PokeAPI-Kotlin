@@ -1,0 +1,2216 @@
+public final class fr/tykok/pokeapi/PokeApi {
+	public static final field BASE_URL Ljava/lang/String;
+	public static final field INSTANCE Lfr/tykok/pokeapi/PokeApi;
+	public final fun getCache ()Lfr/tykok/pokeapi/cache/PokeApiCache;
+	public final fun getDefaultClient ()Lfr/tykok/pokeapi/PokeApiClient;
+}
+
+public final class fr/tykok/pokeapi/PokeApiClient : java/lang/AutoCloseable {
+	public fun <init> ()V
+	public fun <init> (Lfr/tykok/pokeapi/PokeApiConfig;)V
+	public synthetic fun <init> (Lfr/tykok/pokeapi/PokeApiConfig;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun close ()V
+	public final fun fetch (Ljava/lang/String;Ljava/lang/Class;Z)Ljava/lang/Object;
+	public static synthetic fun fetch$default (Lfr/tykok/pokeapi/PokeApiClient;Ljava/lang/String;Ljava/lang/Class;ZILjava/lang/Object;)Ljava/lang/Object;
+	public final fun fetchAsync (Ljava/lang/String;Ljava/lang/Class;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun fetchAsync$default (Lfr/tykok/pokeapi/PokeApiClient;Ljava/lang/String;Ljava/lang/Class;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun fetchPage (Ljava/lang/String;Lcom/fasterxml/jackson/core/type/TypeReference;Z)Lfr/tykok/pokeapi/entities/common/NamedApiResources;
+	public static synthetic fun fetchPage$default (Lfr/tykok/pokeapi/PokeApiClient;Ljava/lang/String;Lcom/fasterxml/jackson/core/type/TypeReference;ZILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/NamedApiResources;
+	public final fun fetchPageAsync (Ljava/lang/String;Lcom/fasterxml/jackson/core/type/TypeReference;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun fetchPageAsync$default (Lfr/tykok/pokeapi/PokeApiClient;Ljava/lang/String;Lcom/fasterxml/jackson/core/type/TypeReference;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getCache ()Lfr/tykok/pokeapi/cache/PokeApiCache;
+	public final fun getConfig ()Lfr/tykok/pokeapi/PokeApiConfig;
+}
+
+public final class fr/tykok/pokeapi/PokeApiConfig {
+	public synthetic fun <init> (Ljava/lang/String;JLjava/lang/String;Lokhttp3/OkHttpClient;Lfr/tykok/pokeapi/cache/CacheConfig;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;JLjava/lang/String;Lokhttp3/OkHttpClient;Lfr/tykok/pokeapi/cache/CacheConfig;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2-UwyO8pc ()J
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lokhttp3/OkHttpClient;
+	public final fun component5 ()Lfr/tykok/pokeapi/cache/CacheConfig;
+	public final fun copy-WPwdCS8 (Ljava/lang/String;JLjava/lang/String;Lokhttp3/OkHttpClient;Lfr/tykok/pokeapi/cache/CacheConfig;)Lfr/tykok/pokeapi/PokeApiConfig;
+	public static synthetic fun copy-WPwdCS8$default (Lfr/tykok/pokeapi/PokeApiConfig;Ljava/lang/String;JLjava/lang/String;Lokhttp3/OkHttpClient;Lfr/tykok/pokeapi/cache/CacheConfig;ILjava/lang/Object;)Lfr/tykok/pokeapi/PokeApiConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBaseUrl ()Ljava/lang/String;
+	public final fun getCache ()Lfr/tykok/pokeapi/cache/CacheConfig;
+	public final fun getCallTimeout-UwyO8pc ()J
+	public final fun getHttpClient ()Lokhttp3/OkHttpClient;
+	public final fun getUserAgent ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface annotation class fr/tykok/pokeapi/annotation/Endpoint : java/lang/annotation/Annotation {
+	public abstract fun path ()Ljava/lang/String;
+}
+
+public abstract interface class fr/tykok/pokeapi/cache/CacheConfig {
+}
+
+public final class fr/tykok/pokeapi/cache/CacheConfig$Disabled : fr/tykok/pokeapi/cache/CacheConfig {
+	public static final field INSTANCE Lfr/tykok/pokeapi/cache/CacheConfig$Disabled;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/cache/CacheConfig$OnDisk : fr/tykok/pokeapi/cache/CacheConfig {
+	public synthetic fun <init> (Ljava/io/File;JJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/io/File;JJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/io/File;
+	public final fun component2 ()J
+	public final fun component3-UwyO8pc ()J
+	public final fun copy-SxA4cEA (Ljava/io/File;JJ)Lfr/tykok/pokeapi/cache/CacheConfig$OnDisk;
+	public static synthetic fun copy-SxA4cEA$default (Lfr/tykok/pokeapi/cache/CacheConfig$OnDisk;Ljava/io/File;JJILjava/lang/Object;)Lfr/tykok/pokeapi/cache/CacheConfig$OnDisk;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDirectory ()Ljava/io/File;
+	public final fun getMaxSize ()J
+	public final fun getTtl-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/cache/PokeApiCache {
+	public final fun clear ()V
+	public final fun clear (Ljava/lang/String;)V
+	public final fun getHitCount ()I
+	public final fun getNetworkCount ()I
+	public final fun getSize ()J
+}
+
+public abstract interface class fr/tykok/pokeapi/entities/PokeApiEndpointReference : fr/tykok/pokeapi/entities/PokeApiObject {
+}
+
+public abstract interface class fr/tykok/pokeapi/entities/PokeApiObject {
+}
+
+public final class fr/tykok/pokeapi/entities/berries/Berry : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;IIIIIILfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/util/List;
+	public final fun component11 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component12 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()I
+	public final fun component8 ()I
+	public final fun component9 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILjava/lang/String;IIIIIILfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/berries/Berry;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/berries/Berry;ILjava/lang/String;IIIIIILfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/berries/Berry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFirmness ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getFlavors ()Ljava/util/List;
+	public final fun getGrowthTime ()I
+	public final fun getId ()I
+	public final fun getItem ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getMaxHarvest ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNaturalGiftPower ()I
+	public final fun getNaturalGiftType ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getSize ()I
+	public final fun getSmoothness ()I
+	public final fun getSoilDryness ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/berries/BerryFirmness : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/berries/BerryFirmness;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/berries/BerryFirmness;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/berries/BerryFirmness;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBerries ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/berries/BerryFlavor : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component5 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/berries/BerryFlavor;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/berries/BerryFlavor;ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/berries/BerryFlavor;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBerries ()Ljava/util/List;
+	public final fun getContestType ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/berries/BerryFlavorMap : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/berries/BerryFlavorMap;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/berries/BerryFlavorMap;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/berries/BerryFlavorMap;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFlavor ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getPotency ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/berries/FlavorBerryMap : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/berries/FlavorBerryMap;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/berries/FlavorBerryMap;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/berries/FlavorBerryMap;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBerry ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getPotency ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/APIResource : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lfr/tykok/pokeapi/entities/common/APIResource;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/APIResource;Ljava/lang/String;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/APIResource;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/Description : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/Description;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/Description;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/Description;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/Effect : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/Effect;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/Effect;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/Effect;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEffect ()Ljava/lang/String;
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/Encounter : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (IILjava/util/List;ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()I
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (IILjava/util/List;ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/Encounter;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/Encounter;IILjava/util/List;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/Encounter;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChance ()I
+	public final fun getConditionValues ()Ljava/util/List;
+	public final fun getMaxLevel ()I
+	public final fun getMethod ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getMinLevel ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/FlavorText : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/FlavorText;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/FlavorText;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/FlavorText;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFlavorText ()Ljava/lang/String;
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersion ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/GenerationGameIndex : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/GenerationGameIndex;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/GenerationGameIndex;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/GenerationGameIndex;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getGameIndex ()I
+	public final fun getGeneration ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/MachineVersionDetail : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/MachineVersionDetail;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/MachineVersionDetail;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/MachineVersionDetail;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMachine ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun getVersionGroup ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/Name : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/Name;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/Name;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/Name;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/NamedApiResource : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/PokeApiObject;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/PokeApiObject;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/PokeApiObject;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/PokeApiObject;)Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/PokeApiObject;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getResource ()Lfr/tykok/pokeapi/entities/PokeApiObject;
+	public final fun getUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/NamedApiResources : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/lang/String;Ljava/util/List;)Lfr/tykok/pokeapi/entities/common/NamedApiResources;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/NamedApiResources;ILjava/lang/String;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/NamedApiResources;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCount ()I
+	public final fun getNext ()Ljava/lang/String;
+	public final fun getPrevious ()Ljava/lang/String;
+	public final fun getResults ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/VerboseEffect : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/VerboseEffect;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/VerboseEffect;Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/VerboseEffect;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEffect ()Ljava/lang/String;
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getShortEffect ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/VersionEncounterDetail : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/util/List;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()I
+	public final fun component3 ()Ljava/util/List;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/util/List;)Lfr/tykok/pokeapi/entities/common/VersionEncounterDetail;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/VersionEncounterDetail;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/VersionEncounterDetail;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEncounterDetails ()Ljava/util/List;
+	public final fun getMaxChance ()I
+	public final fun getVersion ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/VersionGameIndex : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/VersionGameIndex;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/VersionGameIndex;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/VersionGameIndex;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getGameIndex ()I
+	public final fun getVersion ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/common/VersionGroupFlavorText : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/common/VersionGroupFlavorText;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/common/VersionGroupFlavorText;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/common/VersionGroupFlavorText;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getText ()Ljava/lang/String;
+	public final fun getVersionGroup ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/contests/ContestEffect : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (IIILjava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun copy (IIILjava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/contests/ContestEffect;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/contests/ContestEffect;IIILjava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/contests/ContestEffect;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAppeal ()I
+	public final fun getEffectEntries ()Ljava/util/List;
+	public final fun getFlavorTextEntries ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getJam ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/contests/ContestName : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/contests/ContestName;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/contests/ContestName;Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/contests/ContestName;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getColor ()Ljava/lang/String;
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/contests/ContestType : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/contests/ContestType;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/contests/ContestType;ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/contests/ContestType;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBerryFlavor ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/contests/SuperContestEffects : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (IILjava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (IILjava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/contests/SuperContestEffects;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/contests/SuperContestEffects;IILjava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/contests/SuperContestEffects;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAppeal ()I
+	public final fun getFlavorTextEntries ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getMoves ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/encounters/EncounterCondition : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/encounters/EncounterCondition;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/encounters/EncounterCondition;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/encounters/EncounterCondition;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getValues ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/encounters/EncounterConditionValue : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/encounters/EncounterConditionValue;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/encounters/EncounterConditionValue;ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/encounters/EncounterConditionValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCondition ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/encounters/EncounterMethod : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;ILjava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()I
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;ILjava/util/List;)Lfr/tykok/pokeapi/entities/encounters/EncounterMethod;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/encounters/EncounterMethod;ILjava/lang/String;ILjava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/encounters/EncounterMethod;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getOrder ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/evolution/ChainLink : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ZLfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()Z
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ZLfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/evolution/ChainLink;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/evolution/ChainLink;ZLfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/evolution/ChainLink;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEvolutionDetails ()Ljava/util/List;
+	public final fun getEvolvesTo ()Ljava/util/List;
+	public final fun getSpecies ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public final fun isBaby ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/evolution/EvolutionChain : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/evolution/ChainLink;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/evolution/ChainLink;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/evolution/ChainLink;)Lfr/tykok/pokeapi/entities/evolution/EvolutionChain;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/evolution/EvolutionChain;ILfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/evolution/ChainLink;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/evolution/EvolutionChain;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBabyTriggerItem ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getChain ()Lfr/tykok/pokeapi/entities/evolution/ChainLink;
+	public final fun getId ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/evolution/EvolutionDetail : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ZLjava/lang/Integer;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Z)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component10 ()Ljava/lang/Integer;
+	public final fun component11 ()Ljava/lang/Integer;
+	public final fun component12 ()Z
+	public final fun component13 ()Ljava/lang/Integer;
+	public final fun component14 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component15 ()Ljava/lang/Integer;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component18 ()Z
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component6 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component7 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component8 ()I
+	public final fun component9 ()Ljava/lang/Integer;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ZLjava/lang/Integer;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Z)Lfr/tykok/pokeapi/entities/evolution/EvolutionDetail;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/evolution/EvolutionDetail;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ZLjava/lang/Integer;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ZILjava/lang/Object;)Lfr/tykok/pokeapi/entities/evolution/EvolutionDetail;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getGender ()Ljava/lang/Integer;
+	public final fun getHeldItem ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getItem ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getKnownMove ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getKnownMoveType ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getLocation ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getMinAffection ()Ljava/lang/Integer;
+	public final fun getMinBeauty ()Ljava/lang/Integer;
+	public final fun getMinHappiness ()Ljava/lang/Integer;
+	public final fun getMinLevel ()I
+	public final fun getNeedsOverworldRain ()Z
+	public final fun getPartySpecies ()Ljava/lang/Integer;
+	public final fun getPartyType ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getRelativePhysicalStats ()Ljava/lang/Integer;
+	public final fun getTimeOfDay ()Ljava/lang/String;
+	public final fun getTradeSpecies ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getTrigger ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getTurnUpsideDown ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/evolution/EvolutionTrigger : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/evolution/EvolutionTrigger;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/evolution/EvolutionTrigger;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/evolution/EvolutionTrigger;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemonSpecies ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/games/Generation : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/util/List;
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/games/Generation;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/games/Generation;ILjava/lang/String;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/games/Generation;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAbilities ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getMainRegion ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getMoves ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemonSpecies ()Ljava/util/List;
+	public final fun getTypes ()Ljava/util/List;
+	public final fun getVersionGroups ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/games/Pokedex : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;ZLjava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Z
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component8 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;ZLjava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/games/Pokedex;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/games/Pokedex;ILjava/lang/String;ZLjava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/games/Pokedex;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescriptions ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemonEntries ()Ljava/util/List;
+	public final fun getRegion ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionGroups ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isMainSeries ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/games/PokemonEntry : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/games/PokemonEntry;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/games/PokemonEntry;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/games/PokemonEntry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEntryNumber ()I
+	public final fun getPokemonSpecies ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/games/Version : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public synthetic fun <init> (ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/games/Version;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/games/Version;ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/games/Version;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getVersionGroup ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/games/VersionGroup : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;ILfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()I
+	public final fun component4 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/util/List;
+	public final fun component8 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;ILfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/games/VersionGroup;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/games/VersionGroup;ILjava/lang/String;ILfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/games/VersionGroup;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getGeneration ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getId ()I
+	public final fun getMoveLearnMethods ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getOrder ()I
+	public final fun getPokedexes ()Ljava/util/List;
+	public final fun getRegions ()Ljava/util/List;
+	public final fun getVersions ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/items/Item : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/items/ItemSprites;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/APIResource;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/util/List;
+	public final fun component11 ()Ljava/util/List;
+	public final fun component12 ()Lfr/tykok/pokeapi/entities/items/ItemSprites;
+	public final fun component13 ()Ljava/util/List;
+	public final fun component14 ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun component15 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Ljava/lang/Integer;
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/items/ItemSprites;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/APIResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/items/Item;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/items/Item;ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/items/ItemSprites;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/APIResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/items/Item;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttributes ()Ljava/util/List;
+	public final fun getBabyTriggerFor ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun getCategory ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getCost ()Ljava/lang/Integer;
+	public final fun getEffectEntries ()Ljava/util/List;
+	public final fun getFlavorTextEntries ()Ljava/util/List;
+	public final fun getFlingEffect ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getFlingPower ()Ljava/lang/Integer;
+	public final fun getGameIndices ()Ljava/util/List;
+	public final fun getHeldByPokemon ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getMachines ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getSprites ()Lfr/tykok/pokeapi/entities/items/ItemSprites;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/items/ItemAttribute : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/items/ItemAttribute;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/items/ItemAttribute;ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/items/ItemAttribute;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescriptions ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getItems ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/items/ItemCategory : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/items/ItemCategory;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/items/ItemCategory;ILjava/lang/String;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/items/ItemCategory;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getItems ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPocket ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/items/ItemFlingEffect : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/items/ItemFlingEffect;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/items/ItemFlingEffect;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/items/ItemFlingEffect;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEffectEntries ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getItems ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/items/ItemHolderPokemon : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/items/ItemHolderPokemonVersionDetail;)V
+	public final fun getPokemon ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionDetails ()Lfr/tykok/pokeapi/entities/items/ItemHolderPokemonVersionDetail;
+}
+
+public final class fr/tykok/pokeapi/entities/items/ItemHolderPokemonVersionDetail : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/items/ItemHolderPokemonVersionDetail;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/items/ItemHolderPokemonVersionDetail;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/items/ItemHolderPokemonVersionDetail;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRarity ()I
+	public final fun getVersion ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/items/ItemPocket : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/items/ItemPocket;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/items/ItemPocket;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/items/ItemPocket;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategories ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/items/ItemSprites : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lfr/tykok/pokeapi/entities/items/ItemSprites;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/items/ItemSprites;Ljava/lang/String;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/items/ItemSprites;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDefault ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/locations/EncounterMethodRate : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/locations/EncounterMethodRate;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/locations/EncounterMethodRate;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/locations/EncounterMethodRate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEncounterMethod ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionDetails ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/locations/EncounterVersionDetails : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/locations/EncounterVersionDetails;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/locations/EncounterVersionDetails;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/locations/EncounterVersionDetails;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRate ()I
+	public final fun getVersion ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/locations/Location : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/locations/Location;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/locations/Location;ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/locations/Location;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAreas ()Ljava/util/List;
+	public final fun getGameIndices ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getRegion ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/locations/LocationArea : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;ILjava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()I
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;ILjava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/locations/LocationArea;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/locations/LocationArea;ILjava/lang/String;ILjava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/locations/LocationArea;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEncounterMethodRates ()Ljava/util/List;
+	public final fun getGameIndex ()I
+	public final fun getId ()I
+	public final fun getLocation ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemonEncounters ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/locations/PalParkArea : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/locations/PalParkArea;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/locations/PalParkArea;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/locations/PalParkArea;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemonEncounters ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/locations/PalParkEncounterSpecies : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (IILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (IILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/locations/PalParkEncounterSpecies;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/locations/PalParkEncounterSpecies;IILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/locations/PalParkEncounterSpecies;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBaseScore ()I
+	public final fun getPokemonSpecies ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getRate ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/locations/PokemonEncounter : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/locations/PokemonEncounter;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/locations/PokemonEncounter;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/locations/PokemonEncounter;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPokemon ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionDetails ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/locations/Region : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/util/List;Ljava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/util/List;
+	public final fun copy (ILjava/util/List;Ljava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/locations/Region;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/locations/Region;ILjava/util/List;Ljava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/locations/Region;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getLocations ()Ljava/util/List;
+	public final fun getMainGeneration ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokedexes ()Ljava/util/List;
+	public final fun getVersionGroups ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/machines/Machine : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component4 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/machines/Machine;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/machines/Machine;ILfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/machines/Machine;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getItem ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getMove ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionGroup ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/ContestComboDetail : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUseAfter ()Ljava/util/List;
+	public final fun getUseBefore ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/ContestComboSets : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;
+	public final fun copy (Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;)Lfr/tykok/pokeapi/entities/moves/ContestComboSets;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/ContestComboSets;Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/ContestComboSets;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getNormal ()Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;
+	public final fun getSuper ()Lfr/tykok/pokeapi/entities/moves/ContestComboDetail;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/Move : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;IILjava/lang/Integer;Lfr/tykok/pokeapi/entities/moves/ContestComboSets;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/moves/MoveMetaData;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;IILjava/lang/Integer;Lfr/tykok/pokeapi/entities/moves/ContestComboSets;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/moves/MoveMetaData;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component10 ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun component11 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component12 ()Ljava/util/List;
+	public final fun component13 ()Ljava/util/List;
+	public final fun component14 ()Ljava/util/List;
+	public final fun component15 ()Ljava/util/List;
+	public final fun component16 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component17 ()Ljava/util/List;
+	public final fun component18 ()Lfr/tykok/pokeapi/entities/moves/MoveMetaData;
+	public final fun component19 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component20 ()Ljava/util/List;
+	public final fun component21 ()Ljava/util/List;
+	public final fun component22 ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun component23 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component24 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Ljava/lang/Integer;
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()Ljava/lang/Integer;
+	public final fun component8 ()Lfr/tykok/pokeapi/entities/moves/ContestComboSets;
+	public final fun component9 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;IILjava/lang/Integer;Lfr/tykok/pokeapi/entities/moves/ContestComboSets;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/moves/MoveMetaData;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/moves/Move;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/Move;ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;IILjava/lang/Integer;Lfr/tykok/pokeapi/entities/moves/ContestComboSets;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/moves/MoveMetaData;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/Move;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccuracy ()Ljava/lang/Integer;
+	public final fun getContestCombos ()Lfr/tykok/pokeapi/entities/moves/ContestComboSets;
+	public final fun getContestEffect ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun getContestType ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getDamageClass ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getEffectChance ()Ljava/lang/Integer;
+	public final fun getEffectChanges ()Ljava/util/List;
+	public final fun getEffectEntries ()Ljava/util/List;
+	public final fun getFlavorTextEntries ()Ljava/util/List;
+	public final fun getGeneration ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getId ()I
+	public final fun getLearnedByPokemon ()Ljava/util/List;
+	public final fun getMachines ()Ljava/util/List;
+	public final fun getMeta ()Lfr/tykok/pokeapi/entities/moves/MoveMetaData;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPastValues ()Ljava/util/List;
+	public final fun getPower ()Ljava/lang/Integer;
+	public final fun getPp ()I
+	public final fun getPriority ()I
+	public final fun getStatChanges ()Ljava/util/List;
+	public final fun getSuperContestEffect ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun getTarget ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getType ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/MoveAilment : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/moves/MoveAilment;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/MoveAilment;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/MoveAilment;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getMoves ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/MoveBattleStyle : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;)Lfr/tykok/pokeapi/entities/moves/MoveBattleStyle;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/MoveBattleStyle;ILjava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/MoveBattleStyle;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/MoveCategory : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/moves/MoveCategory;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/MoveCategory;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/MoveCategory;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescriptions ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getMoves ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/MoveDamageClass : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/moves/MoveDamageClass;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/MoveDamageClass;ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/MoveDamageClass;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescriptions ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getMoves ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/MoveFlavorText : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/moves/MoveFlavorText;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/MoveFlavorText;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/MoveFlavorText;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFlavorText ()Ljava/lang/String;
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionGroup ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/MoveLearnMethod : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/moves/MoveLearnMethod;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/MoveLearnMethod;ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/MoveLearnMethod;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescriptions ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getVersionGroups ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/MoveMetaData : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;IIIIILjava/lang/Integer;)V
+	public synthetic fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;IIIIILjava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component10 ()I
+	public final fun component11 ()I
+	public final fun component12 ()Ljava/lang/Integer;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Ljava/lang/Integer;
+	public final fun component5 ()Ljava/lang/Integer;
+	public final fun component6 ()Ljava/lang/Integer;
+	public final fun component7 ()I
+	public final fun component8 ()I
+	public final fun component9 ()I
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;IIIIILjava/lang/Integer;)Lfr/tykok/pokeapi/entities/moves/MoveMetaData;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/MoveMetaData;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;IIIIILjava/lang/Integer;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/MoveMetaData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAilment ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getAilmentChance ()I
+	public final fun getCategory ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getCritRate ()I
+	public final fun getDrain ()I
+	public final fun getFlinchChance ()I
+	public final fun getHealing ()I
+	public final fun getMaxHits ()Ljava/lang/Integer;
+	public final fun getMaxTurns ()Ljava/lang/Integer;
+	public final fun getMinHits ()Ljava/lang/Integer;
+	public final fun getMinTurns ()Ljava/lang/Integer;
+	public final fun getStatChance ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/MoveStatChange : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/moves/MoveStatChange;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/MoveStatChange;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/MoveStatChange;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChange ()I
+	public final fun getStat ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/MoveTarget : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/moves/MoveTarget;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/MoveTarget;ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/MoveTarget;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescriptions ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getMoves ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/moves/PastMoveStatValues : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/Integer;
+	public final fun component2 ()Ljava/lang/Integer;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()I
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component7 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/moves/PastMoveStatValues;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/moves/PastMoveStatValues;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/moves/PastMoveStatValues;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccuracy ()Ljava/lang/Integer;
+	public final fun getEffectChance ()Ljava/lang/Integer;
+	public final fun getEffectEntries ()Ljava/util/List;
+	public final fun getPower ()Ljava/lang/Integer;
+	public final fun getPp ()I
+	public final fun getType ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionGroup ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/Ability : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;ZLfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Z
+	public final fun component4 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/util/List;
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;ZLfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/Ability;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/Ability;ILjava/lang/String;ZLfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/Ability;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEffectChanges ()Ljava/util/List;
+	public final fun getEffectEntries ()Ljava/util/List;
+	public final fun getFlavorTextEntries ()Ljava/util/List;
+	public final fun getGeneration ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemon ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isMainSeries ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/AbilityFlavorText : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/AbilityFlavorText;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/AbilityFlavorText;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/AbilityFlavorText;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFlavorText ()Ljava/lang/String;
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionGroup ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/AbilityPokemon : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ZILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Z
+	public final fun component2 ()I
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ZILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/AbilityPokemon;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/AbilityPokemon;ZILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/AbilityPokemon;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPokemon ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getSlot ()I
+	public fun hashCode ()I
+	public final fun isHidden ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/AwesomeName : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/AwesomeName;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/AwesomeName;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/AwesomeName;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAwesomeName ()Ljava/lang/String;
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/Characteristic : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (IILjava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (IILjava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/Characteristic;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/Characteristic;IILjava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/Characteristic;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescriptions ()Ljava/util/List;
+	public final fun getGeneModulo ()I
+	public final fun getHighestStat ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getId ()I
+	public final fun getPossibleValues ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/EggGroup : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/EggGroup;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/EggGroup;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/EggGroup;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemonSpecies ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/Gender : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/Gender;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/Gender;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/Gender;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getPokemonSpeciesDetails ()Ljava/util/List;
+	public final fun getRequiredForEvolution ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/Genus : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/Genus;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/Genus;Ljava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/Genus;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getGenus ()Ljava/lang/String;
+	public final fun getLanguage ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/GrowthRate : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/GrowthRate;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/GrowthRate;ILjava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/GrowthRate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescriptions ()Ljava/util/List;
+	public final fun getFormula ()Ljava/lang/String;
+	public final fun getId ()I
+	public final fun getLevels ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getPokemonSpecies ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/GrowthRateExperienceLevel {
+	public fun <init> (II)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun copy (II)Lfr/tykok/pokeapi/entities/pokemon/GrowthRateExperienceLevel;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/GrowthRateExperienceLevel;IIILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/GrowthRateExperienceLevel;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExperience ()I
+	public final fun getLevel ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/MoveBattleStylePreference {
+	public fun <init> (IILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (IILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/MoveBattleStylePreference;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/MoveBattleStylePreference;IILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/MoveBattleStylePreference;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHighHpPreference ()I
+	public final fun getLowHpPreference ()I
+	public final fun getMoveBattleStyle ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/MoveStatAffect : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/MoveStatAffect;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/MoveStatAffect;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/MoveStatAffect;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChange ()I
+	public final fun getMove ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/MoveStatAffectSets : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/MoveStatAffectSets;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/MoveStatAffectSets;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/MoveStatAffectSets;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDecrease ()Ljava/util/List;
+	public final fun getIncrease ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/Nature : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component4 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component6 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component7 ()Ljava/util/List;
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/Nature;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/Nature;ILjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/Nature;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDecreasedStat ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getHatesFlavor ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getId ()I
+	public final fun getIncreasedStat ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getLikesFlavor ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getMoveBattleStylePreferences ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokeathlonStatChanges ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffect : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffect;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffect;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffect;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaxChange ()I
+	public final fun getNature ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffectSets : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffectSets;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffectSets;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffectSets;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDecrease ()Ljava/util/List;
+	public final fun getIncrease ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/NatureStatAffectSets : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/NatureStatAffectSets;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/NatureStatAffectSets;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/NatureStatAffectSets;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDecrease ()Ljava/util/List;
+	public final fun getIncrease ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/NatureStatChange : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/NatureStatChange;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/NatureStatChange;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/NatureStatChange;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaxChange ()I
+	public final fun getPokeathlonStat ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PalParkEncounterArea : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (IILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (IILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/PalParkEncounterArea;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PalParkEncounterArea;IILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PalParkEncounterArea;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getArea ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getBaseScore ()I
+	public final fun getRate ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokeathlonStat : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffectSets;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffectSets;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffectSets;)Lfr/tykok/pokeapi/entities/pokemon/PokeathlonStat;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokeathlonStat;ILjava/lang/String;Ljava/util/List;Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffectSets;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokeathlonStat;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAffectingNatures ()Lfr/tykok/pokeapi/entities/pokemon/NaturePokeathlonStatAffectSets;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/Pokemon : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;IIZIILjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/util/List;
+	public final fun component11 ()Ljava/util/List;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Ljava/util/List;
+	public final fun component14 ()Ljava/util/List;
+	public final fun component15 ()Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;
+	public final fun component16 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component17 ()Ljava/util/List;
+	public final fun component18 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()Z
+	public final fun component6 ()I
+	public final fun component7 ()I
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;IIZIILjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/Pokemon;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/Pokemon;ILjava/lang/String;IIZIILjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/Pokemon;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAbilities ()Ljava/util/List;
+	public final fun getBaseExperience ()I
+	public final fun getForms ()Ljava/util/List;
+	public final fun getGameIndices ()Ljava/util/List;
+	public final fun getHeight ()I
+	public final fun getHeldItems ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getLocationAreaEncounters ()Ljava/lang/String;
+	public final fun getMoves ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getOrder ()I
+	public final fun getPastTypes ()Ljava/util/List;
+	public final fun getSpecies ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getSprites ()Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;
+	public final fun getStats ()Ljava/util/List;
+	public final fun getTypes ()Ljava/util/List;
+	public final fun getWeight ()I
+	public fun hashCode ()I
+	public final fun isDefault ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonAbility : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ZILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Z
+	public final fun component2 ()I
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ZILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/PokemonAbility;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonAbility;ZILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonAbility;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAbility ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getSlot ()I
+	public fun hashCode ()I
+	public final fun isHidden ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonColor : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonColor;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonColor;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonColor;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemonSpecies ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonEncounter {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonEncounter;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonEncounter;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonEncounter;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLocationArea ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionDetails ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonForm : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;IIZZZLjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/pokemon/PokemonFormSprites;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/util/List;
+	public final fun component11 ()Lfr/tykok/pokeapi/entities/pokemon/PokemonFormSprites;
+	public final fun component12 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component13 ()Ljava/util/List;
+	public final fun component14 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()Z
+	public final fun component6 ()Z
+	public final fun component7 ()Z
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILjava/lang/String;IIZZZLjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/pokemon/PokemonFormSprites;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonForm;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonForm;ILjava/lang/String;IIZZZLjava/lang/String;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Lfr/tykok/pokeapi/entities/pokemon/PokemonFormSprites;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonForm;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFormName ()Ljava/lang/String;
+	public final fun getFormNames ()Ljava/util/List;
+	public final fun getFormOrder ()I
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getOrder ()I
+	public final fun getPokemon ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getSprites ()Lfr/tykok/pokeapi/entities/pokemon/PokemonFormSprites;
+	public final fun getTypes ()Ljava/util/List;
+	public final fun getVersionGroup ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public final fun isBattleOnly ()Z
+	public final fun isDefault ()Z
+	public final fun isMega ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonFormSprites : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lfr/tykok/pokeapi/entities/pokemon/PokemonFormSprites;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonFormSprites;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonFormSprites;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBackDefault ()Ljava/lang/String;
+	public final fun getBackFemale ()Ljava/lang/String;
+	public final fun getBackShiny ()Ljava/lang/String;
+	public final fun getBackShinyFemale ()Ljava/lang/String;
+	public final fun getFrontDefault ()Ljava/lang/String;
+	public final fun getFrontFemale ()Ljava/lang/String;
+	public final fun getFrontShiny ()Ljava/lang/String;
+	public final fun getFrontShinyFemale ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonFormType : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/PokemonFormType;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonFormType;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonFormType;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getSlot ()I
+	public final fun getType ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonHabitat : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonHabitat;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonHabitat;ILjava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonHabitat;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemonSpecies ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonHeldItem : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonHeldItem;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonHeldItem;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonHeldItem;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getItem ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersion_details ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonHeldItemVersion : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;I)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()I
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;I)Lfr/tykok/pokeapi/entities/pokemon/PokemonHeldItemVersion;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonHeldItemVersion;Lfr/tykok/pokeapi/entities/common/NamedApiResource;IILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonHeldItemVersion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRarity ()I
+	public final fun getVersion ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonLocationArea : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonLocationArea;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonLocationArea;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonLocationArea;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLocationArea ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionDetails ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonMove : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonMove;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonMove;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonMove;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMove ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionGroupDetails ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonMoveVersion : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;I)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component3 ()I
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;I)Lfr/tykok/pokeapi/entities/pokemon/PokemonMoveVersion;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonMoveVersion;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;IILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonMoveVersion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLevelLearnedAt ()I
+	public final fun getMoveLearnMethod ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVersionGroup ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonShape : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonShape;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonShape;ILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonShape;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAwesomeNames ()Ljava/util/List;
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPokemonSpecies ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonSpecies : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;IIIIZZZIZZLfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component10 ()I
+	public final fun component11 ()Z
+	public final fun component12 ()Z
+	public final fun component13 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component14 ()Ljava/util/List;
+	public final fun component15 ()Ljava/util/List;
+	public final fun component16 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component17 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component18 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component19 ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component20 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component21 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component22 ()Ljava/util/List;
+	public final fun component23 ()Ljava/util/List;
+	public final fun component24 ()Ljava/util/List;
+	public final fun component25 ()Ljava/util/List;
+	public final fun component26 ()Ljava/util/List;
+	public final fun component27 ()Ljava/util/List;
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()Z
+	public final fun component8 ()Z
+	public final fun component9 ()Z
+	public final fun copy (ILjava/lang/String;IIIIZZZIZZLfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSpecies;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonSpecies;ILjava/lang/String;IIIIZZZIZZLfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/APIResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSpecies;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBaseHappiness ()I
+	public final fun getCaptureRate ()I
+	public final fun getColor ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getEggGroups ()Ljava/util/List;
+	public final fun getEvolutionChain ()Lfr/tykok/pokeapi/entities/common/APIResource;
+	public final fun getEvolvesFromSpecies ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getFlavorTextEntries ()Ljava/util/List;
+	public final fun getFormDescriptions ()Ljava/util/List;
+	public final fun getFormsSwitchable ()Z
+	public final fun getGenderRate ()I
+	public final fun getGenera ()Ljava/util/List;
+	public final fun getGeneration ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getGrowthRate ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getHabitat ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getHasGenderDifferences ()Z
+	public final fun getHatchCounter ()I
+	public final fun getId ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getOrder ()I
+	public final fun getPalParkEncounters ()Ljava/util/List;
+	public final fun getPokedexNumbers ()Ljava/util/List;
+	public final fun getShape ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getVarieties ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isBaby ()Z
+	public final fun isLegendary ()Z
+	public final fun isMythical ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonSpeciesDexEntry : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSpeciesDexEntry;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonSpeciesDexEntry;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSpeciesDexEntry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEntryNumber ()I
+	public final fun getPokedex ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonSpeciesGender : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSpeciesGender;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonSpeciesGender;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSpeciesGender;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPokemonSpecies ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getRate ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonSpeciesVariety : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ZLfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()Z
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ZLfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSpeciesVariety;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonSpeciesVariety;ZLfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSpeciesVariety;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPokemon ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public final fun isDefault ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonSprites : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;Ljava/util/Map;Ljava/util/Map;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Ljava/lang/String;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;
+	public final fun component16 ()Ljava/util/Map;
+	public final fun component17 ()Ljava/util/Map;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;Ljava/util/Map;Ljava/util/Map;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;Ljava/util/Map;Ljava/util/Map;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnimated ()Lfr/tykok/pokeapi/entities/pokemon/PokemonSprites;
+	public final fun getBackDefault ()Ljava/lang/String;
+	public final fun getBackFemale ()Ljava/lang/String;
+	public final fun getBackGray ()Ljava/lang/String;
+	public final fun getBackShiny ()Ljava/lang/String;
+	public final fun getBackShinyFemale ()Ljava/lang/String;
+	public final fun getBackShinyTransparent ()Ljava/lang/String;
+	public final fun getBackTransparent ()Ljava/lang/String;
+	public final fun getFrontDefault ()Ljava/lang/String;
+	public final fun getFrontFemale ()Ljava/lang/String;
+	public final fun getFrontGray ()Ljava/lang/String;
+	public final fun getFrontShiny ()Ljava/lang/String;
+	public final fun getFrontShinyFemale ()Ljava/lang/String;
+	public final fun getFrontShinyTransparent ()Ljava/lang/String;
+	public final fun getFrontTransparent ()Ljava/lang/String;
+	public final fun getOther ()Ljava/util/Map;
+	public final fun getVersions ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonStat : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;II)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;II)Lfr/tykok/pokeapi/entities/pokemon/PokemonStat;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonStat;Lfr/tykok/pokeapi/entities/common/NamedApiResource;IIILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonStat;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBaseStat ()I
+	public final fun getEffort ()I
+	public final fun getStat ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonType : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/PokemonType;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonType;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonType;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getSlot ()I
+	public final fun getType ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/PokemonTypePast : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/PokemonTypePast;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/PokemonTypePast;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/PokemonTypePast;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getGeneration ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getTypes ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/Stat : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;ZLfr/tykok/pokeapi/entities/pokemon/MoveStatAffectSets;Lfr/tykok/pokeapi/entities/pokemon/NatureStatAffectSets;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Z
+	public final fun component5 ()Lfr/tykok/pokeapi/entities/pokemon/MoveStatAffectSets;
+	public final fun component6 ()Lfr/tykok/pokeapi/entities/pokemon/NatureStatAffectSets;
+	public final fun component7 ()Ljava/util/List;
+	public final fun component8 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/lang/String;ZLfr/tykok/pokeapi/entities/pokemon/MoveStatAffectSets;Lfr/tykok/pokeapi/entities/pokemon/NatureStatAffectSets;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/Stat;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/Stat;ILjava/lang/String;Ljava/lang/String;ZLfr/tykok/pokeapi/entities/pokemon/MoveStatAffectSets;Lfr/tykok/pokeapi/entities/pokemon/NatureStatAffectSets;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/Stat;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAffectingMoves ()Lfr/tykok/pokeapi/entities/pokemon/MoveStatAffectSets;
+	public final fun getAffectingNatures ()Lfr/tykok/pokeapi/entities/pokemon/NatureStatAffectSets;
+	public final fun getCharacteristics ()Ljava/util/List;
+	public final fun getGameIndex ()Ljava/lang/String;
+	public final fun getId ()I
+	public final fun getMoveDamageClass ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isBattleOnly ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/Type : fr/tykok/pokeapi/entities/PokeApiEndpointReference {
+	public fun <init> (ILjava/lang/String;Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component7 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/Type;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/Type;ILjava/lang/String;Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;Ljava/util/List;Ljava/util/List;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/Type;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDamageRelations ()Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;
+	public final fun getGameIndices ()Ljava/util/List;
+	public final fun getGeneration ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getId ()I
+	public final fun getMoveDamageClass ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getMoves ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPastDamageRelations ()Ljava/util/List;
+	public final fun getPokemon ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/TypePokemon : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun copy (ILfr/tykok/pokeapi/entities/common/NamedApiResource;)Lfr/tykok/pokeapi/entities/pokemon/TypePokemon;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/TypePokemon;ILfr/tykok/pokeapi/entities/common/NamedApiResource;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/TypePokemon;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPokemon ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun getSlot ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/TypeRelations : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDoubleDamageFrom ()Ljava/util/List;
+	public final fun getDoubleDamageTo ()Ljava/util/List;
+	public final fun getHalfDamageFrom ()Ljava/util/List;
+	public final fun getHalfDamageTo ()Ljava/util/List;
+	public final fun getNoDamageFrom ()Ljava/util/List;
+	public final fun getNoDamageTo ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/pokemon/TypeRelationsPast : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;)V
+	public final fun component1 ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public final fun component2 ()Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;
+	public final fun copy (Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;)Lfr/tykok/pokeapi/entities/pokemon/TypeRelationsPast;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/pokemon/TypeRelationsPast;Lfr/tykok/pokeapi/entities/common/NamedApiResource;Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/pokemon/TypeRelationsPast;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDamageRelations ()Lfr/tykok/pokeapi/entities/pokemon/TypeRelations;
+	public final fun getGeneration ()Lfr/tykok/pokeapi/entities/common/NamedApiResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/entities/utility/Language : fr/tykok/pokeapi/entities/PokeApiObject {
+	public fun <init> (ILjava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Z
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/util/List;)Lfr/tykok/pokeapi/entities/utility/Language;
+	public static synthetic fun copy$default (Lfr/tykok/pokeapi/entities/utility/Language;ILjava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lfr/tykok/pokeapi/entities/utility/Language;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()I
+	public final fun getIso3166 ()Ljava/lang/String;
+	public final fun getIso639 ()Ljava/lang/String;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getOfficial ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class fr/tykok/pokeapi/exception/PokeApiException : java/lang/Exception {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class fr/tykok/pokeapi/exception/PokeApiHttpException : fr/tykok/pokeapi/exception/PokeApiException {
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;)V
+	public final fun getBody ()Ljava/lang/String;
+	public final fun getCode ()I
+	public final fun getUrl ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/exception/PokeApiNetworkException : fr/tykok/pokeapi/exception/PokeApiException {
+	public fun <init> (Ljava/lang/String;Ljava/io/IOException;)V
+	public fun getCause ()Ljava/io/IOException;
+	public synthetic fun getCause ()Ljava/lang/Throwable;
+	public final fun getUrl ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/exception/PokeApiParseException : fr/tykok/pokeapi/exception/PokeApiException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public fun getCause ()Ljava/lang/Throwable;
+	public final fun getUrl ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/exception/ResourceNotFoundException : fr/tykok/pokeapi/exception/PokeApiException {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getUrl ()Ljava/lang/String;
+}
+
+public final class fr/tykok/pokeapi/exception/UnknownEndpointException : fr/tykok/pokeapi/exception/PokeApiException {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class fr/tykok/pokeapi/http/EndpointResolver {
+	public static final field INSTANCE Lfr/tykok/pokeapi/http/EndpointResolver;
+	public final fun resolve (Ljava/lang/Class;)Ljava/lang/String;
+}
+

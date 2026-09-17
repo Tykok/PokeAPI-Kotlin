@@ -8,7 +8,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class MoveMetaData(
+public data class MoveMetaData(
     /**
      * The status ailment this move inflicts on its target.
      * @see MoveAilment

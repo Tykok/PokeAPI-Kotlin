@@ -15,7 +15,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @property pokemonSpecies A list of the Pokémon species that have this shape.
  */
 @Endpoint("pokemon-shape")
-data class PokemonShape(
+public data class PokemonShape(
     val id: Int,
     val name: String,
     val awesomeNames: List<AwesomeName>,

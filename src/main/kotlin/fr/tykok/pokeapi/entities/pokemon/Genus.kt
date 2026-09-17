@@ -8,7 +8,7 @@ import fr.tykok.pokeapi.entities.utility.Language
  * @property genus The localized genus for the referenced Pokémon species
  * @property language The language this genus is in.
  */
-data class Genus(
+public data class Genus(
     val genus: String,
     val language: NamedApiResource<Language>
 ) : PokeApiObject

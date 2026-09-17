@@ -12,7 +12,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  *
  */
 @Endpoint("move-category")
-data class MoveCategory(
+public data class MoveCategory(
     /**
      * The identifier for this resource.
      */

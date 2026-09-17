@@ -21,7 +21,7 @@ import fr.tykok.pokeapi.entities.games.VersionGroup
  * @since 2022-08-27
  */
 @Endpoint("region")
-data class Region(
+public data class Region(
     /**
      * The identifier for this resource.
      */

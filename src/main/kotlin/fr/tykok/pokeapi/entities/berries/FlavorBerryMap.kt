@@ -9,7 +9,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @version 1.0.0
  * @since 2022-07-27
  */
-data class FlavorBerryMap(
+public data class FlavorBerryMap(
     /**
      * How powerful the referenced flavor is for this berry.
      */

@@ -12,7 +12,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  *
  */
 @Endpoint("move-ailment")
-data class MoveAilment(
+public data class MoveAilment(
     /**
      * The identifier for this resource.
      */

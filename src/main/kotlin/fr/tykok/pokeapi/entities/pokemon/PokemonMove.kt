@@ -4,7 +4,7 @@ import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.moves.Move
 
-data class PokemonMove(
+public data class PokemonMove(
     /**
      * The move the Pokémon can learn.
      * @see Move

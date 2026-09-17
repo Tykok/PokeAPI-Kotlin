@@ -22,7 +22,7 @@ import fr.tykok.pokeapi.entities.pokemon.Type
  * @since 2022-08-27
  */
 @Endpoint("generation")
-data class Generation(
+public data class Generation(
     val id: Int,
     val name: String,
     /**

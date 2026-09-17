@@ -9,7 +9,7 @@ import fr.tykok.pokeapi.entities.contests.SuperContestEffects
 import fr.tykok.pokeapi.entities.games.Generation
 
 @Endpoint("ability")
-data class Ability(
+public data class Ability(
     /**
      * The identifier for this resource.
      */

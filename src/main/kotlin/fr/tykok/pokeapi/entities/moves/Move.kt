@@ -27,7 +27,7 @@ import fr.tykok.pokeapi.entities.pokemon.Type
  * @since 2022-08-27
  */
 @Endpoint("move")
-data class Move(
+public data class Move(
     /**
      * The identifier for this resource.
      */

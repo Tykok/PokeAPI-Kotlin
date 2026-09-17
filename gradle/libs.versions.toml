@@ -5,12 +5,16 @@ dokka = "2.1.0"
 mavenPublish = "0.33.0"
 okhttp = "5.5.0"
 coroutines = "1.11.0"
+# 0.18.2 on Maven Central - no marker on the Gradle Plugin Portal, so settings.gradle.kts maps
+# this plugin id to its Maven Central module coordinates.
+binaryCompatibility = "0.18.2"
 
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
+binaryCompatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatibility" }
 
 [libraries]
 junitBom = { module = "org.junit:junit-bom", version = "6.1.3" }

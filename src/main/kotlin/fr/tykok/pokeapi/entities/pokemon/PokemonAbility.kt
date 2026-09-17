@@ -3,7 +3,7 @@ package fr.tykok.pokeapi.entities.pokemon
 import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
-data class PokemonAbility(
+public data class PokemonAbility(
     /**
      *
      * Whether or not this is a hidden ability.

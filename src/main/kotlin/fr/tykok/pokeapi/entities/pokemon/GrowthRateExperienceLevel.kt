@@ -1,6 +1,6 @@
 package fr.tykok.pokeapi.entities.pokemon
 
-data class GrowthRateExperienceLevel(
+public data class GrowthRateExperienceLevel(
     /**
      * The level gained.
      */

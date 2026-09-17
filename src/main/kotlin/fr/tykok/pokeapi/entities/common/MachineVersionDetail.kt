@@ -11,7 +11,7 @@ import fr.tykok.pokeapi.entities.machines.Machine
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class MachineVersionDetail(
+public data class MachineVersionDetail(
     /**
      * The machine that teaches a move from an item.
      * @see NamedApiResource

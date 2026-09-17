@@ -8,7 +8,7 @@ import fr.tykok.pokeapi.entities.games.Pokedex
  * @property entryNumber The index number within the Pokédex.
  * @property pokedex The Pokédex the referenced Pokémon species can be found in.
  */
-data class PokemonSpeciesDexEntry(
+public data class PokemonSpeciesDexEntry(
     val entryNumber: Int,
     val pokedex: NamedApiResource<Pokedex>
 ) : PokeApiObject
