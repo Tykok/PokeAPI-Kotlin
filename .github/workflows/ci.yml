@@ -73,6 +73,15 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
 
+      # 3.0.0 shipped with 50 documentation snippets that no longer compiled - PokeApi.get became
+      # suspend and nothing checked the docs against the code, so the break only surfaced after
+      # release and had to be fixed by hand. extractDocSamples (build.gradle.kts) pulls every
+      # ```kotlin block out of README.md and docs/mkdocs-markdown at build time - never a
+      # hand-maintained copy - and compileTestKotlin compiles the result, so a sample that drifts
+      # from the API fails here, on its own named step, instead of reaching the published site.
+      - name: Compile the documentation samples
+        run: ./gradlew --no-daemon compileTestKotlin
+
       - name: Run tests
         run: ./gradlew --no-daemon test jacocoTestReport
 

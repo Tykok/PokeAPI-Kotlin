@@ -68,4 +68,10 @@ A Pull Request can be solved by anyone only if the following conditions are met:
 - The code is well documented
 - All remarks are solved
 
+CI also compiles every Kotlin code sample in the documentation (`README.md` and
+`docs/mkdocs-markdown/**`), extracted straight from the Markdown - not a hand-maintained copy - so
+if you change a public API signature, update the snippets that call it or the `Compile the
+documentation samples` step will fail on the pull request, naming the generated file it could not
+compile.
+
 Then, you can approve the Pull Request, and the author will be able to merge it.
