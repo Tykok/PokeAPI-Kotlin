@@ -9,6 +9,10 @@
   <span class="dex-entry__count">3 endpoints</span>
 </div>
 
+!!! info "Suspending calls"
+
+    Every `PokeApi.get()` snippet below is `suspend` — see [Suspending calls](index.md#suspending-calls) for what that means and the `getBlocking` alternative.
+
 ## `EncounterMethod`
 
 The `EncounterMethod` class can be used to retrieve information about encounter methods from the
@@ -24,7 +28,7 @@ The `EncounterCondition` class can be used to retrieve information about encount
 `/encounter-condition/{id or name}` endpoints of the API.
 
 ```kotlin
-val encounterCondition = PokeAPI.get<EncounterCondition>(id = 1)
+val encounterCondition = PokeApi.get<EncounterCondition>(id = 1)
 ```
 
 ## `EncounterConditionValue`
@@ -33,5 +37,5 @@ The `EncounterConditionValue` class can be used to retrieve information about en
 `/encounter-condition-values/{id or name}` endpoints of the API.
 
 ```kotlin
-val encounterConditionValue = PokeAPI.get<EncounterConditionValue>(id = 1)
+val encounterConditionValue = PokeApi.get<EncounterConditionValue>(id = 1)
 ```

@@ -9,6 +9,10 @@
   <span class="dex-entry__count">3 endpoints</span>
 </div>
 
+!!! info "Suspending calls"
+
+    Every `PokeApi.get()` snippet below is `suspend` — see [Suspending calls](index.md#suspending-calls) for what that means and the `getBlocking` alternative.
+
 ## `ContestType`
 
 The `ContestType` class can be used to get data from `/contest-type/{id or name}`.
@@ -25,10 +29,10 @@ The `ContestEffect` class can be used to get data from `/contest-effect/{id}`.
 val contestEffect = PokeApi.get<ContestEffect>(id = 1)
 ```
 
-## `SuperContestEffect`
+## `SuperContestEffects`
 
-The `SuperContestEffect` class can be used to get data from `/super-contest-effect/{id}`.
+The `SuperContestEffects` class can be used to get data from `/super-contest-effect/{id}`.
 
 ```kotlin
-val superContestEffect = PokeApi.get<SuperContestEffect>(id = 1)
+val superContestEffects = PokeApi.get<SuperContestEffects>(id = 1)
 ```

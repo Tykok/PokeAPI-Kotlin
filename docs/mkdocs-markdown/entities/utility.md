@@ -9,6 +9,10 @@
   <span class="dex-entry__count">reference only</span>
 </div>
 
+!!! info "Suspending calls"
+
+    Every `PokeApi.get()` snippet below is `suspend` — see [Suspending calls](index.md#suspending-calls) for what that means and the `getBlocking` alternative.
+
 ## `Language`
 
 `Language` describes one of the languages pokeapi.co translates its resources into, and mirrors the [`/language`](https://pokeapi.co/docs/v2#languages) resource:

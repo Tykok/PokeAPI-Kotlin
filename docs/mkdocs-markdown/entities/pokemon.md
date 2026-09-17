@@ -9,6 +9,10 @@
   <span class="dex-entry__count">16 endpoints</span>
 </div>
 
+!!! info "Suspending calls"
+
+    Every `PokeApi.get()` snippet below is `suspend` — see [Suspending calls](index.md#suspending-calls) for what that means and the `getBlocking` alternative.
+
 In the Pokemon package, you'll get the following classes according to their endpoint. You can
 
 ## `Ability`
@@ -115,12 +119,12 @@ This class is used to make request on this endpoint: `pokemon-shape/{id or name}
 val shape = PokeApi.get<PokemonShape>(id = 1)
 ```
 
-## `PokemonSpecie`
+## `PokemonSpecies`
 
 This class is used to make request on this endpoint: `pokemon-species/{id or name}`.
 
 ```kotlin
-val species = PokeApi.get<PokemonSpecie>(id = 1)
+val species = PokeApi.get<PokemonSpecies>(id = 1)
 ```
 
 ## `Stat`

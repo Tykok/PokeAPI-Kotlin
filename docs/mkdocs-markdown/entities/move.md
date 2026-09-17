@@ -9,6 +9,10 @@
   <span class="dex-entry__count">7 endpoints</span>
 </div>
 
+!!! info "Suspending calls"
+
+    Every `PokeApi.get()` snippet below is `suspend` — see [Suspending calls](index.md#suspending-calls) for what that means and the `getBlocking` alternative.
+
 ## `Move`
 
 The `Move` class can be used to get data from `/move/{id or name}` endpoint.
