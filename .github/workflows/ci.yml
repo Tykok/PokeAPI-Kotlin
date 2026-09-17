@@ -107,8 +107,13 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
 
-      # Fails the pull request when the public signature changed without a matching
-      # `./gradlew apiDump`, so a breaking change shows up in the diff.
+      # Fails the pull request when an entity data class or a @PublishedApi-internal member's
+      # signature changed without a matching `./gradlew apiDump`, so that slice of a breaking
+      # change shows up in the diff. It does NOT cover the library's actual public entry surface:
+      # binary-compatibility-validator omits reified-inline functions from the dump entirely, so
+      # PokeApi.get/list/getBlocking/listBlocking, PokeApiCache.clear<T>() and the four
+      # NamedApiResource(s) extensions can all change shape and this step still passes (see ruling
+      # R58). ApiSignatureTest pins those instead, failing to COMPILE the moment one moves.
       - name: Check the public API surface
         run: ./gradlew --no-daemon apiCheck
 

@@ -79,4 +79,41 @@ class NamedApiResourceTest {
             assertEquals(1, berries.size)
             assertEquals("cheri", berries.single().name)
         }
+
+    // getBlocking() had no caller anywhere in the suite before this (ruling R59) - the suspending
+    // path above and this one are separate code (NamedApiResource.getBlocking() calls
+    // PokeApi.defaultClient.fetch, not fetchAsync), so proving one works says nothing about the
+    // other.
+    @Test
+    fun `getBlocking follows the resource's own url and deserializes the body`() {
+        server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
+
+        val resource = NamedApiResource<Berry>(name = "cheri", url = server.url("/api/v2/berry/1").toString())
+
+        val berry = resource.getBlocking()
+
+        assertEquals("cheri", berry?.name)
+    }
+
+    @Test
+    fun `a page with a null-url entry yields a shorter list instead of throwing, blocking`() {
+        server.enqueue(MockResponse(code = 200, body = fixture("berry-cheri.json")))
+
+        val page =
+            NamedApiResources<Berry>(
+                count = 2,
+                next = null,
+                previous = null,
+                results =
+                    listOf(
+                        NamedApiResource(name = "cheri", url = server.url("/api/v2/berry/1").toString()),
+                        NamedApiResource(name = "no-url", url = null)
+                    )
+            )
+
+        val berries = page.getBlocking()
+
+        assertEquals(1, berries.size)
+        assertEquals("cheri", berries.single().name)
+    }
 }
