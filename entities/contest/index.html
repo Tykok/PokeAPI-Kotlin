@@ -290,6 +290,25 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../../configuration/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Configuration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -456,6 +475,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -477,10 +523,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -498,8 +544,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -682,10 +728,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#supercontesteffect" class="md-nav__link">
+  <a href="#supercontesteffects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SuperContestEffect
+        SuperContestEffects
       
     </span>
   </a>
@@ -1008,10 +1054,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#supercontesteffect" class="md-nav__link">
+  <a href="#supercontesteffects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SuperContestEffect
+        SuperContestEffects
       
     </span>
   </a>
@@ -1053,6 +1099,10 @@
   <span class="dex-entry__count">3 endpoints</span>
 </div>
 
+<div class="admonition info">
+<p class="admonition-title">Suspending calls</p>
+<p>Every <code>PokeApi.get()</code> snippet below is <code>suspend</code> — see <a href="../#suspending-calls">Suspending calls</a> for what that means and the <code>getBlocking</code> alternative.</p>
+</div>
 <h2 id="contesttype"><code>ContestType</code><a class="headerlink" href="#contesttype" title="Permanent link">&para;</a></h2>
 <p>The <code>ContestType</code> class can be used to get data from <code>/contest-type/{id or name}</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">contestType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">ContestType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
@@ -1061,9 +1111,9 @@
 <p>The <code>ContestEffect</code> class can be used to get data from <code>/contest-effect/{id}</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">contestEffect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">ContestEffect</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="supercontesteffect"><code>SuperContestEffect</code><a class="headerlink" href="#supercontesteffect" title="Permanent link">&para;</a></h2>
-<p>The <code>SuperContestEffect</code> class can be used to get data from <code>/super-contest-effect/{id}</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">superContestEffect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">SuperContestEffect</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<h2 id="supercontesteffects"><code>SuperContestEffects</code><a class="headerlink" href="#supercontesteffects" title="Permanent link">&para;</a></h2>
+<p>The <code>SuperContestEffects</code> class can be used to get data from <code>/super-contest-effect/{id}</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">superContestEffects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">SuperContestEffects</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 </code></pre></div>
 
 

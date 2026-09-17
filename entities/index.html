@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://tykok.github.io/PokeAPI-Kotlin/entities/">
       
       
-        <link rel="prev" href="../methods/">
+        <link rel="prev" href="../configuration/">
       
       
         <link rel="next" href="pokemon/">
@@ -290,6 +290,25 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../configuration/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Configuration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -456,6 +475,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -477,10 +523,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -498,8 +544,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -525,6 +571,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -541,6 +605,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#suspending-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suspending calls
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -909,6 +1003,25 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#suspending-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suspending calls
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -933,9 +1046,20 @@
 
 
 <h1 id="api-reference">API Reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h1>
-<p>Every entity class maps one endpoint of <a href="https://pokeapi.co/docs/v2">pokeapi.co</a>. Pass the class as the generic parameter of <code>PokeApi.get()</code> and the endpoint is resolved for you:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pikachu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pikachu"</span><span class="p">)</span>
+<p>Every entity class maps one endpoint of <a href="https://pokeapi.co/docs/v2">pokeapi.co</a>. Pass the class as the generic parameter of <code>PokeApi.get()</code> and the endpoint is resolved for you.</p>
+<h2 id="suspending-calls">Suspending calls<a class="headerlink" href="#suspending-calls" title="Permanent link">&para;</a></h2>
+<p><code>PokeApi.get()</code> and <code>PokeApi.list()</code> are <code>suspend</code> functions. Every one-liner on this page and on
+the 11 entity pages linked below is written exactly as it looks inside a coroutine — without
+repeating that setup fifty times over — but it will not compile at a plain call site. A real call
+site looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">pikachu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pikachu"</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
 </code></pre></div>
+<p>Calling from code with no coroutine in scope? Use the blocking counterpart instead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pikachu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">getBlocking</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pikachu"</span><span class="p">)</span>
+</code></pre></div>
+<p>See <a href="../methods/">Methods</a> for every <code>get</code>/<code>list</code> overload and its blocking twin.</p>
 <p>48 endpoints are wired across 11 groups.</p>
 <div class="dex-grid">
 <p><a href="pokemon/"><span class="dex-entry__no">No. 001</span><span class="dex-entry__name">🐾 Pokemon</span><span class="dex-entry__sub">16 endpoints</span></a></p>
@@ -1001,7 +1125,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../methods/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Methods">
+          <a href="../configuration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configuration">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1011,7 +1135,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Methods
+                Configuration
               </div>
             </div>
           </a>
