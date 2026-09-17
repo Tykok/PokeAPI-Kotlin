@@ -15,7 +15,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-08-27
  */
 @Endpoint("item-category")
-data class ItemCategory(
+public data class ItemCategory(
     /**
      * The identifier for this resource.
      */

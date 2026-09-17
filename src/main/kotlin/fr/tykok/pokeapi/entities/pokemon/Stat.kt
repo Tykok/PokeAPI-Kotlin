@@ -22,7 +22,7 @@ import fr.tykok.pokeapi.entities.moves.MoveDamageClass
  * @property names The name of this resource listed in different languages.
  */
 @Endpoint("stat")
-data class Stat(
+public data class Stat(
     val id: Int,
     val name: String,
     val gameIndex: String,

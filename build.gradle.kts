@@ -52,6 +52,7 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.mavenPublish)
+    alias(libs.plugins.binaryCompatibility)
 }
 
 repositories {
@@ -122,6 +123,7 @@ tasks.jar {
 }
 
 kotlin {
+    explicitApi()
     jvmToolchain(17)
     compilerOptions {
         apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_1)
@@ -201,6 +203,11 @@ tasks.register("isPublishedVersion") {
 val generateVersionConstant by tasks.registering {
     val outputDir = layout.buildDirectory.dir("generated/source/version/main/kotlin")
     val libraryVersion = project.version.toString()
+    // Without this, the version is only baked into the `doLast` action's closure, which Gradle's
+    // up-to-date check never inspects - so after a version bump this task stayed UP-TO-DATE and
+    // kept emitting the previous release's LIBRARY_VERSION until a `clean` forced a rerun.
+    // Declaring it as a task input makes the version part of the up-to-date check itself.
+    inputs.property("libraryVersion", libraryVersion)
     outputs.dir(outputDir)
     doLast {
         val file = outputDir.get().file("fr/tykok/pokeapi/LibraryVersion.kt").asFile

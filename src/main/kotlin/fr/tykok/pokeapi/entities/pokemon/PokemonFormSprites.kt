@@ -2,7 +2,7 @@ package fr.tykok.pokeapi.entities.pokemon
 
 import fr.tykok.pokeapi.entities.PokeApiObject
 
-data class PokemonFormSprites(
+public data class PokemonFormSprites(
     val frontDefault: String?,
     val frontShiny: String?,
     val backDefault: String?,

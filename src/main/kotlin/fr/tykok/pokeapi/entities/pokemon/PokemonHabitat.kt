@@ -6,7 +6,7 @@ import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 @Endpoint("pokemon-habitat")
-data class PokemonHabitat(
+public data class PokemonHabitat(
     val id: Int,
     val name: String,
     val names: List<Name>,

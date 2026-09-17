@@ -10,7 +10,7 @@ import fr.tykok.pokeapi.entities.locations.LocationArea
  * @property locationArea The location area the referenced Pokémon can be encountered in.
  * @property versionDetails A list of versions and encounters with the referenced Pokémon that might happen.
  */
-data class PokemonEncounter(
+public data class PokemonEncounter(
     val locationArea: NamedApiResource<LocationArea>,
     val versionDetails: List<VersionEncounterDetail>
 )

@@ -11,16 +11,16 @@ import fr.tykok.pokeapi.entities.pokemon.Pokemon
  * @version 1.0.0
  * @since 2022-08-27
  */
-class ItemHolderPokemon(
+public class ItemHolderPokemon(
     /**
      * The Pokémon that holds this item.
      * @see NamedApiResource
      * @see Pokemon
      */
-    val pokemon: NamedApiResource<Pokemon>,
+    public val pokemon: NamedApiResource<Pokemon>,
     /**
      * The details for the version that this item is held in by the Pokémon.
      * @see ItemHolderPokemonVersionDetail
      */
-    val versionDetails: ItemHolderPokemonVersionDetail
+    public val versionDetails: ItemHolderPokemonVersionDetail
 ) : PokeApiObject

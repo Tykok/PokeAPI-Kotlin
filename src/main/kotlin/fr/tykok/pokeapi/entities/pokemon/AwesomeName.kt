@@ -8,7 +8,7 @@ import fr.tykok.pokeapi.entities.utility.Language
  * @property awesomeName The localized "scientific" name for an API resource in a specific language.
  * @property language The language this "scientific" name is in.
  */
-data class AwesomeName(
+public data class AwesomeName(
     val awesomeName: String,
     val language: NamedApiResource<Language>
 ) : PokeApiObject

@@ -15,50 +15,50 @@ import fr.tykok.pokeapi.entities.common.NamedApiResources
  * @see <a href="https://pokeapi.co/">PokeApi</a>
  * @see <a href="https://pokeapi.co/docs/v2">PokeApi Docs</a>
  */
-object PokeApi {
+public object PokeApi {
     private const val VERSION = "v2"
 
-    const val BASE_URL = "https://pokeapi.co/api/$VERSION"
+    public const val BASE_URL: String = "https://pokeapi.co/api/$VERSION"
 
     @PublishedApi
     internal val defaultClient: PokeApiClient by lazy { PokeApiClient() }
 
     /** Inspection and eviction for the default client's response cache. */
-    val cache: PokeApiCache get() = defaultClient.cache
+    public val cache: PokeApiCache get() = defaultClient.cache
 
     /** Get a resource by its id. */
-    suspend inline fun <reified T : PokeApiEndpointReference> get(
+    public suspend inline fun <reified T : PokeApiEndpointReference> get(
         id: Int,
         refresh: Boolean = false
     ): T = defaultClient.get<T>(id, refresh)
 
     /** Get a resource by its name. */
-    suspend inline fun <reified T : PokeApiEndpointReference> get(
+    public suspend inline fun <reified T : PokeApiEndpointReference> get(
         name: String,
         refresh: Boolean = false
     ): T = defaultClient.get<T>(name, refresh)
 
     /** Get a page of resources. */
-    suspend inline fun <reified T : PokeApiEndpointReference> list(
+    public suspend inline fun <reified T : PokeApiEndpointReference> list(
         limit: Int = 20,
         offset: Int = 0,
         refresh: Boolean = false
     ): NamedApiResources<T> = defaultClient.list<T>(limit = limit, offset = offset, refresh = refresh)
 
     /** Get a resource by its id, blocking the calling thread. */
-    inline fun <reified T : PokeApiEndpointReference> getBlocking(
+    public inline fun <reified T : PokeApiEndpointReference> getBlocking(
         id: Int,
         refresh: Boolean = false
     ): T = defaultClient.getBlocking<T>(id, refresh)
 
     /** Get a resource by its name, blocking the calling thread. */
-    inline fun <reified T : PokeApiEndpointReference> getBlocking(
+    public inline fun <reified T : PokeApiEndpointReference> getBlocking(
         name: String,
         refresh: Boolean = false
     ): T = defaultClient.getBlocking<T>(name, refresh)
 
     /** Get a page of resources, blocking the calling thread. */
-    inline fun <reified T : PokeApiEndpointReference> listBlocking(
+    public inline fun <reified T : PokeApiEndpointReference> listBlocking(
         limit: Int = 20,
         offset: Int = 0,
         refresh: Boolean = false

@@ -4,7 +4,7 @@ import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.items.Item
 
-data class PokemonHeldItem(
+public data class PokemonHeldItem(
     /**
      * The item the referenced Pokémon holds.
      */

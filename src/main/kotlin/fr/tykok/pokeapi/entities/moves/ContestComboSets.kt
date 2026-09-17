@@ -9,7 +9,7 @@ import fr.tykok.pokeapi.entities.PokeApiObject
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class ContestComboSets(
+public data class ContestComboSets(
     /**
      * A detail of moves this move can be used before or after, granting additional appeal points in contests.
      * @see ContestComboDetail

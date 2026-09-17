@@ -11,7 +11,7 @@ import fr.tykok.pokeapi.entities.games.Version
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class ItemHolderPokemonVersionDetail(
+public data class ItemHolderPokemonVersionDetail(
     /**
      * How often this Pokémon holds this item in this version.
      */

@@ -27,7 +27,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-08-27
  */
 @Endpoint("contest-type")
-data class ContestType(
+public data class ContestType(
     /**
      * Identifier of the resource
      */

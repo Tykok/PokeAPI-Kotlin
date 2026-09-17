@@ -17,7 +17,7 @@ import kotlin.time.Duration.Companion.seconds
  * @property cache how responses are cached locally. PokeApi's terms ask consumers to cache rather
  *                than re-fetch static data, so this defaults to [CacheConfig.OnDisk].
  */
-data class PokeApiConfig(
+public data class PokeApiConfig(
     val baseUrl: String = PokeApi.BASE_URL,
     val callTimeout: Duration = 30.seconds,
     val userAgent: String = "PokeAPI-Kotlin/$LIBRARY_VERSION",

@@ -5,7 +5,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.games.VersionGroup
 import fr.tykok.pokeapi.entities.utility.Language
 
-data class AbilityFlavorText(
+public data class AbilityFlavorText(
     /**
      * The localized name for an API resource in a specific language.
      */

@@ -22,7 +22,7 @@ import fr.tykok.pokeapi.entities.evolution.EvolutionChain
  * @since 2022-08-27
  */
 @Endpoint("item")
-data class Item(
+public data class Item(
     /**
      * The identifier for this resource.
      */

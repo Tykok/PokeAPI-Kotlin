@@ -12,7 +12,7 @@ import fr.tykok.pokeapi.entities.PokeApiObject
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class ItemSprites(
+public data class ItemSprites(
     /**
      * The default depiction of this item.
      */

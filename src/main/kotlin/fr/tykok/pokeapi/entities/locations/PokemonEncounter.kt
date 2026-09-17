@@ -12,7 +12,7 @@ import fr.tykok.pokeapi.entities.pokemon.Pokemon
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class PokemonEncounter(
+public data class PokemonEncounter(
     /**
      * The Pokémon being encountered.
      * @see NamedApiResource

@@ -12,7 +12,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-07-27
  */
 @Endpoint("berry-firmness")
-data class BerryFirmness(
+public data class BerryFirmness(
     val id: Int,
     val name: String,
     /**

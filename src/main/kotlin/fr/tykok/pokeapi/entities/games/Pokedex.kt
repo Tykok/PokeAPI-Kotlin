@@ -19,7 +19,7 @@ import fr.tykok.pokeapi.entities.locations.Region
  * @since 2022-08-27
  */
 @Endpoint("pokedex")
-data class Pokedex(
+public data class Pokedex(
     /**
      * The identifier for this resource.
      */

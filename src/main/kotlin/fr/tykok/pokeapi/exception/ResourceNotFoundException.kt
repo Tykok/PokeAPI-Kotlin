@@ -6,6 +6,6 @@ package fr.tykok.pokeapi.exception
  * Distinct from [PokeApiHttpException] because a caller treats it differently: it is an expected
  * outcome of a valid program, it is never worth retrying, and it maps cleanly onto a null.
  */
-class ResourceNotFoundException(
-    val url: String
+public class ResourceNotFoundException(
+    public val url: String
 ) : PokeApiException("No resource at $url")

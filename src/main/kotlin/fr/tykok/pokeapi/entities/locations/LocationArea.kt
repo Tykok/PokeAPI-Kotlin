@@ -16,7 +16,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-08-27
  */
 @Endpoint("location-area")
-data class LocationArea(
+public data class LocationArea(
     /**
      * The identifier for this resource.
      */

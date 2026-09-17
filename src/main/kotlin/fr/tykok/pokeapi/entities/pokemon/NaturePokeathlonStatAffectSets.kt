@@ -2,7 +2,7 @@ package fr.tykok.pokeapi.entities.pokemon
 
 import fr.tykok.pokeapi.entities.PokeApiObject
 
-data class NaturePokeathlonStatAffectSets(
+public data class NaturePokeathlonStatAffectSets(
     /**
      * A list of natures and how they change the referenced Pokéathlon stat.
      */

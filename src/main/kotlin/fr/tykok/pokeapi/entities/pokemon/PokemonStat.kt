@@ -3,7 +3,7 @@ package fr.tykok.pokeapi.entities.pokemon
 import fr.tykok.pokeapi.entities.PokeApiObject
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
-data class PokemonStat(
+public data class PokemonStat(
     /**
      * The stat the Pokémon has.
      * @see Stat

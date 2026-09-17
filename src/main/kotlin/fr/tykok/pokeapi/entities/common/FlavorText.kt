@@ -7,7 +7,7 @@ import fr.tykok.pokeapi.entities.utility.Language
 /**
  * @see <a href="https://pokeapi.co/docs/v2#common-models">Documentation of PokeApi</a>
  */
-data class FlavorText(
+public data class FlavorText(
     /**
      * The localized flavor text for an API resource in a specific language
      */

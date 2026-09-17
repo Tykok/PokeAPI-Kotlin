@@ -5,7 +5,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
 import fr.tykok.pokeapi.entities.common.VersionGameIndex
 
 @Endpoint("pokemon")
-data class Pokemon(
+public data class Pokemon(
     /**
      * The identifier for this resource.
      */

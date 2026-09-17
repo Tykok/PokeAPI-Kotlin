@@ -16,7 +16,7 @@ import fr.tykok.pokeapi.entities.utility.Language
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class ContestName(
+public data class ContestName(
     /**
      * The name for this contest.
      */

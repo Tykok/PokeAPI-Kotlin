@@ -14,7 +14,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @since 2022-08-27
  */
 @Endpoint("item-fling-effect")
-data class ItemFlingEffect(
+public data class ItemFlingEffect(
     /**
      * The identifier for this resource.
      */

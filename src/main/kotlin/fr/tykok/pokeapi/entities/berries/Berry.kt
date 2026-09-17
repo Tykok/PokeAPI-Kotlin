@@ -15,7 +15,7 @@ import fr.tykok.pokeapi.entities.pokemon.Type
  * @since 2022-07-27
  */
 @Endpoint("berry")
-data class Berry(
+public data class Berry(
     /**
      * The identifier of the resource
      */

@@ -6,7 +6,7 @@ import fr.tykok.pokeapi.entities.common.VersionEncounterDetail
 import fr.tykok.pokeapi.entities.locations.LocationArea
 
 @Endpoint("pokemon-location-area")
-data class PokemonLocationArea(
+public data class PokemonLocationArea(
     val locationArea: NamedApiResource<LocationArea>,
     val versionDetails: List<VersionEncounterDetail>
 ) : PokeApiEndpointReference

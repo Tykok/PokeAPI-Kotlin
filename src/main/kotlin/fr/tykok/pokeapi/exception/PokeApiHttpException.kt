@@ -5,8 +5,8 @@ package fr.tykok.pokeapi.exception
  *
  * Unlike [ResourceNotFoundException], some of these are worth retrying: 429 and 503 are transient.
  */
-class PokeApiHttpException(
-    val code: Int,
-    val url: String,
-    val body: String
+public class PokeApiHttpException(
+    public val code: Int,
+    public val url: String,
+    public val body: String
 ) : PokeApiException("HTTP $code for $url: $body")

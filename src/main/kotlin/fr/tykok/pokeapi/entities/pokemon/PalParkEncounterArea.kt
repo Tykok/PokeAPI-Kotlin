@@ -8,7 +8,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @property rate The base rate for encountering the referenced Pokémon in this pal park area.
  * @property area The pal park area where this encounter happens.
  */
-data class PalParkEncounterArea(
+public data class PalParkEncounterArea(
     val baseScore: Int,
     val rate: Int,
     val area: NamedApiResource<PalParkEncounterArea>

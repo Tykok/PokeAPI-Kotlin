@@ -14,7 +14,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @property pokemonSpecies A list of the Pokémon species that have this color.
  */
 @Endpoint("pokemon-color")
-data class PokemonColor(
+public data class PokemonColor(
     val id: Int,
     val name: String,
     val names: List<Name>,

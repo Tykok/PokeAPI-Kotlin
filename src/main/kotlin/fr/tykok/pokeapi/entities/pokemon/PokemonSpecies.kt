@@ -13,7 +13,7 @@ import fr.tykok.pokeapi.entities.games.Generation
  * Represents a Pokémon species.
  */
 @Endpoint("pokemon-species")
-data class PokemonSpecies(
+public data class PokemonSpecies(
     val id: Int,
     val name: String,
     val order: Int,

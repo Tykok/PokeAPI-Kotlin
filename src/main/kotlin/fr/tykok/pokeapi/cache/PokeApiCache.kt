@@ -12,25 +12,25 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
  * prefix, so entries are separated by endpoint without a store per type; what a per-type store
  * would buy — selective invalidation — is done here by filtering urls instead.
  */
-class PokeApiCache internal constructor(
+public class PokeApiCache internal constructor(
     internal val cache: Cache?
 ) {
     /** Bytes currently held on disk. */
-    val size: Long get() = cache?.size() ?: 0L
+    public val size: Long get() = cache?.size() ?: 0L
 
     /** Responses served from the store since this client was built. */
-    val hitCount: Int get() = cache?.hitCount() ?: 0
+    public val hitCount: Int get() = cache?.hitCount() ?: 0
 
     /** Responses that reached the network since this client was built. */
-    val networkCount: Int get() = cache?.networkCount() ?: 0
+    public val networkCount: Int get() = cache?.networkCount() ?: 0
 
     /** Evicts everything. */
-    fun clear() {
+    public fun clear() {
         cache?.evictAll()
     }
 
     /** Evicts every entry of one endpoint. */
-    fun clear(endpoint: String) {
+    public fun clear(endpoint: String) {
         val store = cache ?: return
         val urls = store.urls()
         while (urls.hasNext()) {
@@ -58,7 +58,7 @@ class PokeApiCache internal constructor(
      * [EndpointResolver.resolve] — it never touches either of those `internal` members itself.
      */
     @JvmName("clearEndpointOf")
-    inline fun <reified T : PokeApiEndpointReference> clear() {
+    public inline fun <reified T : PokeApiEndpointReference> clear() {
         clear(EndpointResolver.resolve(T::class.java))
     }
 }

@@ -6,7 +6,7 @@ import fr.tykok.pokeapi.entities.common.Description
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 @Endpoint("characteristic")
-data class Characteristic(
+public data class Characteristic(
     /**
      * The identifier for this resource.
      */

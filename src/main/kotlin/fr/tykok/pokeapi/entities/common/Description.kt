@@ -10,7 +10,7 @@ import fr.tykok.pokeapi.entities.utility.Language
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class Description(
+public data class Description(
     /**
      * The localized description for an API resource in a specific language.
      */

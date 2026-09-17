@@ -9,7 +9,7 @@ import fr.tykok.pokeapi.entities.utility.Language
  * @version 1.0.0
  * @since 2022-07-27
  */
-data class Name(
+public data class Name(
     /**
      * The localized name for an API resource in a specific language
      */

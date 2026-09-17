@@ -6,7 +6,7 @@ import fr.tykok.pokeapi.entities.common.Name
 import fr.tykok.pokeapi.entities.common.NamedApiResource
 
 @Endpoint("nature")
-data class Nature(
+public data class Nature(
     /**
      * The identifier for this resource.
      */

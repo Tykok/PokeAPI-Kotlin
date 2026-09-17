@@ -10,7 +10,7 @@ import fr.tykok.pokeapi.entities.common.NamedApiResource
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class ContestComboDetail(
+public data class ContestComboDetail(
     /**
      * A list of moves to use before this move.
      * @see NamedApiResource

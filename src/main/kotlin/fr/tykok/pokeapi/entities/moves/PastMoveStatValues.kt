@@ -11,7 +11,7 @@ import fr.tykok.pokeapi.entities.pokemon.Type
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class PastMoveStatValues(
+public data class PastMoveStatValues(
     /**
      * The percent value of how likely this move is to be successful.
      * PokeAPI returns null here for some moves (e.g. swords-dance, recover), so this

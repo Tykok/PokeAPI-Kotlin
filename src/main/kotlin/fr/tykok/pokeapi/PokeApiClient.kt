@@ -15,22 +15,22 @@ import fr.tykok.pokeapi.http.ResponseMapper
  * Most callers want the [PokeApi] object, which holds a default instance. Build one of these
  * when you need your own configuration — a different base URL, your own [okhttp3.OkHttpClient].
  */
-class PokeApiClient(
+public class PokeApiClient(
     @PublishedApi internal val config: PokeApiConfig = PokeApiConfig()
 ) : AutoCloseable {
     internal val engine: HttpEngine = HttpEngine(config)
 
     /** Inspection and eviction for this client's response cache. */
-    val cache: PokeApiCache = PokeApiCache(engine.okHttpCache)
+    public val cache: PokeApiCache = PokeApiCache(engine.okHttpCache)
 
     /** Get a resource by its id. */
-    suspend inline fun <reified T : PokeApiEndpointReference> get(
+    public suspend inline fun <reified T : PokeApiEndpointReference> get(
         id: Int,
         refresh: Boolean = false
     ): T = fetchAsync(url = url<T>(id.toString()), type = T::class.java, refresh = refresh)
 
     /** Get a resource by its name. */
-    suspend inline fun <reified T : PokeApiEndpointReference> get(
+    public suspend inline fun <reified T : PokeApiEndpointReference> get(
         name: String,
         refresh: Boolean = false
     ): T = fetchAsync(url = url<T>(name), type = T::class.java, refresh = refresh)
@@ -42,7 +42,7 @@ class PokeApiClient(
      * callable with a single [Int], which made `get<Pokemon>(50)` silently mean "the Pokémon with id
      * 50" instead of "fifty Pokémon".
      */
-    suspend inline fun <reified T : PokeApiEndpointReference> list(
+    public suspend inline fun <reified T : PokeApiEndpointReference> list(
         limit: Int = 20,
         offset: Int = 0,
         refresh: Boolean = false
@@ -54,19 +54,19 @@ class PokeApiClient(
         )
 
     /** Get a resource by its id, blocking the calling thread. */
-    inline fun <reified T : PokeApiEndpointReference> getBlocking(
+    public inline fun <reified T : PokeApiEndpointReference> getBlocking(
         id: Int,
         refresh: Boolean = false
     ): T = fetch(url = url<T>(id.toString()), type = T::class.java, refresh = refresh)
 
     /** Get a resource by its name, blocking the calling thread. */
-    inline fun <reified T : PokeApiEndpointReference> getBlocking(
+    public inline fun <reified T : PokeApiEndpointReference> getBlocking(
         name: String,
         refresh: Boolean = false
     ): T = fetch(url = url<T>(name), type = T::class.java, refresh = refresh)
 
     /** Get a page of resources, blocking the calling thread. */
-    inline fun <reified T : PokeApiEndpointReference> listBlocking(
+    public inline fun <reified T : PokeApiEndpointReference> listBlocking(
         limit: Int = 20,
         offset: Int = 0,
         refresh: Boolean = false
@@ -139,5 +139,5 @@ class PokeApiClient(
      * dispatcher threads only when no [PokeApiConfig.httpClient] was supplied — see
      * [fr.tykok.pokeapi.http.HttpEngine.close].
      */
-    override fun close() = engine.close()
+    override fun close(): Unit = engine.close()
 }

@@ -11,7 +11,7 @@ import fr.tykok.pokeapi.entities.encounters.EncounterMethod
  * @version 1.0.0
  * @since 2022-08-27
  */
-data class EncounterMethodRate(
+public data class EncounterMethodRate(
     /**
      * The method in which Pokémon may be encountered in an area..
      * @see NamedApiResource
