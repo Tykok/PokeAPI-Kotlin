@@ -18,10 +18,10 @@ Changelog - PokeAPI extension 'changelog' property 'version'
 ## [3.0.0] - 2026-09-17
 
 A rewrite of the client surface: suspending calls with blocking equivalents, a configurable HTTP
-cache, typed exceptions in place of raised generic errors, and nine fields corrected from non-null
+cache, typed exceptions in place of raised generic errors, and eight fields corrected from non-null
 to nullable after fixture tests were pointed at real PokeAPI responses.
 
-**Known limitation:** the nine nullability fixes above were each found by adding a fixture for the
+**Known limitation:** the eight nullability fixes above were each found by adding a fixture for the
 endpoint that returned the surprising `null`. The fixture suite now covers 10 of the library's 48
 endpoints; the other 38 have not been checked against a real response and may hide the same kind of
 mismatch. A `PokeApiParseException` on one of those is a bug report, not a usage error.

@@ -126,9 +126,10 @@ val client = PokeApiClient(
 
 The entity classes are checked against real PokeAPI responses only for the endpoints exercised by
 this repository's fixture tests — **10 of the library's 48 endpoints**. Every one of those fixtures
-was added by pointing it at a real response, and doing so on this branch alone turned up **nine**
+was added by pointing it at a real response, and doing so on this branch alone turned up **eight**
 fields that PokeAPI actually returns as `null` while the class declared them non-null: `Move.power`,
-`Move.accuracy`, `Move.contestCombos`, `Item.cost`, and four fields of `PastMoveStatValues`.
+`Move.accuracy`, `Move.contestCombos`, `Item.cost`, `PastMoveStatValues.type`,
+`PastMoveStatValues.accuracy`, `PastMoveStatValues.power`, and `PastMoveStatValues.effectChance`.
 
 The other 38 endpoints have no fixture yet, so their nullability is unverified. If a call to one of
 them raises a `PokeApiParseException` wrapping a `MismatchedInputException`-style cause, that is a bug
@@ -142,9 +143,10 @@ in this library worth reporting — not a mistake in how you called it.
 | `PokeApi.get<Pokemon>(limit = 50, offset = 20)` | `PokeApi.list<Pokemon>(limit = 50, offset = 20)` — `suspend`, with `listBlocking` for synchronous callers |
 | default `offset` is `20` | default `offset` is `0` |
 | every numeric field is `Number` | every numeric field is `Int` |
-| `Move.power`, `Move.accuracy`, `Move.contestCombos`, `Item.cost`, and four `PastMoveStatValues` fields are non-null | all nine are nullable, matching what PokeAPI actually returns |
+| `Move.power`, `Move.accuracy`, `Move.contestCombos`, `Item.cost`, `PastMoveStatValues.type`, `PastMoveStatValues.accuracy`, `PastMoveStatValues.power`, and `PastMoveStatValues.effectChance` are non-null | all eight are nullable, matching what PokeAPI actually returns |
 | `PokeApiClient` has no lifecycle | `PokeApiClient` is `AutoCloseable` — `close()` it once you are done, if you built your own |
 | no built-in caching | caching is on by default: on disk, 24h TTL |
+| failures surfaced as raw Jackson/OkHttp errors — a 404 body reached the parser and came out as a deserialization failure | every failure is a typed `PokeApiException` subtype (see [Errors](#errors)) |
 
 ## [Contributing Guide](./CONTRIBUTING.md)
 
