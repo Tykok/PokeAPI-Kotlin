@@ -213,9 +213,9 @@
 </header>
   <div class="dex-version">
     <a class="dex-version__chip"
-       href="https://central.sonatype.com/artifact/fr.tykok/pokeapi/2.0.0"
-       title="This documentation describes version 2.0.0">
-      v2.0.0
+       href="https://central.sonatype.com/artifact/fr.tykok/pokeapi/3.0.0"
+       title="This documentation describes version 3.0.0">
+      v3.0.0
     </a>
   </div>
 
@@ -514,10 +514,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getlimit-offset-a-page-of-resources" class="md-nav__link">
+  <a href="#listlimit-offset-a-page-of-resources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get(limit, offset) — a page of resources
+        list(limit, offset) — a page of resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#refresh-bypass-the-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        refresh — bypass the cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errors
       
     </span>
   </a>
@@ -1003,10 +1025,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getlimit-offset-a-page-of-resources" class="md-nav__link">
+  <a href="#listlimit-offset-a-page-of-resources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get(limit, offset) — a page of resources
+        list(limit, offset) — a page of resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#refresh-bypass-the-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        refresh — bypass the cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errors
       
     </span>
   </a>
@@ -1046,21 +1090,28 @@ never write a URL:</p>
 </code></pre></div>
 <p>The type must be one of the entities in the <code>fr.tykok.pokeapi.entities</code> package; the full list is in
 the <a href="../entities/">API Reference</a>. Asking for an unmapped class throws <code>UnknownEndpointException</code>.</p>
+<p><code>get</code> and <code>list</code> are <code>suspend</code> functions — call them from a coroutine. Each has a blocking
+counterpart, <code>getBlocking</code>/<code>listBlocking</code>, with the same parameters, for callers with no coroutine in
+scope (Java included).</p>
 <h2 id="getid-one-resource-by-id"><code>get(id)</code> — one resource by id<a class="headerlink" href="#getid-one-resource-by-id" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pikachu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">// or, blocking:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pikachu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">getBlocking</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">)</span>
 </code></pre></div>
 <p>Resolves to <code>GET /pokemon/25</code>.</p>
 <h2 id="getname-one-resource-by-name"><code>get(name)</code> — one resource by name<a class="headerlink" href="#getname-one-resource-by-name" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pikachu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pikachu"</span><span class="p">)</span>
 </code></pre></div>
-<p>Resolves to <code>GET /pokemon/pikachu</code>. An unknown name makes the call throw.</p>
+<p>Resolves to <code>GET /pokemon/pikachu</code>. An unknown name throws <code>ResourceNotFoundException</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Not every resource has a name</p>
 <p>A few endpoints are id-only. <code>EvolutionChain</code> is the usual one: use
 <code>PokeApi.get&lt;EvolutionChain&gt;(id = 1)</code>, never the <code>name</code> overload.</p>
 </div>
-<h2 id="getlimit-offset-a-page-of-resources"><code>get(limit, offset)</code> — a page of resources<a class="headerlink" href="#getlimit-offset-a-page-of-resources" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<h2 id="listlimit-offset-a-page-of-resources"><code>list(limit, offset)</code> — a page of resources<a class="headerlink" href="#listlimit-offset-a-page-of-resources" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">list</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1">// or, blocking:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">listBlocking</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
 </code></pre></div>
 <p>Resolves to <code>GET /pokemon?offset=0&amp;limit=10</code> and returns <code>NamedApiResources&lt;Pokemon&gt;</code> — a page of
 references, not fully-loaded entities. Fetch a reference with <code>get(name)</code> or <code>get(id)</code> when you need
@@ -1081,16 +1132,46 @@ its details.</p>
 </tr>
 <tr>
 <td><code>offset</code></td>
-<td><code>20</code></td>
+<td><code>0</code></td>
 <td>How many to skip first</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition warning">
-<p class="admonition-title"><code>offset</code> defaults to 20, not 0</p>
-<p><code>PokeApi.get&lt;Pokemon&gt;(limit = 10)</code> returns entries <strong>21 to 30</strong>, not the first ten. Pass
-<code>offset = 0</code> explicitly whenever you want to start at the beginning.</p>
-</div>
+<h2 id="refresh-bypass-the-cache"><code>refresh</code> — bypass the cache<a class="headerlink" href="#refresh-bypass-the-cache" title="Permanent link">&para;</a></h2>
+<p>Every <code>get</code>/<code>list</code> overload takes a trailing <code>refresh: Boolean = false</code>. Pass <code>refresh = true</code> to
+force that one call past the cache and back to the network:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">freshPikachu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pikachu"</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+</code></pre></div>
+<p>See the <a href="https://github.com/Tykok/PokeAPI-Kotlin#cache">README's cache section</a> for how the cache
+itself is configured, including why concurrently running clients need distinct cache directories.</p>
+<h2 id="errors">Errors<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h2>
+<p>Every failure is a <code>PokeApiException</code> subtype:</p>
+<table>
+<thead>
+<tr>
+<th>Exception</th>
+<th>What happened</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ResourceNotFoundException</code></td>
+<td>the name or id does not exist</td>
+<td>recover — map to <code>null</code>, or fix the name</td>
+</tr>
+<tr>
+<td><code>PokeApiNetworkException</code>, or <code>PokeApiHttpException</code> with code <code>429</code>/<code>503</code></td>
+<td>transient infrastructure</td>
+<td>retry with backoff</td>
+</tr>
+<tr>
+<td><code>PokeApiParseException</code>, <code>PokeApiHttpException</code> with any other non-2xx code, or <code>UnknownEndpointException</code></td>
+<td>the contract is broken — schema drift, a library bug, or a programming error</td>
+<td>stop and report it</td>
+</tr>
+</tbody>
+</table>
 
 
 

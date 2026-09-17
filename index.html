@@ -211,9 +211,9 @@
 </header>
   <div class="dex-version">
     <a class="dex-version__chip"
-       href="https://central.sonatype.com/artifact/fr.tykok/pokeapi/2.0.0"
-       title="This documentation describes version 2.0.0">
-      v2.0.0
+       href="https://central.sonatype.com/artifact/fr.tykok/pokeapi/3.0.0"
+       title="This documentation describes version 3.0.0">
+      v3.0.0
     </a>
   </div>
 
@@ -1049,16 +1049,18 @@
     <div class="dex-home__prose md-typeset">
       <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <p>You never name an endpoint. You name a <strong>type</strong>, and <code>PokeApi</code> resolves the endpoint from it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pikachu</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pikachu"</span><span class="p">)</span><span class="w">   </span><span class="c1">// GET /pokemon/pikachu</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">cheriBerry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Berry</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">              </span><span class="c1">// GET /berry/1</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">firstTen</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// GET /pokemon?offset=0&amp;limit=10</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// inside a coroutine</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pikachu</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pikachu"</span><span class="p">)</span><span class="w">       </span><span class="c1">// GET /pokemon/pikachu</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">cheriBerry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">get</span><span class="o">&lt;</span><span class="n">Berry</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">                   </span><span class="c1">// GET /berry/1</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">firstTen</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">PokeApi</span><span class="p">.</span><span class="na">list</span><span class="o">&lt;</span><span class="n">Pokemon</span><span class="o">&gt;</span><span class="p">(</span><span class="n">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// GET /pokemon?offset=0&amp;limit=10</span>
 </code></pre></div>
 <p>Every response is mapped into a Kotlin data class, so the compiler — not the JSON — tells you what a
-resource contains.</p>
+resource contains. Each call above is <code>suspend</code>; a <code>getBlocking</code>/<code>listBlocking</code> counterpart exists for
+callers outside a coroutine.</p>
 <h2 id="where-to-go-next">Where to go next<a class="headerlink" href="#where-to-go-next" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="getting-started/">Getting started</a> — add the dependency to Gradle or Maven</li>
-<li><a href="methods/">Methods</a> — the three <code>get()</code> overloads and their parameters</li>
+<li><a href="methods/">Methods</a> — <code>get</code>, <code>list</code>, and their blocking counterparts</li>
 <li><a href="entities/">API Reference</a> — all 48 endpoints, grouped</li>
 <li><a href="https://github.com/Tykok/PokeAPI-Kotlin/blob/main/CONTRIBUTING.md">Contributing</a> — issues and pull requests welcome</li>
 </ul>
