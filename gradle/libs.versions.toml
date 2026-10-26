@@ -3,7 +3,7 @@ kotlin = "2.4.10"
 ktlint = "14.2.0"
 dokka = "2.1.0"
 mavenPublish = "0.33.0"
-okhttp = "5.5.0"
+okhttp = "5.5.1"
 coroutines = "1.11.0"
 # 0.18.2 on Maven Central - no marker on the Gradle Plugin Portal, so settings.gradle.kts maps
 # this plugin id to its Maven Central module coordinates.
